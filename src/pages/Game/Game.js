@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Button from "@mui/joy/Button";
 
 import { fetchQuestionsAndAnswers } from "../../store/Slices/gamePlaySlice";
-import { useDispatch, useSelector } from "react-redux";
 
-import { updateUserStatistics } from "../../store/Slices/gamePlaySlice";
 import Question from "../../components/Question/Question";
 import Answers from "../../components/Answers/Answers";
 import styles from "./Game.module.css";
+import { useNavigate } from "react-router-dom";
 
 const Game = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const Game = () => {
     (state) => state.gamePlay
   );
   let currentQuestionIndex = answeredQuestions;
+  let navigate = useNavigate();
 
   useEffect(() => {
     // Fetch the questions data(question itself with answers) when the component mounts
@@ -33,9 +35,22 @@ const Game = () => {
   if (status === "failed") {
     return <p>Error: {error}</p>;
   }
+  const routeChange = () => {
+    let path = "/";
+    navigate(path);
+  };
   if (questions.length === 0) {
-    // let it be a button so when clicked to redirect to home
-    return <p>No Questions Found, please different difficulty or category</p>;
+    return (
+      <Button
+        className={styles.return}
+        onClick={routeChange}
+        size="md"
+        variant={"soft"}
+        color="warning"
+      >
+        No Questions Found, please select another difficulty or category
+      </Button>
+    );
   }
   // shuffledAnswers is an array which has array of 3 wrong answers and a string with the correct answer
   const shuffledAnswers = [
@@ -43,16 +58,20 @@ const Game = () => {
     questions[currentQuestionIndex].correct_answer,
   ].sort(() => Math.random() - 0.5);
 
+  //we will need to implement soundtrack handling logic here
+
   return (
     <div className={styles.background}>
-      <Question
-        question={questions[currentQuestionIndex].question}
-        currentQuestionIndex={currentQuestionIndex}
-      />
-      <Answers
-        shuffledAnswers={shuffledAnswers}
-        correctAnswer={questions[currentQuestionIndex].correct_answer}
-      />
+      <div className={styles.gameContainer}>
+        <Question
+          question={questions[currentQuestionIndex].question}
+          currentQuestionIndex={currentQuestionIndex}
+        />
+        <Answers
+          shuffledAnswers={shuffledAnswers}
+          correctAnswer={questions[currentQuestionIndex].correct_answer}
+        />
+      </div>
     </div>
   );
 };
