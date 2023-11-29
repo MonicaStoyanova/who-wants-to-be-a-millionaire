@@ -16,6 +16,7 @@ import styles from "./Home.module.css";
 import logo from "../../images/logo.png";
 
 export default function Home() {
+  // this will be needed later maybe in second screen
   // const correctAnswersCount = useSelector(
   //   (state) => state.gamePlay.answeredQuestions
   // );
@@ -23,7 +24,7 @@ export default function Home() {
     (state) => state.gamePlay
   );
 
-  // State to track the user's selected category
+  // State to track the user's selected category as a name
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ export default function Home() {
   const handleChangeDifficulty = (event) => {
     if (event && event.target) {
       const selectedDifficulty = event.target.textContent;
-      dispatch(updateDifficulty(selectedDifficulty));
+      dispatch(updateDifficulty(selectedDifficulty.toLowerCase()));
     }
   };
 

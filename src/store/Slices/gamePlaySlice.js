@@ -3,6 +3,8 @@ import axios from "axios";
 
 const initialState = {
   questions: [],
+  status: "idle",
+  error: null,
   answeredQuestions: 0,
   difficulty: "",
   categories: [],
@@ -23,17 +25,17 @@ export const fetchCategories = createAsyncThunk(
 
 export const fetchQuestionsAndAnswers = createAsyncThunk(
   "gamePlay/fetchQuestionsAndAnswers",
-  async (categoryId, difficulty) => {
+  async ({ categoryId, difficulty }, { rejectWithValue }) => {
+    //console.log(categoryId, difficulty); //it does show the correct info
     try {
       const response = await axios.get(
         `https://opentdb.com/api.php?amount=15&category=${Number(
           categoryId
-        )}&difficulty=${difficulty.toLowerCase()}&type=multiple`
+        )}&difficulty=${difficulty}&type=multiple`
       );
-      console.log(response.data.results);
       return response.data.results;
     } catch (error) {
-      throw error;
+      return rejectWithValue({ message: "Error fetching questions", error });
     }
   }
 );
@@ -63,9 +65,18 @@ const gamePlaySlice = createSlice({
     builder.addCase(fetchCategories.fulfilled, (state, action) => {
       state.categories = action.payload;
     });
-    builder.addCase(fetchQuestionsAndAnswers.fulfilled, (state, action) => {
-      state.questions = action.payload;
-    });
+    builder
+      .addCase(fetchQuestionsAndAnswers.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchQuestionsAndAnswers.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.questions = action.payload;
+      })
+      .addCase(fetchQuestionsAndAnswers.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload.message;
+      });
   },
 });
 
