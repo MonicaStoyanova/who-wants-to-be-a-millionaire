@@ -1,0 +1,10 @@
+.background {
+    background-image: url("../../images/questions.jpg");
+    background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+.question{}
+
+.answers{}
