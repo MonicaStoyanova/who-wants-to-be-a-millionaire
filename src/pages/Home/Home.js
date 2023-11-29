@@ -16,10 +16,6 @@ import styles from "./Home.module.css";
 import logo from "../../images/logo.png";
 
 export default function Home() {
-  // this will be needed later maybe in second screen
-  // const correctAnswersCount = useSelector(
-  //   (state) => state.gamePlay.answeredQuestions
-  // );
   const { difficulty, categories, categoryId } = useSelector(
     (state) => state.gamePlay
   );

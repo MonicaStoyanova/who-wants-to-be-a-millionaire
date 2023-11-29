@@ -26,7 +26,6 @@ export const fetchCategories = createAsyncThunk(
 export const fetchQuestionsAndAnswers = createAsyncThunk(
   "gamePlay/fetchQuestionsAndAnswers",
   async ({ categoryId, difficulty }, { rejectWithValue }) => {
-    //console.log(categoryId, difficulty); //it does show the correct info
     try {
       const response = await axios.get(
         `https://opentdb.com/api.php?amount=15&category=${Number(

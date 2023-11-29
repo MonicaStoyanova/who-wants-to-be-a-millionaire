@@ -1,0 +1,18 @@
+.question {
+    border-radius: 35px;
+    background-color: purple;
+    color: white;
+    font-size: 14px;
+    padding: 16px 14px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    margin-bottom: 20px;
+  }
+  
+  .question span {
+    margin-right: 5px;
+  }
+  

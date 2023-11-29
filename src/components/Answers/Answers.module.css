@@ -1,0 +1,34 @@
+.answersContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .answerOptions {
+    border-radius: 35px;
+    background-color: rgb(51, 31, 126);
+    color: white;
+    font-size: 16px;
+    padding: 16px 30px;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+  }
+  
+  .answerOptions:hover {
+    background-color: rgb(51, 31, 150);
+  }
+  .answerOptions span {
+    margin-right: 5px;
+  }
+  
+  @media screen and (max-width: 800px) {
+    .answersContainer {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  
