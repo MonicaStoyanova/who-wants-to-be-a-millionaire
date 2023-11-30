@@ -1,33 +1,44 @@
 import styles from "./Answers.module.css";
 import { updateUserStatistics } from "../../store/Slices/gamePlaySlice";
+
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 
 const AnswerItem = ({ answer, index, correctAnswer }) => {
-  const letters = ["A", "B", "C", "D"];
-
+  const [answeredQuestion, setAnsweredQuestion] = useState(null);
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
-  const isCorrectAnswer = (answer) => {
-    if (!(correctAnswer === answer)) {
+  useEffect(() => {
+    if (answeredQuestion && correctAnswer !== answeredQuestion) {
       navigate("/gameover");
-    } else {
-      // we might need info if that is the correct answer in the slice in order to rend the NEXT button?
-      dispatch(updateUserStatistics());
     }
-  };
+  }, [answeredQuestion]);
+
+  const letters = ["A", "B", "C", "D"];
+
   // TO DO:
   // When the user selects an answer, it should start blinking. If the answer is correct, show the answer in green; if incorrect, show it in red and display the correct answer in green simultaneously.
   // If the user answers all 15 questions correctly, redirect them to this screen with the title "CONGRATULATIONS YOU WON 100,000lv." Show a table with the amount they have won.
   return (
-    <button
-      className={styles.answerOptions}
-      onClick={() => isCorrectAnswer(answer)}
-    >
-      <span>{letters[index]}: </span>
-      {answer}
-    </button>
+    <>
+      {correctAnswer === answeredQuestion && (
+        <button
+          className={styles.nextBtn}
+          onClick={() => dispatch(updateUserStatistics())}
+        >
+          Next
+        </button>
+      )}
+      <button
+        className={styles.answerOptions}
+        onClick={() => setAnsweredQuestion(answer)}
+      >
+        <span>{letters[index]}: </span>
+        {answer}
+      </button>
+    </>
   );
 };
 
