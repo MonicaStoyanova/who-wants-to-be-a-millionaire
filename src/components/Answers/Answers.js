@@ -1,18 +1,13 @@
 import styles from "./Answers.module.css";
 import { updateUserStatistics } from "../../store/Slices/gamePlaySlice";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const AnswerItem = ({ answer, index, correctAnswer }) => {
   const letters = ["A", "B", "C", "D"];
 
   const dispatch = useDispatch();
   let navigate = useNavigate();
-
-  // those two line were used in order to check if the value updates
-  // const answeredQuestions = useSelector(
-  //   (state) => state.gamePlay.answeredQuestions
-  // );
 
   const isCorrectAnswer = (answer) => {
     if (!(correctAnswer === answer)) {
@@ -21,7 +16,9 @@ const AnswerItem = ({ answer, index, correctAnswer }) => {
       dispatch(updateUserStatistics());
     }
   };
-  // console.log(answeredQuestions);
+  // TO DO:
+  // When the user selects an answer, it should start blinking. If the answer is correct, show the answer in green; if incorrect, show it in red and display the correct answer in green simultaneously.
+  // If the user answers all 15 questions correctly, redirect them to this screen with the title "CONGRATULATIONS YOU WON 100,000lv." Show a table with the amount they have won.
   return (
     <button
       className={styles.answerOptions}
