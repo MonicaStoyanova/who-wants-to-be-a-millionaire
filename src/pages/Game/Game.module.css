@@ -1,10 +1,9 @@
 .background {
-    background-image: url("../../images/questions.jpg");
-    background-size: cover;
+  background-image: url("../../images/questions.jpg");
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh; 
- 
 }
 
 .return {
@@ -13,9 +12,8 @@
   top: 250%;
   left: 40%;
   position: absolute;
-  margin-left: -250px;
+  margin-left: 0 auto;
 }
-
 
 .gameContainer {
 padding: 350px;
