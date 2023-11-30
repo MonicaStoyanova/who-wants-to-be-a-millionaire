@@ -13,6 +13,7 @@ const AnswerItem = ({ answer, index, correctAnswer }) => {
     if (!(correctAnswer === answer)) {
       navigate("/gameover");
     } else {
+      // we might need info if that is the correct answer in the slice in order to rend the NEXT button?
       dispatch(updateUserStatistics());
     }
   };
