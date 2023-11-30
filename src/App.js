@@ -3,7 +3,7 @@ import { Route, Routes, Link } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Game from "./pages/Game/Game";
 import Win from "./pages/Win";
-import GameOver from "./pages/GameOver";
+import GameOver from "./pages/End/GameOver";
 function App() {
   return (
     <Routes>
