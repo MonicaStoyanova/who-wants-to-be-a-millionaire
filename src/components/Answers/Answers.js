@@ -1,5 +1,6 @@
 import styles from "./Answers.module.css";
 import { updateUserStatistics } from "../../store/Slices/gamePlaySlice";
+import { LETTERS } from "../../utils/const";
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -15,8 +16,6 @@ const AnswerItem = ({ answer, index, correctAnswer }) => {
       navigate("/gameover");
     }
   }, [answeredQuestion]);
-
-  const letters = ["A", "B", "C", "D"];
 
   // TO DO:
   // When the user selects an answer, it should start blinking. If the answer is correct, show the answer in green; if incorrect, show it in red and display the correct answer in green simultaneously.
@@ -35,7 +34,7 @@ const AnswerItem = ({ answer, index, correctAnswer }) => {
         className={styles.answerOptions}
         onClick={() => setAnsweredQuestion(answer)}
       >
-        <span>{letters[index]}: </span>
+        <span>{LETTERS[index]}: </span>
         {answer}
       </button>
     </>

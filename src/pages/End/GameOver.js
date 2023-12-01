@@ -2,24 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import styles from "./GameOver.module.css";
-
-const rewards = {
-  15: " 100 000",
-  14: "50 000",
-  13: "30 000",
-  12: "20 000",
-  11: "10 000",
-  10: "5 000",
-  9: "3 000",
-  8: "2 000",
-  7: "1 500",
-  6: "1 000",
-  5: "500",
-  4: "400",
-  3: "300",
-  2: "200",
-  1: "100",
-};
+import { REWARDS } from "../../utils/const";
+import { formatNumber } from "../../utils/sumFormat";
 
 const GameOver = () => {
   const { answeredQuestions } = useSelector((state) => state.gamePlay);
@@ -48,7 +32,7 @@ const GameOver = () => {
 
         <div className={styles.endViewPoints}>
           <ul>
-            {Object.entries(rewards)
+            {Object.entries(REWARDS)
               .reverse()
               .map(([position, price]) => {
                 return (
@@ -60,7 +44,7 @@ const GameOver = () => {
                    ${currentQuestionIndex == position ? styles.won : ""}
                   `}
                   >
-                    {position}: {price}
+                    {position}: {formatNumber(price)}
                   </li>
                 );
               })}
