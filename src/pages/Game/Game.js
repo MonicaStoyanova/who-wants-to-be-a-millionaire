@@ -63,8 +63,6 @@ const Game = () => {
 
   // TO DO:
   // we will need to implement soundtrack handling logic enabled by default
-  // timer logic: The user will have 60 seconds to answer each question.
-  // If the timer reaches 0, it will count as a wrong answer and redirect to the End Screen.
   // Implement three extra Joker options: "Call a Friend," "50/50," and "Help from the Audience." Each Joker provides extra points
   return (
     <div className={styles.background}>
