@@ -6,6 +6,7 @@ import { fetchQuestionsAndAnswers } from "../../store/Slices/gamePlaySlice";
 
 import Question from "../../components/Question/Question";
 import Answers from "../../components/Answers/Answers";
+import Timer from "../../components/Timer/Timer";
 import styles from "./Game.module.css";
 import { useNavigate } from "react-router-dom";
 
@@ -41,6 +42,7 @@ const Game = () => {
   };
   if (questions.length === 0) {
     return (
+      //relocate the request from here to home
       <Button
         className={styles.return}
         onClick={routeChange}
@@ -50,6 +52,7 @@ const Game = () => {
       >
         No Questions Found, please select another difficulty or category
       </Button>
+      //or do this : alert("No Questions Found, please select another difficulty or category")
     );
   }
   // shuffledAnswers is an array which has array of 3 wrong answers and a string with the correct answer
@@ -65,6 +68,7 @@ const Game = () => {
   // Implement three extra Joker options: "Call a Friend," "50/50," and "Help from the Audience." Each Joker provides extra points
   return (
     <div className={styles.background}>
+      <Timer />
       <div className={styles.gameContainer}>
         <Question
           question={questions[currentQuestionIndex].question}
