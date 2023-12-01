@@ -2,10 +2,17 @@ import styles from "./Timer.module.css";
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
+// we will need local state for the seconds,it should restart on question index change
 const Timer = () => {
-  // we will need local state for the seconds,it should restart on question index change
   const [seconds, setSeconds] = useState(60);
+
+  let navigate = useNavigate();
+
+  const answeredQuestions = useSelector(
+    (state) => state.gamePlay.answeredQuestions
+  );
 
   useEffect(() => {
     const timer =
@@ -17,12 +24,13 @@ const Timer = () => {
     return () => clearInterval(timer);
   }, [seconds]);
 
-  let navigate = useNavigate();
   if (seconds === 0) {
     navigate("/gameover");
   }
-
-  // now we need to re-start the seconds from 60 on question index change
+  // now we need to re-start the seconds from 60 on question index change which we can track with the state of the correct answer count
+  useEffect(() => {
+    setSeconds(60);
+  }, [answeredQuestions]);
 
   return (
     <div className={styles.timer}>
