@@ -25,6 +25,31 @@
   .answerOptions span {
     margin-right: 5px;
   }
+  /*
+  .answerOptionsBlink{
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+ @keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  25%{
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+ }
+}
+*/
+
+  
   
   @media screen and (max-width: 800px) {
     .answersContainer {

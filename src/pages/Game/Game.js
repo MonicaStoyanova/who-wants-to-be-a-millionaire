@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@mui/joy/Button";
 
-import { fetchQuestionsAndAnswers } from "../../store/Slices/gamePlaySlice";
+import { fetchQuestionsAndAnswers } from "store/slices/gamePlaySlice";
 
-import Question from "../../components/Question/Question";
-import Answers from "../../components/Answers/Answers";
+import Question from "components/Question/Question";
+import Answers from "components/Answers/Answers";
 import styles from "./Game.module.css";
 import { useNavigate } from "react-router-dom";
 

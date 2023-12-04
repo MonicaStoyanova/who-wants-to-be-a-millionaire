@@ -1,5 +1,5 @@
 import styles from "./Answers.module.css";
-import { updateUserStatistics } from "../../store/Slices/gamePlaySlice";
+import { updateUserStatistics } from "../../store/slices/gamePlaySlice";
 import { LETTERS } from "../../utils/const";
 
 import { useNavigate } from "react-router-dom";
