@@ -74,6 +74,7 @@ const Game = () => {
         />
         <Answers
           shuffledAnswers={shuffledAnswers}
+          // &[^;]+;
           correctAnswer={questions[currentQuestionIndex].correct_answer}
         />
       </div>

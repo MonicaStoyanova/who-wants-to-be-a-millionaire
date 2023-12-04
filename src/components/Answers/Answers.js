@@ -11,6 +11,9 @@ const AnswerItem = ({ answer, index, correctAnswer }) => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
+  let pattern = /&[^;]+;/g;
+  let modifiedAnswer = answer.replace(pattern, "'");
+
   useEffect(() => {
     if (answeredQuestion && correctAnswer !== answeredQuestion) {
       navigate("/gameover");
@@ -32,10 +35,10 @@ const AnswerItem = ({ answer, index, correctAnswer }) => {
       )}
       <button
         className={styles.answerOptions}
-        onClick={() => setAnsweredQuestion(answer)}
+        onClick={() => setAnsweredQuestion(modifiedAnswer)}
       >
         <span>{LETTERS[index]}: </span>
-        {answer}
+        {modifiedAnswer}
       </button>
     </>
   );
