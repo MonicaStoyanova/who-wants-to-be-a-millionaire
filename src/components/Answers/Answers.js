@@ -1,6 +1,6 @@
 import styles from "./Answers.module.css";
-import { updateUserStatistics } from "../../store/Slices/gamePlaySlice";
-import { LETTERS } from "../../utils/const";
+import { updateUserStatistics } from "../../store/slices/gamePlaySlice";
+import { LETTERS } from "../../utils/constants";
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
