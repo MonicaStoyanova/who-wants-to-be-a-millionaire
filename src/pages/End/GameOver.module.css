@@ -78,7 +78,10 @@ position: relative;
     border: none;
     border-radius: 25px;
     padding: 0.7em 0;
-    color:white
+    color:white;
+  }
 
+  .playagainBtn:hover{
+    cursor: pointer;
   }
   
