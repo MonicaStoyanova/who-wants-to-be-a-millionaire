@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/joy/Button";
 
-import { fetchQuestionsAndAnswers } from "../../store/slices/gamePlaySlice";
+import {
+  fetchQuestionsAndAnswers,
+  resetGame,
+} from "../../store/slices/gamePlaySlice";
 
 import Question from "../../components/Question/Question";
 import Answers from "../../components/Answers/Answers";
 import Timer from "../../components/Timer/Timer";
 import styles from "./Game.module.css";
-import { useNavigate } from "react-router-dom";
 
 const Game = () => {
   const dispatch = useDispatch();
@@ -19,13 +22,9 @@ const Game = () => {
   let navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch the questions data(question itself with answers) when the component mounts
     dispatch(fetchQuestionsAndAnswers({ categoryId, difficulty }));
   }, []);
   const status = useSelector((state) => state.gamePlay.status);
-  // in this variable there is an array of objects containing the question itself,
-  // correct and incorrect answers as follows
-  // .question-string; .correct_answer-string; .incorrect_answers-which is array with 3 strings
   const questions = useSelector((state) => state.gamePlay.questions);
   const error = useSelector((state) => state.gamePlay.error);
 
@@ -37,9 +36,11 @@ const Game = () => {
     return <p>Error: {error}</p>;
   }
   const routeChange = () => {
+    dispatch(resetGame());
     let path = "/";
     navigate(path);
   };
+
   if (questions.length === 0) {
     return (
       //relocate the request from here to home

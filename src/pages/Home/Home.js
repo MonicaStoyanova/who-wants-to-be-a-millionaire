@@ -11,6 +11,7 @@ import {
   updateDifficulty,
   fetchCategories,
   updateCategory,
+  resetGame,
 } from "../../store/slices/gamePlaySlice";
 import styles from "./Home.module.css";
 import logo from "../../images/logo.png";
@@ -27,7 +28,10 @@ export default function Home() {
   let navigate = useNavigate();
 
   // Fetch categories when the component mounts
+  // if the useris herebecause they clicked the back button,
+  //the state forthe previously selected params will be cleared
   useEffect(() => {
+    dispatch(resetGame());
     dispatch(fetchCategories());
   }, []);
 

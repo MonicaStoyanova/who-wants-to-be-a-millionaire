@@ -7,7 +7,9 @@ const initialState = {
   error: null,
   answeredQuestions: 0,
   difficulty: "",
+  //resetDifficulty: "",
   categories: [],
+  //resetCatefories: [],
   categoryId: "",
 };
 
@@ -59,6 +61,11 @@ const gamePlaySlice = createSlice({
     updateCategory: (state, action) => {
       state.categoryId = action.payload;
     },
+    // resetting the state, when the userclicks play again button
+    resetGame: (state, action) => {
+      state.difficulty = initialState.difficulty;
+      state.categories = initialState.categories;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCategories.fulfilled, (state, action) => {
@@ -84,6 +91,7 @@ export const {
   updateUserStatistics,
   updateDifficulty,
   updateCategory,
+  resetGame,
 } = gamePlaySlice.actions;
 
 export default gamePlaySlice.reducer;
