@@ -15,4 +15,18 @@
   .question span {
     margin-right: 5px;
   }
+
+  @media screen and (max-width: 600px) {
+    .question {
+      width: 95%;
+      font-size: 0.5em;
+    }
+  }
+
+  @media screen and (max-width: 300px) {
+    .question {
+      width: 90%;
+      font-size: 0.5em;
+    }
+  }
   

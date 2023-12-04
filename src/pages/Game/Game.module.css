@@ -1,23 +1,41 @@
 .background {
-    background-image: url("../../images/questions.jpg");
-    background-size: cover;
+  background-image: url("../../images/questions.jpg");
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh; 
- 
 }
 
 .return {
   width: 300px;
   height: 200px;
   top: 250%;
-  left: 40%;
+  left: 30%;
   position: absolute;
-  margin-left: -250px;
+  margin-left: 0 auto;
 }
-
 
 .gameContainer {
 padding: 350px;
 
 } 
+
+@media screen and (max-width: 600px) {
+  .gameContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .gameContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
+}

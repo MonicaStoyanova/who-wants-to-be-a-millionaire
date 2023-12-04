@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@mui/joy/Button";
 
-import { fetchQuestionsAndAnswers } from "../../store/Slices/gamePlaySlice";
+import { fetchQuestionsAndAnswers } from "../../store/slices/gamePlaySlice";
 
 import Question from "../../components/Question/Question";
 import Answers from "../../components/Answers/Answers";
@@ -62,7 +62,6 @@ const Game = () => {
   // we will need to implement soundtrack handling logic enabled by default
   // timer logic: The user will have 60 seconds to answer each question.
   // If the timer reaches 0, it will count as a wrong answer and redirect to the End Screen.
-  // After selecting the correct answer, display a "Next" button above the question to move to the next question.
   // Implement three extra Joker options: "Call a Friend," "50/50," and "Help from the Audience." Each Joker provides extra points
   return (
     <div className={styles.background}>
