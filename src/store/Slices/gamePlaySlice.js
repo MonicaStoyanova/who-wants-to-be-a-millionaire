@@ -7,9 +7,7 @@ const initialState = {
   error: null,
   answeredQuestions: 0,
   difficulty: "",
-  //resetDifficulty: "",
   categories: [],
-  //resetCatefories: [],
   categoryId: "",
 };
 

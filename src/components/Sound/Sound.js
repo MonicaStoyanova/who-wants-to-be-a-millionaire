@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Button } from "@mui/joy";
 
 import styles from "./Sound.module.css";
 import song from "../../assets/sound.mp3";
@@ -22,16 +23,18 @@ const useAudio = () => {
 
   return [playing, toggle];
 };
+// if user navigates else museic should stop
 
 const Player = ({ song }) => {
   const [playing, toggle] = useAudio(song);
 
   return (
-    <div>
-      <button onClick={toggle}>
-        {playing ? "Pause" : "Play"}
-        <img className={styles.player} />
-      </button>
+    <div className={styles.playerContainer}>
+      <Button
+        variant="plain"
+        className={playing ? styles.playerOn : styles.playerOff}
+        onClick={toggle}
+      ></Button>
     </div>
   );
 };

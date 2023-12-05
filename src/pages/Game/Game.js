@@ -12,7 +12,6 @@ import Question from "../../components/Question/Question";
 import Answers from "../../components/Answers/Answers";
 import Timer from "../../components/Timer/Timer";
 import Player from "../../components/Sound/Sound";
-import { URL } from "../../utils/constants";
 import styles from "./Game.module.css";
 
 const Game = () => {
@@ -58,14 +57,12 @@ const Game = () => {
       //or do this : alert("No Questions Found, please select another difficulty or category")
     );
   }
-  // shuffledAnswers is an array which has array of 3 wrong answers and a string with the correct answer
   const shuffledAnswers = [
     ...questions[currentQuestionIndex].incorrect_answers,
     questions[currentQuestionIndex].correct_answer,
   ].sort(() => Math.random() - 0.5);
 
   // TO DO:
-  // we will need to implement soundtrack handling logic enabled by default
   // Implement three extra Joker options: "Call a Friend," "50/50," and "Help from the Audience." Each Joker provides extra points
   return (
     <div className={styles.background}>

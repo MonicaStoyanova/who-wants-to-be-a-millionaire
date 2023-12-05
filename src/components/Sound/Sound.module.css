@@ -1,3 +1,19 @@
-.player{
-    background-image: url('../../assets/icon.png');
+.playerContainer{
+    position: absolute;
+    bottom: 4em;
+    left: 3em;
+    background-color: transparent;
 }
+
+ .playerOn{
+    background-image: url('../../assets/icon.png');
+    background-size:cover;
+    width: 5em ;
+    height: 5em;
+} 
+.playerOff{
+    background-image: url('../../assets/muted.jpg');
+    background-size:cover;
+    width: 5em ;
+    height: 5em;
+} 
