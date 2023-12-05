@@ -14,7 +14,6 @@ const AnswerItem = ({
   isAnswerSelected,
 }) => {
   const [answeredQuestion, setAnsweredQuestion] = useState(null);
-  // in order to block the rest of the answers we will need local state
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
@@ -26,7 +25,6 @@ const AnswerItem = ({
       navigate("/gameover");
     }
   }, [answeredQuestion]);
-  console.log("correctAnswer", correctAnswer);
   // TO DO:
   // When the user selects an answer, it should start blinking. If the answer is correct, show the answer in green; if incorrect, show it in red and display the correct answer in green simultaneously.
   // If the user answers all 15 questions correctly, redirect them to this screen with the title "CONGRATULATIONS YOU WON 100,000lv." Show a table with the amount they have won.
@@ -61,8 +59,6 @@ const AnswerItem = ({
 
 const Answers = ({ shuffledAnswers, correctAnswer }) => {
   const [isAnswerSelected, setIsAnswerSelected] = useState(false);
-  console.log("Answers rendered");
-  console.log("isAnswerSelected", isAnswerSelected);
   return (
     <div className={styles.answersContainer}>
       {shuffledAnswers.map((a, i) => (

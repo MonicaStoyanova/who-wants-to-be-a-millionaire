@@ -11,6 +11,8 @@ import {
 import Question from "../../components/Question/Question";
 import Answers from "../../components/Answers/Answers";
 import Timer from "../../components/Timer/Timer";
+import Player from "../../components/Sound/Sound";
+import { URL } from "../../utils/constants";
 import styles from "./Game.module.css";
 
 const Game = () => {
@@ -67,6 +69,7 @@ const Game = () => {
   // Implement three extra Joker options: "Call a Friend," "50/50," and "Help from the Audience." Each Joker provides extra points
   return (
     <div className={styles.background}>
+      <Player />
       <Timer />
       <div className={styles.gameContainer}>
         <Question
@@ -75,7 +78,6 @@ const Game = () => {
         />
         <Answers
           shuffledAnswers={shuffledAnswers}
-          // &[^;]+;
           correctAnswer={questions[currentQuestionIndex].correct_answer}
         />
       </div>
