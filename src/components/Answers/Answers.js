@@ -15,14 +15,18 @@ const AnswerItem = ({
 }) => {
   const [answeredQuestion, setAnsweredQuestion] = useState(null);
   const dispatch = useDispatch();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   // re do the pattern
   let pattern = /&[^;]+;/g;
   let modifiedAnswer = answer.replace(pattern, "'");
 
+  // checks if the Game is over
   useEffect(() => {
-    if (answeredQuestion && correctAnswer !== answeredQuestion) {
+    const isSelectedAnswerCorrect =
+      answeredQuestion && correctAnswer !== answeredQuestion;
+
+    if (isSelectedAnswerCorrect) {
       navigate("/gameover");
     }
   }, [answeredQuestion]);
