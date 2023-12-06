@@ -11,6 +11,8 @@ const useAudio = () => {
   useEffect(() => {
     if (playing) {
       audio.play().catch((error) => {
+        // the error: DOMException: The play() request was interrupted by a call to pause().
+        // appears in chrome
         console.log("Play error:", error);
       });
     } else {
