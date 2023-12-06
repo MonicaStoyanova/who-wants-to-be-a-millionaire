@@ -73,12 +73,15 @@ position: relative;
   }
 
   .playagainBtn {
-    width: 30%;
-    background-color: rgb(53, 51, 51);
+    width: 15%;
+    background-color: rgb(73, 161, 142);
     border: none;
     border-radius: 25px;
-    padding: 0.5em 0;
-    color:white
+    padding: 0.7em 0;
+    color:white;
+  }
 
+  .playagainBtn:hover{
+    cursor: pointer;
   }
   
