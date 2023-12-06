@@ -43,7 +43,6 @@ const Game = () => {
 
   if (questions.length === 0) {
     return (
-      //relocate the request from here to home
       <Button
         className={styles.return}
         onClick={routeChange}
