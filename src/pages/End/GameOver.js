@@ -15,7 +15,6 @@ const GameOver = () => {
 
   const routeChange = () => {
     let path = "/";
-    // make the current question index be 0
     dispatch(resetGame());
     navigate(path);
   };

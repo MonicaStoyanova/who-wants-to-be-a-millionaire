@@ -25,9 +25,16 @@ const Game = () => {
   useEffect(() => {
     dispatch(fetchQuestionsAndAnswers({ categoryId, difficulty }));
   }, []);
+
   const status = useSelector((state) => state.gamePlay.status);
   const questions = useSelector((state) => state.gamePlay.questions);
   const error = useSelector((state) => state.gamePlay.error);
+
+  const routeChange = () => {
+    dispatch(resetGame());
+    let path = "/";
+    navigate(path);
+  };
 
   if (status === "loading") {
     return <p>Loading...</p>;
@@ -36,11 +43,6 @@ const Game = () => {
   if (status === "failed") {
     return <p>Error: {error}</p>;
   }
-  const routeChange = () => {
-    dispatch(resetGame());
-    let path = "/";
-    navigate(path);
-  };
 
   if (questions.length === 0) {
     return (

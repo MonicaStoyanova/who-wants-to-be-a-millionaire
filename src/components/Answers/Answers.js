@@ -17,6 +17,7 @@ const AnswerItem = ({
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
+  // re do the pattern
   let pattern = /&[^;]+;/g;
   let modifiedAnswer = answer.replace(pattern, "'");
 
