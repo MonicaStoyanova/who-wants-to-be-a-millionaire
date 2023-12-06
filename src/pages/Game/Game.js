@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/joy/Button";
@@ -63,7 +63,6 @@ const Game = () => {
   ].sort(() => Math.random() - 0.5);
 
   // TO DO:
-  // we will need to implement soundtrack handling logic enabled by default
   // Implement three extra Joker options: "Call a Friend," "50/50," and "Help from the Audience." Each Joker provides extra points
   return (
     <div className={styles.background}>
@@ -75,7 +74,6 @@ const Game = () => {
         />
         <Answers
           shuffledAnswers={shuffledAnswers}
-          // &[^;]+;
           correctAnswer={questions[currentQuestionIndex].correct_answer}
         />
       </div>
