@@ -16,23 +16,24 @@ import styles from "./Game.module.css";
 
 const Game = () => {
   const dispatch = useDispatch();
-  const { categoryId, difficulty, answeredQuestions } = useSelector(
+  const navigate = useNavigate();
+
+  const { categoryId, difficulty, answeredQuestionsCount } = useSelector(
     (state) => state.gamePlay
   );
-  let currentQuestionIndex = answeredQuestions;
-  let navigate = useNavigate();
+  const status = useSelector((state) => state.gamePlay.status);
+  const questions = useSelector((state) => state.gamePlay.questions);
+  const error = useSelector((state) => state.gamePlay.error);
+
+  let currentQuestionIndex = answeredQuestionsCount;
 
   useEffect(() => {
     dispatch(fetchQuestionsAndAnswers({ categoryId, difficulty }));
   }, []);
 
-  const status = useSelector((state) => state.gamePlay.status);
-  const questions = useSelector((state) => state.gamePlay.questions);
-  const error = useSelector((state) => state.gamePlay.error);
-
   const routeChange = () => {
     dispatch(resetGame());
-    let path = "/";
+    const path = "/";
     navigate(path);
   };
 

@@ -1,10 +1,10 @@
-import styles from "./Answers.module.css";
-import { updateUserStatistics } from "../../store/slices/gamePlaySlice";
-import { LETTERS } from "../../utils/constants";
-
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
+
+import styles from "./Answers.module.css";
+import { updateUserStatistics } from "../../store/slices/gamePlaySlice";
+import { LETTERS } from "../../utils/constants";
 
 const AnswerItem = ({
   answer,
@@ -13,10 +13,11 @@ const AnswerItem = ({
   setIsAnswerSelected,
   isAnswerSelected,
 }) => {
+  //answeredQuestion is not descriptive enough,this is the string value of the answer the user has selected
   const [answeredQuestion, setAnsweredQuestion] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  console.log(answeredQuestion);
   // re do the pattern
   let pattern = /&[^;]+;/g;
   let modifiedAnswer = answer.replace(pattern, "'");

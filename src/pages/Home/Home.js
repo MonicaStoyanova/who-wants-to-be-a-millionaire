@@ -28,8 +28,8 @@ export default function Home() {
   let navigate = useNavigate();
 
   // Fetch categories when the component mounts
-  // if the useris herebecause they clicked the back button,
-  //the state forthe previously selected params will be cleared
+  // if the user is herebecause they clicked the back button,
+  // the state for the previously selected params will be cleared
   useEffect(() => {
     dispatch(resetGame());
     dispatch(fetchCategories());
@@ -53,7 +53,7 @@ export default function Home() {
   };
 
   const routeChange = () => {
-    let path = "/game";
+    const path = "/game";
     navigate(path, { state: { categoryId, difficulty } });
   };
 

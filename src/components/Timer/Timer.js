@@ -7,13 +7,13 @@ import { useSelector } from "react-redux";
 // we will need local state for the seconds,it should restart on question index change
 const Timer = () => {
   const [seconds, setSeconds] = useState(60);
-  //freezing logic for timer
-  const [isPaused, setIsPaused] = useState(false);
+  // TO DO: freezing logic for timer
+  // const [isPaused, setIsPaused] = useState(false);
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const answeredQuestions = useSelector(
-    (state) => state.gamePlay.answeredQuestions
+  const answeredQuestionsCount = useSelector(
+    (state) => state.gamePlay.answeredQuestionsCount
   );
 
   // this is more readable
@@ -32,10 +32,11 @@ const Timer = () => {
   // }
   // now we need to re-start the seconds from 60 on question index change which we can track with the state of the correct answer count
 
-  //if the current q is 0 don`t execute, exc. only when the value is updated
+  //This useEffect needs to be rewriten
+  //dif the current q is 0 don`t execute, exc. only when the value is updated
   useEffect(() => {
-    setSeconds(5);
-  }, [answeredQuestions]);
+    setSeconds(60);
+  }, [answeredQuestionsCount]);
   return (
     <div className={styles.timer}>
       <span>{seconds}</span>
