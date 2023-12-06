@@ -1,19 +1,21 @@
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import styles from "./GameOver.module.css";
 import { REWARDS } from "../../utils/constants";
 import { formatNumber } from "../../utils/projectUtils";
+import { resetGame } from "../../store/slices/gamePlaySlice";
 
 const GameOver = () => {
   const { answeredQuestions } = useSelector((state) => state.gamePlay);
   let currentQuestionIndex = answeredQuestions;
 
   let navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const routeChange = () => {
     let path = "/";
-    // make the current question index be 0
+    dispatch(resetGame());
     navigate(path);
   };
 

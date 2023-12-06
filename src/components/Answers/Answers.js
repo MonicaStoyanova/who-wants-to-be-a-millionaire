@@ -6,11 +6,18 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 
-const AnswerItem = ({ answer, index, correctAnswer }) => {
+const AnswerItem = ({
+  answer,
+  index,
+  correctAnswer,
+  setIsAnswerSelected,
+  isAnswerSelected,
+}) => {
   const [answeredQuestion, setAnsweredQuestion] = useState(null);
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
+  // re do the pattern
   let pattern = /&[^;]+;/g;
   let modifiedAnswer = answer.replace(pattern, "'");
 
@@ -19,7 +26,6 @@ const AnswerItem = ({ answer, index, correctAnswer }) => {
       navigate("/gameover");
     }
   }, [answeredQuestion]);
-
   // TO DO:
   // When the user selects an answer, it should start blinking. If the answer is correct, show the answer in green; if incorrect, show it in red and display the correct answer in green simultaneously.
   // If the user answers all 15 questions correctly, redirect them to this screen with the title "CONGRATULATIONS YOU WON 100,000lv." Show a table with the amount they have won.
@@ -28,14 +34,22 @@ const AnswerItem = ({ answer, index, correctAnswer }) => {
       {correctAnswer === answeredQuestion && (
         <button
           className={styles.nextBtn}
-          onClick={() => dispatch(updateUserStatistics())}
+          onClick={() => {
+            dispatch(updateUserStatistics());
+            setIsAnswerSelected(false);
+          }}
         >
           Next
         </button>
       )}
+
       <button
+        disabled={isAnswerSelected}
         className={styles.answerOptions}
-        onClick={() => setAnsweredQuestion(modifiedAnswer)}
+        onClick={() => {
+          setIsAnswerSelected(true);
+          setAnsweredQuestion(modifiedAnswer);
+        }}
       >
         <span>{LETTERS[index]}: </span>
         {modifiedAnswer}
@@ -45,6 +59,7 @@ const AnswerItem = ({ answer, index, correctAnswer }) => {
 };
 
 const Answers = ({ shuffledAnswers, correctAnswer }) => {
+  const [isAnswerSelected, setIsAnswerSelected] = useState(false);
   return (
     <div className={styles.answersContainer}>
       {shuffledAnswers.map((a, i) => (
@@ -53,6 +68,8 @@ const Answers = ({ shuffledAnswers, correctAnswer }) => {
           answer={a}
           index={i}
           correctAnswer={correctAnswer}
+          setIsAnswerSelected={setIsAnswerSelected}
+          isAnswerSelected={isAnswerSelected}
         />
       ))}
     </div>
