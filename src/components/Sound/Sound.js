@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@mui/joy";
+
 import styles from "./Sound.module.css";
 import song from "../../assets/sound.mp3";
 
@@ -9,6 +10,7 @@ const useAudio = () => {
   const toggle = () => setPlaying(!playing);
 
   useEffect(() => {
+    audio.loop = true;
     if (playing) {
       audio.play().catch((error) => {
         // the error: DOMException: The play() request was interrupted by a call to pause().
@@ -30,7 +32,7 @@ const useAudio = () => {
     return () => {
       audio.removeEventListener("ended", () => setPlaying(false));
     };
-  }, []);
+  }, [audio]);
 
   return [playing, toggle];
 };
