@@ -7,14 +7,14 @@ import { formatNumber } from "../../utils/projectUtils";
 import { resetGame } from "../../store/slices/gamePlaySlice";
 
 const GameOver = () => {
-  const { answeredQuestions } = useSelector((state) => state.gamePlay);
-  let currentQuestionIndex = answeredQuestions;
+  const { answeredQuestionsCount } = useSelector((state) => state.gamePlay);
+  let currentQuestionIndex = answeredQuestionsCount;
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const routeChange = () => {
-    let path = "/";
+    const path = "/";
     dispatch(resetGame());
     navigate(path);
   };
@@ -22,6 +22,7 @@ const GameOver = () => {
   return (
     <div className={styles.endBackground}>
       <div className={styles.endViewContainer}>
+        {/* the check if user has answered last question correctly is not working as expected */}
         {currentQuestionIndex === 14 ? (
           <div>Won</div>
         ) : (

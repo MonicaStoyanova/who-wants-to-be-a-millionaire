@@ -5,7 +5,7 @@ const initialState = {
   questions: [],
   status: "idle",
   error: null,
-  answeredQuestions: 0,
+  answeredQuestionsCount: 0,
   difficulty: "",
   categories: [],
   categoryId: "",
@@ -49,7 +49,7 @@ const gamePlaySlice = createSlice({
     },
     // we are counting the correctly answered questions
     updateUserStatistics: (state, action) => {
-      state.answeredQuestions += 1;
+      state.answeredQuestionsCount += 1;
     },
     //the user select one of 3 options
     updateDifficulty: (state, action) => {

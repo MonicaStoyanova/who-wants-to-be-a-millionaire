@@ -7,31 +7,36 @@ import { useSelector } from "react-redux";
 // we will need local state for the seconds,it should restart on question index change
 const Timer = () => {
   const [seconds, setSeconds] = useState(60);
+  // TO DO: freezing logic for timer
+  // const [isPaused, setIsPaused] = useState(false);
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const answeredQuestions = useSelector(
-    (state) => state.gamePlay.answeredQuestions
+  const answeredQuestionsCount = useSelector(
+    (state) => state.gamePlay.answeredQuestionsCount
   );
 
+  // this is more readable
   useEffect(() => {
-    const timer =
-      // setInterval is native JSfunction and triggers setSeconds
-      // we need clearInterval in order the Timer to work properly
-      // everytime the seconds change,new setinterval is called
-      seconds > 0 && setInterval(() => setSeconds(seconds - 1), 1000);
+    const isTimerMoreThanZero = seconds > 0;
+    if (isTimerMoreThanZero) setInterval(() => setSeconds(seconds - 1), 1000);
 
-    return () => clearInterval(timer);
+    const isTimerExpired = seconds === 0;
+    if (isTimerExpired) navigate("/gameover");
+
+    return () => clearInterval(isTimerMoreThanZero);
   }, [seconds]);
 
-  if (seconds === 0) {
-    navigate("/gameover");
-  }
+  // if (seconds === 0) {
+  //   navigate("/gameover");
+  // }
   // now we need to re-start the seconds from 60 on question index change which we can track with the state of the correct answer count
+
+  //This useEffect needs to be rewriten
+  //dif the current q is 0 don`t execute, exc. only when the value is updated
   useEffect(() => {
     setSeconds(60);
-  }, [answeredQuestions]);
-
+  }, [answeredQuestionsCount]);
   return (
     <div className={styles.timer}>
       <span>{seconds}</span>
