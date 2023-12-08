@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/joy/Button";
@@ -47,7 +47,6 @@ const Game = () => {
 
   if (questions.length === 0) {
     return (
-      //relocate the request from here to home
       <Button
         className={styles.return}
         onClick={routeChange}
