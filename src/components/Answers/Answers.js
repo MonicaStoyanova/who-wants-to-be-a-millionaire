@@ -17,10 +17,9 @@ const AnswerItem = ({
   const [answeredQuestion, setAnsweredQuestion] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(answeredQuestion);
-  // re do the pattern
-  let pattern = /&[^;]+;/g;
-  let modifiedAnswer = answer.replace(pattern, "'");
+
+  const pattern = /&[^;]+;/g;
+  const modifiedAnswer = answer.replace(pattern, "'");
 
   // checks if the Game is over
   useEffect(() => {
