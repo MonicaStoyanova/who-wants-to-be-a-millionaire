@@ -5,10 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 // we will need local state for the seconds,it should restart on question index change
-const Timer = () => {
-  const [seconds, setSeconds] = useState(60);
-  // TO DO: freezing logic for timer
-  // const [isPaused, setIsPaused] = useState(false);
+const Timer = ({ isTimerPaused, maxSeconds }) => {
+  const [seconds, setSeconds] = useState(maxSeconds);
 
   const navigate = useNavigate();
 
@@ -19,13 +17,23 @@ const Timer = () => {
   // this is more readable
   useEffect(() => {
     const isTimerMoreThanZero = seconds > 0;
-    if (isTimerMoreThanZero) setInterval(() => setSeconds(seconds - 1), 1000);
+
+    let intervalId;
+    if (isTimerMoreThanZero && !isTimerPaused) {
+      intervalId = setInterval(
+        () => setSeconds((prevSeconds) => prevSeconds - 1),
+        1000
+      );
+    }
 
     const isTimerExpired = seconds === 0;
-    if (isTimerExpired) navigate("/gameover");
+    if (isTimerExpired) {
+      navigate("/gameover");
+      clearInterval(intervalId); // Clear the interval when the timer is expired
+    }
 
-    return () => clearInterval(isTimerMoreThanZero);
-  }, [seconds]);
+    return () => clearInterval(intervalId); // Clear the interval on component unmount or when seconds change
+  }, [seconds, isTimerPaused]);
 
   // if (seconds === 0) {
   //   navigate("/gameover");
@@ -35,7 +43,7 @@ const Timer = () => {
   //This useEffect needs to be rewriten
   //dif the current q is 0 don`t execute, exc. only when the value is updated
   useEffect(() => {
-    setSeconds(60);
+    setSeconds(maxSeconds);
   }, [answeredQuestionsCount]);
   return (
     <div className={styles.timer}>

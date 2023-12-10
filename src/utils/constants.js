@@ -17,3 +17,5 @@ export const REWARDS = {
   2: "200",
   1: "100",
 };
+
+export const MAX_SECONDS = 60;

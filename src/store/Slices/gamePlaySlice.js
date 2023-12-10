@@ -9,6 +9,7 @@ const initialState = {
   difficulty: "",
   categories: [],
   categoryId: "",
+  isTimerPaused: false,
 };
 
 export const fetchCategories = createAsyncThunk(
@@ -65,6 +66,9 @@ const gamePlaySlice = createSlice({
       state.categories = initialState.categories;
       state.answeredQuestions = initialState.answeredQuestions;
     },
+    updateTimerPause: (state, action) => {
+      state.isTimerPaused = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCategories.fulfilled, (state, action) => {
@@ -91,6 +95,7 @@ export const {
   updateDifficulty,
   updateCategory,
   resetGame,
+  updateTimerPause,
 } = gamePlaySlice.actions;
 
 export default gamePlaySlice.reducer;

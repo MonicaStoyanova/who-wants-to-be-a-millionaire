@@ -3,7 +3,10 @@ import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 
 import styles from "./Answers.module.css";
-import { updateUserStatistics } from "../../store/slices/gamePlaySlice";
+import {
+  updateUserStatistics,
+  updateTimerPause,
+} from "../../store/slices/gamePlaySlice";
 import { LETTERS } from "../../utils/constants";
 
 const AnswerItem = ({
@@ -23,11 +26,13 @@ const AnswerItem = ({
 
   // checks if the Game is over
   useEffect(() => {
-    const isSelectedAnswerCorrect =
+    const isSelectedAnswerWrong =
       answeredQuestion && correctAnswer !== answeredQuestion;
 
-    if (isSelectedAnswerCorrect) {
+    if (isSelectedAnswerWrong) {
       navigate("/gameover");
+    } else if (isSelectedAnswerWrong === false) {
+      dispatch(updateTimerPause(true));
     }
   }, [answeredQuestion]);
   // TO DO:
@@ -40,6 +45,7 @@ const AnswerItem = ({
           className={styles.nextBtn}
           onClick={() => {
             dispatch(updateUserStatistics());
+            dispatch(updateTimerPause(false));
             setIsAnswerSelected(false);
           }}
         >

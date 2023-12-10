@@ -12,15 +12,15 @@ import Question from "../../components/Question/Question";
 import Answers from "../../components/Answers/Answers";
 import Timer from "../../components/Timer/Timer";
 import Player from "../../components/Sound/Sound";
+import { MAX_SECONDS } from "../../utils/constants";
 import styles from "./Game.module.css";
 
 const Game = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { categoryId, difficulty, answeredQuestionsCount } = useSelector(
-    (state) => state.gamePlay
-  );
+  const { categoryId, difficulty, answeredQuestionsCount, isTimerPaused } =
+    useSelector((state) => state.gamePlay);
   const status = useSelector((state) => state.gamePlay.status);
   const questions = useSelector((state) => state.gamePlay.questions);
   const error = useSelector((state) => state.gamePlay.error);
@@ -69,7 +69,7 @@ const Game = () => {
   return (
     <div className={styles.background}>
       <Player />
-      <Timer />
+      <Timer isTimerPaused={isTimerPaused} maxSeconds={MAX_SECONDS} />
       <div className={styles.gameContainer}>
         <Question
           question={questions[currentQuestionIndex].question}
