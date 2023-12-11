@@ -12,7 +12,7 @@ import Question from "../../components/Question/Question";
 import Answers from "../../components/Answers/Answers";
 import Timer from "../../components/Timer/Timer";
 import Player from "../../components/Sound/Sound";
-import { MAX_SECONDS } from "../../utils/constants";
+
 import styles from "./Game.module.css";
 
 const Game = () => {
@@ -69,7 +69,7 @@ const Game = () => {
   return (
     <div className={styles.background}>
       <Player />
-      <Timer isTimerPaused={isTimerPaused} maxSeconds={MAX_SECONDS} />
+      <Timer isTimerPaused={isTimerPaused} />
       <div className={styles.gameContainer}>
         <Question
           question={questions[currentQuestionIndex].question}

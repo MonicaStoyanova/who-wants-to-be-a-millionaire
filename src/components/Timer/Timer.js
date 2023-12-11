@@ -1,12 +1,12 @@
-import styles from "./Timer.module.css";
-
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-// we will need local state for the seconds,it should restart on question index change
-const Timer = ({ isTimerPaused, maxSeconds }) => {
-  const [seconds, setSeconds] = useState(maxSeconds);
+import { MAX_SECONDS } from "../../utils/constants";
+import styles from "./Timer.module.css";
+//props coming from parent Game.js
+const Timer = ({ isTimerPaused }) => {
+  const [seconds, setSeconds] = useState(MAX_SECONDS);
 
   const navigate = useNavigate();
 
@@ -14,13 +14,18 @@ const Timer = ({ isTimerPaused, maxSeconds }) => {
     (state) => state.gamePlay.answeredQuestionsCount
   );
 
-  // this is more readable
+  // Since the state persists between renders we need to set them back to 60
+  useEffect(() => {
+    setSeconds(MAX_SECONDS);
+  }, [answeredQuestionsCount]);
+
+  // Checks if timer should decrease or has reached 0;
   useEffect(() => {
     const isTimerMoreThanZero = seconds > 0;
 
-    let intervalId;
+    let decreaseSeconds;
     if (isTimerMoreThanZero && !isTimerPaused) {
-      intervalId = setInterval(
+      decreaseSeconds = setInterval(
         () => setSeconds((prevSeconds) => prevSeconds - 1),
         1000
       );
@@ -29,22 +34,11 @@ const Timer = ({ isTimerPaused, maxSeconds }) => {
     const isTimerExpired = seconds === 0;
     if (isTimerExpired) {
       navigate("/gameover");
-      clearInterval(intervalId); // Clear the interval when the timer is expired
+      clearInterval(decreaseSeconds); // Clear the interval when the timer has expired
     }
-
-    return () => clearInterval(intervalId); // Clear the interval on component unmount or when seconds change
+    return () => clearInterval(decreaseSeconds); // Clear the interval on component unmount or when seconds change
   }, [seconds, isTimerPaused]);
 
-  // if (seconds === 0) {
-  //   navigate("/gameover");
-  // }
-  // now we need to re-start the seconds from 60 on question index change which we can track with the state of the correct answer count
-
-  //This useEffect needs to be rewriten
-  //dif the current q is 0 don`t execute, exc. only when the value is updated
-  useEffect(() => {
-    setSeconds(maxSeconds);
-  }, [answeredQuestionsCount]);
   return (
     <div className={styles.timer}>
       <span>{seconds}</span>
