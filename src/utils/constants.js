@@ -17,3 +17,16 @@ export const REWARDS = {
   2: "200",
   1: "100",
 };
+
+export const switchByStatus = (status, error) => {
+  switch (status) {
+    case "loading":
+      return <p>Loading...</p>;
+
+    case "failed":
+      return <p>Error: {error}</p>;
+
+    default:
+      return null;
+  }
+};
