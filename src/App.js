@@ -4,6 +4,9 @@ import Home from "./pages/Home/Home";
 import Game from "./pages/Game/Game";
 import Win from "./pages/Win";
 import GameOver from "./pages/End/GameOver";
+
+import "./App.css";
+
 function App() {
   return (
     <Routes>

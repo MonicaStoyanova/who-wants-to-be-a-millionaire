@@ -18,14 +18,16 @@ const Game = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { categoryId, difficulty, answeredQuestionsCount } = useSelector(
-    (state) => state.gamePlay
-  );
-  const status = useSelector((state) => state.gamePlay.status);
-  const questions = useSelector((state) => state.gamePlay.questions);
-  const error = useSelector((state) => state.gamePlay.error);
+  const {
+    categoryId,
+    difficulty,
+    answeredQuestionsCount,
+    status,
+    questions,
+    error,
+  } = useSelector((state) => state.gamePlay);
 
-  let currentQuestionIndex = answeredQuestionsCount;
+  const currentQuestionIndex = answeredQuestionsCount;
 
   useEffect(() => {
     dispatch(fetchQuestionsAndAnswers({ categoryId, difficulty }));
@@ -36,16 +38,15 @@ const Game = () => {
     const path = "/";
     navigate(path);
   };
-
+  // iznesi kato switch v const
   if (status === "loading") {
     return <p>Loading...</p>;
-  }
-
-  if (status === "failed") {
+  } else if (status === "failed") {
     return <p>Error: {error}</p>;
   }
-
+  //naprawi kato ternaren
   if (questions.length === 0) {
+    // sloji modal ne da redirektva
     return (
       <Button
         className={styles.return}
@@ -56,7 +57,6 @@ const Game = () => {
       >
         No Questions Found, please select another difficulty or category
       </Button>
-      //or do this : alert("No Questions Found, please select another difficulty or category")
     );
   }
   const shuffledAnswers = [
