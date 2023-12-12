@@ -27,9 +27,7 @@ const Game = () => {
     dispatch(fetchQuestionsAndAnswers({ categoryId, difficulty }));
   }, [categoryId, difficulty, dispatch]);
 
-  const handleModalClose = () => {
-    // Perform necessary actions on close
-    // For example, resetting the game state or navigating to a different page
+  const handleAlertClose = () => {
     dispatch(resetGame());
     navigate("/");
   };
@@ -61,7 +59,7 @@ const Game = () => {
         content = (
           <AlertMessage
             message="Please select another difficulty or category."
-            onClose={handleModalClose}
+            onClose={handleAlertClose}
           />
         );
       }

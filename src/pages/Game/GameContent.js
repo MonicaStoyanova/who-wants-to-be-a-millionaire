@@ -1,10 +1,9 @@
-// GameContent.js
-import React from "react";
 import Question from "../../components/Question/Question";
 import Answers from "../../components/Answers/Answers";
 import Timer from "../../components/Timer/Timer";
 import Player from "../../components/Sound/Sound";
-import styles from "./Game.module.css";
+
+import styles from "./GameContent.module.css";
 
 const GameContent = ({
   currentQuestion,

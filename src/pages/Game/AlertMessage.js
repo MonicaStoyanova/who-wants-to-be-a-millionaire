@@ -1,6 +1,4 @@
-// AlertMessage.js
-import React from "react";
-import styles from "./Game.module.css";
+import styles from "./GameContent.module.css";
 
 const AlertMessage = ({ message, onClose }) => {
   return (
