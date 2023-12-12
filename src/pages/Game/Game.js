@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import AlertMessage from "../../components/Alert/AlertMessage";
+import { GAME_SCREEN_ALERTS } from "../../utils/constants";
 import GameContent from "./GameContent";
-import AlertMessage from "./AlertMessage";
 
 import {
   fetchQuestionsAndAnswers,
@@ -25,50 +26,50 @@ const Game = () => {
   // Fetching questions and answers
   useEffect(() => {
     dispatch(fetchQuestionsAndAnswers({ categoryId, difficulty }));
-  }, [categoryId, difficulty, dispatch]);
+  }, [categoryId, difficulty]);
 
   const handleAlertClose = () => {
     dispatch(resetGame());
     navigate("/");
   };
 
-  let content;
-  switch (status) {
-    case "loading":
-      content = <p>Loading...</p>;
-      break;
-    case "failed":
-      content = <p>Error: {error}</p>;
-      break;
-    case "succeeded":
-      if (questions.length !== 0) {
-        const currentQuestion = questions[answeredQuestionsCount];
-        const shuffledAnswers = [
-          ...currentQuestion.incorrect_answers,
-          currentQuestion.correct_answer,
-        ].sort(() => Math.random() - 0.5);
+  const content = () => {
+    switch (status) {
+      case "loading":
+        return <p>Loading...</p>;
 
-        content = (
-          <GameContent
-            currentQuestion={currentQuestion}
-            answeredQuestionsCount={answeredQuestionsCount}
-            shuffledAnswers={shuffledAnswers}
-          />
-        );
-      } else {
-        content = (
+      case "failed":
+        return <p>Error: {error}</p>;
+
+      case "succeeded":
+        if (questions.length !== 0) {
+          const currentQuestion = questions[answeredQuestionsCount];
+          const shuffledAnswers = [
+            ...currentQuestion.incorrect_answers,
+            currentQuestion.correct_answer,
+          ].sort(() => Math.random() - 0.5);
+
+          return (
+            <GameContent
+              currentQuestion={currentQuestion}
+              answeredQuestionsCount={answeredQuestionsCount}
+              shuffledAnswers={shuffledAnswers}
+            />
+          );
+        }
+        return (
           <AlertMessage
-            message="Please select another difficulty or category."
+            message={GAME_SCREEN_ALERTS.NO_QUESTIONS_MESSAGE}
+            title={GAME_SCREEN_ALERTS.NO_QUESTIONS_TITLE}
             onClose={handleAlertClose}
           />
         );
-      }
-      break;
-    default:
-      content = null;
-  }
 
-  return content;
+      default:
+        return null;
+    }
+  };
+
+  return content();
 };
-
 export default Game;

@@ -1,9 +1,9 @@
-import styles from "./GameContent.module.css";
+import styles from "./AlertMessage.module.css";
 
-const AlertMessage = ({ message, onClose }) => {
+const AlertMessage = ({ message, title, onClose }) => {
   return (
     <div className={styles.alert}>
-      <h2>No Questions Found</h2>
+      <h2>{title}</h2>
       <p>{message}</p>
       <button className={styles.alertBtn} onClick={onClose}>
         OK

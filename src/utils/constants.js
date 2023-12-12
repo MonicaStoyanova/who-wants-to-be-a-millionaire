@@ -17,3 +17,8 @@ export const REWARDS = {
   2: "200",
   1: "100",
 };
+
+export const GAME_SCREEN_ALERTS = {
+  NO_QUESTIONS_TITLE: "No Questions Found",
+  NO_QUESTIONS_MESSAGE: "Please select another difficulty or category.",
+};
