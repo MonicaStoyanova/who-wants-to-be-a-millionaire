@@ -23,4 +23,18 @@
       left: 40px;
     }
   }
+  @media screen and (max-width: 600px) {
+    .timer {
+      left: 50%;
+      transform: translate(-50%);
+      padding-bottom: 1em;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    .timer {
+      left: 50%;
+      transform: translate(-50%);
+      padding-bottom: 1em;
+    }
+  }
   

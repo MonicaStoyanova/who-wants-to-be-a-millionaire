@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/joy/Button";
+import Modal from "@mui/joy/Modal";
 
 import {
   fetchQuestionsAndAnswers,
@@ -15,9 +16,9 @@ import Player from "../../components/Sound/Sound";
 import styles from "./Game.module.css";
 
 const Game = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const {
     categoryId,
     difficulty,
@@ -27,60 +28,70 @@ const Game = () => {
     error,
   } = useSelector((state) => state.gamePlay);
 
-  const currentQuestionIndex = answeredQuestionsCount;
-
+  // Fetching questions and answers
   useEffect(() => {
     dispatch(fetchQuestionsAndAnswers({ categoryId, difficulty }));
-  }, []);
+  }, [categoryId, difficulty, dispatch]);
 
-  const routeChange = () => {
+  // Handling modal state
+  useEffect(() => {
+    if (status === "succeeded" && questions.length === 0) {
+      setModalOpen(true);
+    } else {
+      setModalOpen(false);
+    }
+  }, [status, questions.length]);
+
+  const handleModalClose = () => {
+    setModalOpen(false);
     dispatch(resetGame());
     const path = "/";
     navigate(path);
   };
-  // iznesi kato switch v const
+
+  const renderGameContent = () => {
+    const currentQuestion = questions[answeredQuestionsCount];
+    const shuffledAnswers = [
+      ...currentQuestion.incorrect_answers,
+      currentQuestion.correct_answer,
+    ].sort(() => Math.random() - 0.5);
+
+    return (
+      <div className={styles.background}>
+        <Player />
+        <Timer />
+        <div className={styles.gameContainer}>
+          <Question
+            question={currentQuestion.question}
+            currentQuestionIndex={answeredQuestionsCount}
+          />
+          <Answers
+            shuffledAnswers={shuffledAnswers}
+            correctAnswer={currentQuestion.correct_answer}
+          />
+        </div>
+      </div>
+    );
+  };
+
   if (status === "loading") {
     return <p>Loading...</p>;
   } else if (status === "failed") {
     return <p>Error: {error}</p>;
+  } else if (status === "succeeded" && questions.length !== 0) {
+    return renderGameContent();
   }
-  //naprawi kato ternaren
-  if (questions.length === 0) {
-    // sloji modal ne da redirektva
-    return (
-      <Button
-        className={styles.return}
-        onClick={routeChange}
-        size="md"
-        variant={"soft"}
-        color="warning"
-      >
-        No Questions Found, please select another difficulty or category
-      </Button>
-    );
-  }
-  const shuffledAnswers = [
-    ...questions[currentQuestionIndex].incorrect_answers,
-    questions[currentQuestionIndex].correct_answer,
-  ].sort(() => Math.random() - 0.5);
 
-  // TO DO:
-  // Implement three extra Joker options: "Call a Friend," "50/50," and "Help from the Audience." Each Joker provides extra points
   return (
-    <div className={styles.background}>
-      <Player />
-      <Timer />
-      <div className={styles.gameContainer}>
-        <Question
-          question={questions[currentQuestionIndex].question}
-          currentQuestionIndex={currentQuestionIndex}
-        />
-        <Answers
-          shuffledAnswers={shuffledAnswers}
-          correctAnswer={questions[currentQuestionIndex].correct_answer}
-        />
+    <Modal open={isModalOpen} onClose={handleModalClose}>
+      <div className={styles.modal}>
+        <h2 id="modal-title">No Questions Found</h2>
+        <p id="modal-description">
+          Please select another difficulty or category.
+        </p>
+        <Button onClick={handleModalClose}>OK</Button>
       </div>
-    </div>
+    </Modal>
   );
 };
 
