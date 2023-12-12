@@ -5,7 +5,9 @@ const AlertMessage = ({ message, onClose }) => {
     <div className={styles.alert}>
       <h2>No Questions Found</h2>
       <p>{message}</p>
-      <button onClick={onClose}>OK</button>
+      <button className={styles.alertBtn} onClick={onClose}>
+        OK
+      </button>
     </div>
   );
 };
