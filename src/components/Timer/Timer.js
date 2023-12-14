@@ -4,11 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 import { MAX_SECONDS } from "../../utils/constants";
 import styles from "./Timer.module.css";
-//props coming from parent Game.js
+
 const Timer = ({ isTimerPaused }) => {
   const [seconds, setSeconds] = useState(MAX_SECONDS);
-  //1.timerPaused = false; checked;
-  // 12.tuk izvednuj stawa true
+  // 1.1st render is false, then its true;WHY?
   console.log("timerpaused begining of timer component?", { isTimerPaused });
   const navigate = useNavigate();
 
@@ -27,7 +26,7 @@ const Timer = ({ isTimerPaused }) => {
 
     let decreaseSeconds;
     if (isTimerMoreThanZero && !isTimerPaused) {
-      //3.checked it is false;
+      //2. it is still false; then it goes to  1. and its true;WHY?
       console.log("decreasing of timer component?", { isTimerPaused });
       decreaseSeconds = setInterval(
         () => setSeconds((prevSeconds) => prevSeconds - 1),

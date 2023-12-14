@@ -19,3 +19,5 @@ export const REWARDS = {
 };
 
 export const MAX_SECONDS = 60;
+
+export const PATTERN = /&[^;]+;/g;

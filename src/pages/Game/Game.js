@@ -19,11 +19,15 @@ const Game = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { categoryId, difficulty, answeredQuestionsCount, isTimerPaused } =
-    useSelector((state) => state.gamePlay);
-  const status = useSelector((state) => state.gamePlay.status);
-  const questions = useSelector((state) => state.gamePlay.questions);
-  const error = useSelector((state) => state.gamePlay.error);
+  const {
+    categoryId,
+    difficulty,
+    answeredQuestionsCount,
+    isTimerPaused,
+    status,
+    questions,
+    error,
+  } = useSelector((state) => state.gamePlay);
 
   let currentQuestionIndex = answeredQuestionsCount;
 
