@@ -6,6 +6,7 @@ import styles from "./Answers.module.css";
 import {
   updateUserStatistics,
   updateTimerPause,
+  updateTime,
 } from "../../store/slices/gamePlaySlice";
 import { LETTERS } from "../../utils/constants";
 import { PATTERN } from "../../utils/constants";
@@ -52,6 +53,7 @@ const AnswerItem = ({
             dispatch(updateUserStatistics());
             setIsAnswerSelected(false);
             dispatch(updateTimerPause(false));
+            dispatch(updateTime());
           }}
         >
           Next

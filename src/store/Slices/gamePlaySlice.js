@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { MAX_SECONDS } from "../../utils/constants";
 
 const initialState = {
   questions: [],
@@ -10,6 +11,7 @@ const initialState = {
   categories: [],
   categoryId: "",
   isTimerPaused: false,
+  time: MAX_SECONDS,
 };
 
 export const fetchCategories = createAsyncThunk(
@@ -70,6 +72,9 @@ const gamePlaySlice = createSlice({
     updateTimerPause: (state, action) => {
       state.isTimerPaused = action.payload;
     },
+    updateTime: (state, action) => {
+      state.time = initialState.time;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCategories.fulfilled, (state, action) => {
@@ -97,6 +102,7 @@ export const {
   updateCategory,
   resetGame,
   updateTimerPause,
+  updateTime,
 } = gamePlaySlice.actions;
 
 export default gamePlaySlice.reducer;
