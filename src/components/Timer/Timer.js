@@ -7,7 +7,9 @@ import styles from "./Timer.module.css";
 //props coming from parent Game.js
 const Timer = ({ isTimerPaused }) => {
   const [seconds, setSeconds] = useState(MAX_SECONDS);
-
+  //1.timerPaused = false; checked;
+  // 12.tuk izvednuj stawa true
+  console.log("timerpaused begining of timer component?", { isTimerPaused });
   const navigate = useNavigate();
 
   const answeredQuestionsCount = useSelector(
@@ -25,6 +27,8 @@ const Timer = ({ isTimerPaused }) => {
 
     let decreaseSeconds;
     if (isTimerMoreThanZero && !isTimerPaused) {
+      //3.checked it is false;
+      console.log("decreasing of timer component?", { isTimerPaused });
       decreaseSeconds = setInterval(
         () => setSeconds((prevSeconds) => prevSeconds - 1),
         1000

@@ -64,7 +64,8 @@ const gamePlaySlice = createSlice({
     resetGame: (state, action) => {
       state.difficulty = initialState.difficulty;
       state.categories = initialState.categories;
-      state.answeredQuestions = initialState.answeredQuestions;
+      state.answeredQuestionsCount = initialState.answeredQuestionsCount;
+      state.isTimerPaused = initialState.isTimerPaused;
     },
     updateTimerPause: (state, action) => {
       state.isTimerPaused = action.payload;

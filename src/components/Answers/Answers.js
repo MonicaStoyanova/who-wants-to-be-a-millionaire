@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
 import styles from "./Answers.module.css";
@@ -23,16 +23,29 @@ const AnswerItem = ({
 
   const pattern = /&[^;]+;/g;
   const modifiedAnswer = answer.replace(pattern, "'");
-
+  const isTimerPaused = useSelector((state) => state.gamePlay.isTimerPaused);
   // checks if the Game is over
+  // the probleme is here somewhere
   useEffect(() => {
     const isSelectedAnswerWrong =
       answeredQuestion && correctAnswer !== answeredQuestion;
 
     if (isSelectedAnswerWrong) {
       navigate("/gameover");
-    } else if (isSelectedAnswerWrong === false) {
+    } else if (!isSelectedAnswerWrong) {
+      //4. before even selecting it is false; checked;
+      //6.  checkes again : false; checked
+      //8
+      //9
+      console.log("timerpaused on selected correct answer?", { isTimerPaused });
       dispatch(updateTimerPause(true));
+      //5. it doesnt execute before selected answer still false, checked;
+      //7
+      //9
+      //11
+      console.log("does it executes before an answer is even selected??", {
+        isTimerPaused,
+      });
     }
   }, [answeredQuestion]);
   // TO DO:
@@ -45,8 +58,14 @@ const AnswerItem = ({
           className={styles.nextBtn}
           onClick={() => {
             dispatch(updateUserStatistics());
-            dispatch(updateTimerPause(false));
             setIsAnswerSelected(false);
+            console.log("timerpaused before updating it AnswerItem?", {
+              isTimerPaused,
+            });
+            dispatch(updateTimerPause(false));
+            console.log("timerpaused after updating it AnswerItem?", {
+              isTimerPaused,
+            });
           }}
         >
           Next
@@ -70,6 +89,9 @@ const AnswerItem = ({
 
 const Answers = ({ shuffledAnswers, correctAnswer }) => {
   const [isAnswerSelected, setIsAnswerSelected] = useState(false);
+  const isTimerPaused = useSelector((state) => state.gamePlay.isTimerPaused);
+  // 2. it is false; checked
+  console.log("timerpaused begining of answer component?", { isTimerPaused });
   return (
     <div className={styles.answersContainer}>
       {shuffledAnswers.map((a, i) => (
