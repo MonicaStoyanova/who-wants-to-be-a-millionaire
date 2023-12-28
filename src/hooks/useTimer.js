@@ -14,6 +14,7 @@ const useSecondsInterval = interval(1000);
 export const useTimer = ({
   initialSeconds = MAX_SECONDS,
   initiallyRunning = true,
+  cb = () => {},
 } = {}) => {
   const [seconds, setSeconds] = useState(initialSeconds);
   const [running, setRunning] = useState(initiallyRunning);
@@ -32,6 +33,17 @@ export const useTimer = ({
   };
 
   useSecondsInterval(tick);
+
+  useEffect(() => {
+    if (running && seconds === 0) {
+      pause();
+      cb();
+    }
+
+    if (!running) {
+      pause();
+    }
+  }, [seconds, running]);
 
   return { pause, reset, running, seconds, start, stop };
 };
