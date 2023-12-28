@@ -10,7 +10,7 @@ const initialState = {
   difficulty: "",
   categories: [],
   categoryId: "",
-  isTimerPaused: false,
+
   time: MAX_SECONDS,
 };
 
@@ -67,13 +67,6 @@ const gamePlaySlice = createSlice({
       state.difficulty = initialState.difficulty;
       state.categories = initialState.categories;
       state.answeredQuestionsCount = initialState.answeredQuestionsCount;
-      state.isTimerPaused = initialState.isTimerPaused;
-    },
-    updateTimerPause: (state, action) => {
-      state.isTimerPaused = action.payload;
-    },
-    updateTime: (state, action) => {
-      state.time = initialState.time;
     },
   },
   extraReducers: (builder) => {
@@ -101,8 +94,6 @@ export const {
   updateDifficulty,
   updateCategory,
   resetGame,
-  updateTimerPause,
-  updateTime,
 } = gamePlaySlice.actions;
 
 export default gamePlaySlice.reducer;

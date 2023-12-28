@@ -23,7 +23,6 @@ const Game = () => {
     categoryId,
     difficulty,
     answeredQuestionsCount,
-    isTimerPaused,
     status,
     questions,
     error,
@@ -73,7 +72,7 @@ const Game = () => {
   return (
     <div className={styles.background}>
       <Player />
-      <Timer isTimerPaused={isTimerPaused} />
+      <Timer />
       <div className={styles.gameContainer}>
         <Question
           question={questions[currentQuestionIndex].question}

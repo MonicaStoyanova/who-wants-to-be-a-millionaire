@@ -3,13 +3,10 @@ import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 
 import styles from "./Answers.module.css";
-import {
-  updateUserStatistics,
-  updateTimerPause,
-  updateTime,
-} from "../../store/slices/gamePlaySlice";
+import { updateUserStatistics } from "../../store/slices/gamePlaySlice";
 import { LETTERS } from "../../utils/constants";
 import { PATTERN } from "../../utils/constants";
+import { useTimer } from "../../hooks/useTimer";
 
 const AnswerItem = ({
   answer,
@@ -21,6 +18,7 @@ const AnswerItem = ({
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { seconds, start, pause, reset, running, stop } = useTimer();
 
   const modifiedAnswer = answer.replace(PATTERN, "'");
 
@@ -32,14 +30,16 @@ const AnswerItem = ({
     const isSelectedAnswerCorrect =
       selectedAnswer && correctAnswer === selectedAnswer;
 
-    if (isSelectedAnswerWrong) {
+    if (isSelectedAnswerWrong || seconds === 0) {
       navigate("/gameover");
     }
+    if (isSelectedAnswerCorrect) pause();
 
-    if (isSelectedAnswerCorrect) {
-      dispatch(updateTimerPause(true));
-    }
-  }, [selectedAnswer, correctAnswer]);
+    // Cleanup function
+    return () => {
+      stop();
+    };
+  }, [selectedAnswer, correctAnswer, pause, stop, seconds]);
 
   // TO DO:
   // When the user selects an answer, it should start blinking. If the answer is correct, show the answer in green; if incorrect, show it in red and display the correct answer in green simultaneously.
@@ -52,8 +52,7 @@ const AnswerItem = ({
           onClick={() => {
             dispatch(updateUserStatistics());
             setIsAnswerSelected(false);
-            dispatch(updateTimerPause(false));
-            dispatch(updateTime());
+            reset();
           }}
         >
           Next

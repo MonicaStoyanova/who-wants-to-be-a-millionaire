@@ -25,7 +25,7 @@ export const useTimer = ({
 
   const start = () => setRunning(true);
   const pause = () => setRunning(false);
-  const reset = () => setSeconds(MAX_SECONDS);
+  const reset = () => setSeconds(initialSeconds);
   const stop = () => {
     pause();
     reset();
