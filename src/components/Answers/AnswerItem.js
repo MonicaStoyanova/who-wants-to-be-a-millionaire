@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -41,7 +41,7 @@ const AnswerItem = ({
       } else {
         setAnswerStatus({
           [answer]: "incorrect",
-          [modifiedCorrectAnswer]: "correct", // Ensure the correct answer is marked for blinking
+          [modifiedCorrectAnswer]: "correct", // correct answer is marked for blinking BUT NOT WORKING
         });
         setTimeout(() => {
           navigate("/gameover");
@@ -57,7 +57,7 @@ const AnswerItem = ({
           className={styles.nextBtn}
           onClick={() => {
             dispatch(updateUserStatistics());
-            dispatch(updateGameStage("running")); // Resume the game
+            dispatch(updateGameStage("running"));
             setIsAnswerSelected(false);
             setShowNext(false);
             setAnswerStatus({});

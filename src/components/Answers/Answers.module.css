@@ -17,6 +17,7 @@
     border: none;
     cursor: pointer;
     transition: all 0.4s ease-in-out;
+    width: 100%;
   }
   
   .answerOptions:hover {
