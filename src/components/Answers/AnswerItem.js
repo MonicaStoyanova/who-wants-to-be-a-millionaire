@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import {
   updateGameStage,
@@ -8,10 +9,8 @@ import {
 import { LETTERS, PATTERN } from "../../utils/constants";
 import styles from "./Answers.module.css";
 
-// SHIFT + ALT + O
-// check on worng answer why it is not navigatoing to end
 const AnswerItem = ({
-  answer,
+  possibleAnswers,
   index,
   correctAnswer,
   setIsAnswerSelected,
@@ -19,12 +18,23 @@ const AnswerItem = ({
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const modifiedAnswer = answer.replace(PATTERN, "'");
+  const modifiedAnswers = possibleAnswers.replace(PATTERN, "'");
+  const modifiedCorrectAnswer = correctAnswer.replace(PATTERN, "'");
+
+  useEffect(() => {
+    const isSelectedAnswerWrong =
+      selectedAnswer && modifiedCorrectAnswer !== selectedAnswer;
+
+    if (isSelectedAnswerWrong) {
+      navigate("/gameover");
+    }
+  }, [selectedAnswer, modifiedCorrectAnswer]);
 
   return (
     <>
-      {correctAnswer === selectedAnswer && (
+      {modifiedCorrectAnswer === selectedAnswer && (
         <button
           className={styles.nextBtn}
           onClick={() => {
@@ -42,14 +52,14 @@ const AnswerItem = ({
         className={styles.answerOptions}
         onClick={() => {
           setIsAnswerSelected(true);
-          setSelectedAnswer(modifiedAnswer);
-          if (correctAnswer === modifiedAnswer) {
+          setSelectedAnswer(modifiedAnswers);
+          if (modifiedCorrectAnswer === modifiedAnswers) {
             dispatch(updateGameStage("paused"));
           }
         }}
       >
         <span>{LETTERS[index]}: </span>
-        {modifiedAnswer}
+        {modifiedAnswers}
       </button>
     </>
   );
