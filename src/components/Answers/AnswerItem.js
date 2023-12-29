@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
 import {
   updateGameStage,
   updateUserStatistics,
@@ -17,30 +16,51 @@ const AnswerItem = ({
   isAnswerSelected,
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [answerStatus, setAnswerStatus] = useState({});
+  const [showNext, setShowNext] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const modifiedAnswers = possibleAnswers.replace(PATTERN, "'");
   const modifiedCorrectAnswer = correctAnswer.replace(PATTERN, "'");
 
-  useEffect(() => {
-    const isSelectedAnswerWrong =
-      selectedAnswer && modifiedCorrectAnswer !== selectedAnswer;
+  const handleAnswerClick = (answer) => {
+    setIsAnswerSelected(true);
+    setSelectedAnswer(answer);
+    dispatch(updateGameStage("paused")); // Pause the timer immediately after an answer is selected
+    setAnswerStatus({ [answer]: "selected" });
 
-    if (isSelectedAnswerWrong) {
-      navigate("/gameover");
-    }
-  }, [selectedAnswer, modifiedCorrectAnswer]);
+    setTimeout(() => {
+      const isCorrect = answer === modifiedCorrectAnswer;
+
+      if (isCorrect) {
+        setAnswerStatus({ [answer]: "correct" });
+        setTimeout(() => {
+          setShowNext(true);
+        }, 3000);
+      } else {
+        setAnswerStatus({
+          [answer]: "incorrect",
+          [modifiedCorrectAnswer]: "correct", // Ensure the correct answer is marked for blinking
+        });
+        setTimeout(() => {
+          navigate("/gameover");
+        }, 5000); // 5 seconds total (3 seconds suspense + 2 seconds red)
+      }
+    }, 3000); // 3-second suspense before showing the result
+  };
 
   return (
-    <>
-      {modifiedCorrectAnswer === selectedAnswer && (
+    <div>
+      {showNext && (
         <button
           className={styles.nextBtn}
           onClick={() => {
             dispatch(updateUserStatistics());
-            dispatch(updateGameStage("running"));
+            dispatch(updateGameStage("running")); // Resume the game
             setIsAnswerSelected(false);
+            setShowNext(false);
+            setAnswerStatus({});
           }}
         >
           Next
@@ -49,19 +69,16 @@ const AnswerItem = ({
 
       <button
         disabled={isAnswerSelected}
-        className={styles.answerOptions}
-        onClick={() => {
-          setIsAnswerSelected(true);
-          setSelectedAnswer(modifiedAnswers);
-          if (modifiedCorrectAnswer === modifiedAnswers) {
-            dispatch(updateGameStage("paused"));
-          }
-        }}
+        className={`${styles.answerOptions} ${
+          styles[answerStatus[modifiedAnswers]]
+        }`}
+        onClick={() => handleAnswerClick(modifiedAnswers)}
       >
         <span>{LETTERS[index]}: </span>
         {modifiedAnswers}
       </button>
-    </>
+    </div>
   );
 };
+
 export default AnswerItem;

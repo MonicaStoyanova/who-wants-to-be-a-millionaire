@@ -25,6 +25,24 @@
   .answerOptions span {
     margin-right: 5px;
   }
+  @keyframes blink {
+    50% { opacity: 0.5; }
+  }
+  
+  .selected {
+    background-color: orange;
+  }
+  
+  .correct {
+    background-color: green;
+    animation: blink 1s linear 3;
+  }
+  
+  .incorrect {
+    background-color: red;
+    animation: blink 1s linear 3;
+  }
+  
   
   @media screen and (max-width: 800px) {
     .answersContainer {
