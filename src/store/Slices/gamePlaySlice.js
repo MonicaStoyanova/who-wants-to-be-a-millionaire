@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { MAX_SECONDS } from "../../utils/constants";
 
 const initialState = {
   questions: [],
@@ -10,8 +9,7 @@ const initialState = {
   difficulty: "",
   categories: [],
   categoryId: "",
-
-  time: MAX_SECONDS,
+  gameStage: "running",
 };
 
 export const fetchCategories = createAsyncThunk(
@@ -62,6 +60,10 @@ const gamePlaySlice = createSlice({
     updateCategory: (state, action) => {
       state.categoryId = action.payload;
     },
+
+    updateGameStage: (state, action) => {
+      state.gameStage = action.payload;
+    },
     // resetting the state, when the user clicks play again button
     resetGame: (state, action) => {
       state.difficulty = initialState.difficulty;
@@ -93,6 +95,7 @@ export const {
   updateUserStatistics,
   updateDifficulty,
   updateCategory,
+  updateGameStage,
   resetGame,
 } = gamePlaySlice.actions;
 

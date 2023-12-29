@@ -18,6 +18,6 @@ export const REWARDS = {
   1: "100",
 };
 
-export const MAX_SECONDS = 30;
+export const MAX_SECONDS = 60;
 
 export const PATTERN = /&[^;]+;/g;
