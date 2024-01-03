@@ -22,3 +22,6 @@ export const GAME_SCREEN_ALERTS = {
   NO_QUESTIONS_TITLE: "No Questions Found",
   NO_QUESTIONS_MESSAGE: "Please select another difficulty or category.",
 };
+export const MAX_SECONDS = 60;
+
+export const PATTERN = /&[^;]+;/g;

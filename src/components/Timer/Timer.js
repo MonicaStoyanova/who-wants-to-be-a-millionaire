@@ -1,42 +1,46 @@
-import styles from "./Timer.module.css";
-
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
 
-// we will need local state for the seconds,it should restart on question index change
+import { MAX_SECONDS } from "../../utils/constants";
+import { useTimer } from "../../hooks/useTimer";
+
+import styles from "./Timer.module.css";
+
 const Timer = () => {
-  const [seconds, setSeconds] = useState(60);
-  // TO DO: freezing logic for timer
-  // const [isPaused, setIsPaused] = useState(false);
-
   const navigate = useNavigate();
 
-  const answeredQuestionsCount = useSelector(
-    (state) => state.gamePlay.answeredQuestionsCount
+  const { gameStage, answeredQuestionsCount } = useSelector(
+    (state) => state.gamePlay
   );
 
-  // this is more readable
+  const prevAnsweredQuestionsCountRef = useRef(answeredQuestionsCount);
+
+  const { seconds, pause, reset, running, start, stop } = useTimer({
+    initialSeconds: MAX_SECONDS,
+  });
+
   useEffect(() => {
-    const isTimerMoreThanZero = seconds > 0;
-    if (isTimerMoreThanZero) setInterval(() => setSeconds(seconds - 1), 1000);
+    if (seconds === 0) {
+      stop();
+      navigate("/gameover");
+    }
 
-    const isTimerExpired = seconds === 0;
-    if (isTimerExpired) navigate("/gameover");
+    if (answeredQuestionsCount > prevAnsweredQuestionsCountRef.current) {
+      reset();
+    }
 
-    return () => clearInterval(isTimerMoreThanZero);
-  }, [seconds]);
+    prevAnsweredQuestionsCountRef.current = answeredQuestionsCount;
 
-  // if (seconds === 0) {
-  //   navigate("/gameover");
-  // }
-  // now we need to re-start the seconds from 60 on question index change which we can track with the state of the correct answer count
+    if (gameStage === "paused") {
+      pause();
+    }
 
-  //This useEffect needs to be rewriten
-  //dif the current q is 0 don`t execute, exc. only when the value is updated
-  useEffect(() => {
-    setSeconds(60);
-  }, [answeredQuestionsCount]);
+    if (gameStage === "running" && !running) {
+      start();
+    }
+  }, [seconds, gameStage, answeredQuestionsCount]);
+
   return (
     <div className={styles.timer}>
       <span>{seconds}</span>

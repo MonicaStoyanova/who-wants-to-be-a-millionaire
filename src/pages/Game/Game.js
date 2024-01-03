@@ -23,7 +23,6 @@ const Game = () => {
     error,
   } = useSelector((state) => state.gamePlay);
 
-  // Fetching questions and answers
   useEffect(() => {
     dispatch(fetchQuestionsAndAnswers({ categoryId, difficulty }));
   }, [categoryId, difficulty]);
