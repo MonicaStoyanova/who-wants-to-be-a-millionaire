@@ -5,6 +5,7 @@ body {
   background-repeat: no-repeat;
   height: 100vh;
   position: relative;
+  overflow: hidden;
 }
 
 .container {
@@ -40,6 +41,7 @@ body {
 }
 
 @media screen and (max-width: 600px) {
+
   .logoContainer {
     width: 50vw; 
     padding-top: 1em;

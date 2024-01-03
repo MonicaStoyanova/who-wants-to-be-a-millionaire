@@ -1,0 +1,58 @@
+.background {
+  background-image: url("../../images/questions.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw; 
+  position: relative;
+} 
+
+.gameContainer {
+  margin: 0 auto;
+  padding-top: 20em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+} 
+
+@media screen and (max-width: 600px) {
+  .gameContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 6em 2em;
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .gameContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 6em 2em;
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .gameContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 6em 2em;
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .gameContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
+}
