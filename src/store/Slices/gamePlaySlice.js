@@ -9,6 +9,7 @@ const initialState = {
   difficulty: "",
   categories: [],
   categoryId: "",
+  gameStage: "running",
 };
 
 export const fetchCategories = createAsyncThunk(
@@ -59,11 +60,15 @@ const gamePlaySlice = createSlice({
     updateCategory: (state, action) => {
       state.categoryId = action.payload;
     },
+
+    updateGameStage: (state, action) => {
+      state.gameStage = action.payload;
+    },
     // resetting the state, when the user clicks play again button
     resetGame: (state, action) => {
       state.difficulty = initialState.difficulty;
       state.categories = initialState.categories;
-      state.answeredQuestions = initialState.answeredQuestions;
+      state.answeredQuestionsCount = initialState.answeredQuestionsCount;
     },
   },
   extraReducers: (builder) => {
@@ -90,6 +95,7 @@ export const {
   updateUserStatistics,
   updateDifficulty,
   updateCategory,
+  updateGameStage,
   resetGame,
 } = gamePlaySlice.actions;
 

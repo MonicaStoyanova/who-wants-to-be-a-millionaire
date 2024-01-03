@@ -12,18 +12,21 @@ import Question from "../../components/Question/Question";
 import Answers from "../../components/Answers/Answers";
 import Timer from "../../components/Timer/Timer";
 import Player from "../../components/Sound/Sound";
+
 import styles from "./Game.module.css";
 
 const Game = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { categoryId, difficulty, answeredQuestionsCount } = useSelector(
-    (state) => state.gamePlay
-  );
-  const status = useSelector((state) => state.gamePlay.status);
-  const questions = useSelector((state) => state.gamePlay.questions);
-  const error = useSelector((state) => state.gamePlay.error);
+  const {
+    categoryId,
+    difficulty,
+    answeredQuestionsCount,
+    status,
+    questions,
+    error,
+  } = useSelector((state) => state.gamePlay);
 
   let currentQuestionIndex = answeredQuestionsCount;
 
