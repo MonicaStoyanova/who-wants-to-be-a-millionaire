@@ -7,7 +7,7 @@ import { useTimer } from "../../hooks/useTimer";
 
 import styles from "./Timer.module.css";
 
-function Timer() {
+const Timer = () => {
   const navigate = useNavigate();
 
   const { gameStage, answeredQuestionsCount } = useSelector(
@@ -46,6 +46,6 @@ function Timer() {
       <span>{seconds}</span>
     </div>
   );
-}
+};
 
 export default Timer;

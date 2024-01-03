@@ -1,14 +1,11 @@
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback, useState } from "react";
 
-const interval =
-  (delay = 0) =>
-  (callback) =>
-    useEffect(() => {
-      const id = setInterval(callback, delay);
-
-      return () => clearInterval(id);
-    }, [callback]);
-const useSecondsInterval = interval(1000);
+const useSecondsInterval = (callback, delay = 1000) => {
+  useEffect(() => {
+    const id = setInterval(callback, delay);
+    return () => clearInterval(id);
+  }, [callback, delay]);
+};
 
 export const useTimer = ({ initialSeconds, initiallyRunning = true } = {}) => {
   const [seconds, setSeconds] = useState(initialSeconds);

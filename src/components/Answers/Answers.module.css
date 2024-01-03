@@ -64,10 +64,22 @@
     right: 40px;
   }
   
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 700px) {
     .nextBtn {
-      top: 550px;
-      right: 40%;
+      top: 700px;
+      right: 1%;
     }
   }
-  
+
+  @media screen and (max-width: 500px) {
+    .nextBtn {
+      top: 700px;
+      right: 30%;
+    }
+  }
+  @media screen and (max-width: 300px) {
+    .nextBtn {
+      top: 700px;
+      right: 25%;
+    }
+  }
