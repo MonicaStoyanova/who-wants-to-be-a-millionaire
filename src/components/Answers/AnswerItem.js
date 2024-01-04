@@ -16,11 +16,12 @@ const AnswerItem = ({
   isAnswerSelected,
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [answerStatus, setAnswerStatus] = useState({});
+  const [answerStatus, setAnswerStatus] = useState({}); //selected, correct or incorrect
   const [showNext, setShowNext] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // applying RegEx to clear the answers from unwanted elements
   const modifiedAnswers = possibleAnswers.replace(PATTERN, "'");
   const modifiedCorrectAnswer = correctAnswer.replace(PATTERN, "'");
 
@@ -28,28 +29,34 @@ const AnswerItem = ({
     setIsAnswerSelected(true);
     setSelectedAnswer(answer);
     dispatch(updateGameStage("paused")); // Pause the timer immediately after an answer is selected
-    setAnswerStatus({ [answer]: "selected" });
+    setAnswerStatus({ [answer]: "selected" }); // tried to add here always to blink the correct [correctAnswer]: "correct" DID NOT WORK
 
     setTimeout(() => {
       const isCorrect = answer === modifiedCorrectAnswer;
-
+      setAnswerStatus({ [answer]: "correct" });
       if (isCorrect) {
-        setAnswerStatus({ [answer]: "correct" });
+        //setAnswerStatus({ [answer]: "correct" });
         setTimeout(() => {
           setShowNext(true);
         }, 3000);
       } else {
-        setAnswerStatus({
+        // console.log(Object.values(answerStatus)); returns empty array
+        setAnswerStatus((prevState) => ({
+          ...prevState,
           [answer]: "incorrect",
-          [modifiedCorrectAnswer]: "correct", // correct answer is marked for blinking BUT NOT WORKING
-        });
+        }));
+        // HERE IT IS EMPTY
+        //console.log(Object.values(answerStatus));
         setTimeout(() => {
           navigate("/gameover");
         }, 5000); // 5 seconds total (3 seconds suspense + 2 seconds red)
       }
     }, 3000); // 3-second suspense before showing the result
   };
-
+  // console.log(answerStatus);
+  // it does show that both correct and wrong selection do have proper class attached
+  //HERE IT DOES SHOE THE CORRECT VALUES ['incorrect', 'correct']
+  //console.log(Object.values(answerStatus));
   return (
     <div>
       {showNext && (
@@ -66,7 +73,7 @@ const AnswerItem = ({
           Next
         </button>
       )}
-
+      {/* Possible answers buttons */}
       <button
         disabled={isAnswerSelected}
         className={`${styles.answerOptions} ${

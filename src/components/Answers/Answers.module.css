@@ -36,8 +36,9 @@
   
   .correct {
     background-color: green;
-    animation: blink 1s linear 3;
-  }
+    animation: blink 1s linear 3; 
+    
+  } 
   
   .incorrect {
     background-color: red;
