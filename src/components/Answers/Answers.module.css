@@ -27,7 +27,7 @@
     margin-right: 5px;
   }
   @keyframes blink {
-    50% { opacity: 0.5; }
+    50% { background-color: orange; }
   }
   
   .selected {
