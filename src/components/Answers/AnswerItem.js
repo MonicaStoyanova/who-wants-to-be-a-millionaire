@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 import {
   updateGameStage,
   updateUserStatistics,
 } from "../../store/slices/gamePlaySlice";
 import { LETTERS, PATTERN } from "../../utils/constants";
+
 import styles from "./Answers.module.css";
 
 const AnswerItem = ({
@@ -18,7 +20,7 @@ const AnswerItem = ({
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [answerStatus, setAnswerStatus] = useState({});
   const [showNext, setShowNext] = useState(false);
-  const [isSuspense, setIsSuspense] = useState(false); // New state for suspense
+  const [isSuspense, setIsSuspense] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -26,9 +28,9 @@ const AnswerItem = ({
   const modifiedCorrectAnswer = correctAnswer.replace(PATTERN, "'");
 
   const answerClass = () => {
-    if (isSuspense) return "selected"; // Add class for suspense period
+    if (isSuspense) return "selected";
     if (!isAnswerSelected) return "";
-    if (modifiedAnswers === modifiedCorrectAnswer) return "correct"; // Update comparison to modifiedCorrectAnswer
+    if (modifiedAnswers === modifiedCorrectAnswer) return "correct";
     if (modifiedAnswers === selectedAnswer) return "incorrect";
     return "";
   };
@@ -51,13 +53,14 @@ const AnswerItem = ({
           }));
           setTimeout(() => navigate("/gameover"), 4000);
         }
-      }, 3000); // 3 seconds suspense period
+      }, 3000);
     }
   }, [selectedAnswer, modifiedCorrectAnswer, isSuspense]);
 
   const handleAnswerClick = (answer) => {
     setSelectedAnswer(answer);
     setIsSuspense(true); // Trigger suspense
+    dispatch(updateGameStage("paused"));
   };
 
   return (
