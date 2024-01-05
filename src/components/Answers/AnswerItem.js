@@ -18,6 +18,7 @@ const AnswerItem = ({
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [answerStatus, setAnswerStatus] = useState({});
   const [showNext, setShowNext] = useState(false);
+  const [isSuspense, setIsSuspense] = useState(false); // New state for suspense
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -25,22 +26,21 @@ const AnswerItem = ({
   const modifiedCorrectAnswer = correctAnswer.replace(PATTERN, "'");
 
   const answerClass = () => {
+    if (isSuspense) return "selected"; // Add class for suspense period
     if (!isAnswerSelected) return "";
-    if (modifiedAnswers === correctAnswer) return "correct"; // Always mark the correct answer
-    if (modifiedAnswers === selectedAnswer) return "incorrect"; // Mark the selected incorrect answer
+    if (modifiedAnswers === modifiedCorrectAnswer) return "correct"; // Update comparison to modifiedCorrectAnswer
+    if (modifiedAnswers === selectedAnswer) return "incorrect";
     return "";
   };
 
   useEffect(() => {
-    if (selectedAnswer !== null) {
-      dispatch(updateGameStage("paused"));
-      setAnswerStatus({ [correctAnswer]: "correct" });
-
+    if (isSuspense) {
       setTimeout(() => {
+        setIsSuspense(false);
+        setIsAnswerSelected(true);
         const isCorrect = selectedAnswer === modifiedCorrectAnswer;
         const isWrong = selectedAnswer !== modifiedCorrectAnswer;
 
-        setAnswerStatus({ [selectedAnswer]: "correct" });
         if (isCorrect) {
           setAnswerStatus({ [selectedAnswer]: "correct" });
           setTimeout(() => setShowNext(true), 3000);
@@ -49,15 +49,15 @@ const AnswerItem = ({
             ...prevState,
             [selectedAnswer]: "incorrect",
           }));
-          setTimeout(() => navigate("/gameover"), 5000);
+          setTimeout(() => navigate("/gameover"), 4000);
         }
-      }, 3000);
+      }, 3000); // 3 seconds suspense period
     }
-  }, [selectedAnswer, modifiedCorrectAnswer, correctAnswer]);
+  }, [selectedAnswer, modifiedCorrectAnswer, isSuspense]);
 
   const handleAnswerClick = (answer) => {
-    setIsAnswerSelected(true);
     setSelectedAnswer(answer);
+    setIsSuspense(true); // Trigger suspense
   };
 
   return (
