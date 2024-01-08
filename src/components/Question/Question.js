@@ -1,8 +1,12 @@
+import { REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN } from "utils/constants";
+
 import styles from "./Question.module.css";
 
 const Question = ({ question, currentQuestionIndex }) => {
-  let pattern = /&[^;]+;/g;
-  let modifiedQuestion = question.replace(pattern, "'");
+  const modifiedQuestion = question.replace(
+    REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,
+    "'"
+  );
 
   return (
     <div className={styles.question}>

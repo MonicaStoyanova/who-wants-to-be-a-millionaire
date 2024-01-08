@@ -24,4 +24,4 @@ export const GAME_SCREEN_ALERTS = {
 };
 export const MAX_SECONDS = 60;
 
-export const PATTERN = /&[^;]+;/g;
+export const REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN = /&[^;]+;/g;

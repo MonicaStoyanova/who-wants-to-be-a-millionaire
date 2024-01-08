@@ -5,8 +5,11 @@ import { useNavigate } from "react-router-dom";
 import {
   updateGameStage,
   updateUserStatistics,
-} from "../../store/slices/gamePlaySlice";
-import { LETTERS, PATTERN } from "../../utils/constants";
+} from "store/slices/gamePlaySlice.js";
+import {
+  LETTERS,
+  REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,
+} from "utils/constants";
 
 import styles from "./Answers.module.css";
 
@@ -18,14 +21,19 @@ const AnswerItem = ({
   isAnswerSelected,
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [answerStatus, setAnswerStatus] = useState({});
   const [showNext, setShowNext] = useState(false);
   const [isSuspense, setIsSuspense] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const modifiedAnswers = possibleAnswers.replace(PATTERN, "'");
-  const modifiedCorrectAnswer = correctAnswer.replace(PATTERN, "'");
+  const modifiedAnswers = possibleAnswers.replace(
+    REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,
+    "'"
+  );
+  const modifiedCorrectAnswer = correctAnswer.replace(
+    REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,
+    "'"
+  );
 
   const answerClass = () => {
     if (isSuspense) return "selected";
@@ -40,17 +48,15 @@ const AnswerItem = ({
       setTimeout(() => {
         setIsSuspense(false);
         setIsAnswerSelected(true);
+
         const isCorrect = selectedAnswer === modifiedCorrectAnswer;
         const isWrong = selectedAnswer !== modifiedCorrectAnswer;
 
         if (isCorrect) {
-          setAnswerStatus({ [selectedAnswer]: "correct" });
           setTimeout(() => setShowNext(true), 3000);
-        } else if (isWrong) {
-          setAnswerStatus((prevState) => ({
-            ...prevState,
-            [selectedAnswer]: "incorrect",
-          }));
+        }
+
+        if (isWrong) {
           setTimeout(() => navigate("/gameover"), 4000);
         }
       }, 3000);
@@ -73,7 +79,6 @@ const AnswerItem = ({
             dispatch(updateGameStage("running"));
             setIsAnswerSelected(false);
             setShowNext(false);
-            setAnswerStatus({});
           }}
         >
           Next

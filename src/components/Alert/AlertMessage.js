@@ -1,6 +1,8 @@
+import { memo } from "react";
+
 import styles from "./AlertMessage.module.css";
 
-const AlertMessage = ({ message, title, onClose }) => {
+const AlertMessage = memo(({ message, title, onClose }) => {
   return (
     <div className={styles.alert}>
       <h2>{title}</h2>
@@ -10,6 +12,6 @@ const AlertMessage = ({ message, title, onClose }) => {
       </button>
     </div>
   );
-};
+});
 
 export default AlertMessage;

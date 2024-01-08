@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
 
-import { MAX_SECONDS } from "../../utils/constants";
-import { useTimer } from "../../hooks/useTimer";
+import { MAX_SECONDS } from "utils/constants";
+import { useTimer } from "hooks/useTimer";
 
 import styles from "./Timer.module.css";
 

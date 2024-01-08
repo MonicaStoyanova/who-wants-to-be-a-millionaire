@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import AlertMessage from "../../components/Alert/AlertMessage";
-import { GAME_SCREEN_ALERTS } from "../../utils/constants";
+import AlertMessage from "components/Alert/AlertMessage";
+import { GAME_SCREEN_ALERTS } from "utils/constants";
 import GameContent from "./GameContent";
 
 import {
   fetchQuestionsAndAnswers,
   resetGame,
-} from "../../store/slices/gamePlaySlice";
+} from "store/slices/gamePlaySlice";
 
 const Game = () => {
   const dispatch = useDispatch();

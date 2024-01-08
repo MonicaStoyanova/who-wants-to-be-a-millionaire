@@ -12,9 +12,10 @@ import {
   fetchCategories,
   updateCategory,
   resetGame,
-} from "../../store/slices/gamePlaySlice";
+} from "store/slices/gamePlaySlice";
+import logo from "assets/images/logo.png";
+
 import styles from "./Home.module.css";
-import logo from "../../images/logo.png";
 
 export default function Home() {
   const { difficulty, categories, categoryId } = useSelector(
