@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import styles from "./GameOver.module.css";
 import { REWARDS } from "utils/constants";
-import { formatNumber } from "utils/projectUtils";
+import { formatNumber } from "utils/helpers";
 import { resetGame } from "store/slices/gamePlaySlice";
 
 const GameOver = () => {
