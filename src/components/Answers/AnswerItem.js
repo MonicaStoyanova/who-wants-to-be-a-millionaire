@@ -18,7 +18,6 @@ const AnswerItem = ({
   isAnswerSelected,
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [answerStatus, setAnswerStatus] = useState({});
   const [showNext, setShowNext] = useState(false);
   const [isSuspense, setIsSuspense] = useState(false);
   const dispatch = useDispatch();
@@ -40,17 +39,15 @@ const AnswerItem = ({
       setTimeout(() => {
         setIsSuspense(false);
         setIsAnswerSelected(true);
+
         const isCorrect = selectedAnswer === modifiedCorrectAnswer;
         const isWrong = selectedAnswer !== modifiedCorrectAnswer;
 
         if (isCorrect) {
-          //  setAnswerStatus({ [selectedAnswer]: "correct" });
           setTimeout(() => setShowNext(true), 3000);
-        } else if (isWrong) {
-          // setAnswerStatus((prevState) => ({
-          //   ...prevState,
-          //   [selectedAnswer]: "incorrect",
-          // }));
+        }
+
+        if (isWrong) {
           setTimeout(() => navigate("/gameover"), 4000);
         }
       }, 3000);
@@ -73,7 +70,6 @@ const AnswerItem = ({
             dispatch(updateGameStage("running"));
             setIsAnswerSelected(false);
             setShowNext(false);
-            setAnswerStatus({});
           }}
         >
           Next
