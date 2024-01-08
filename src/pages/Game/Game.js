@@ -41,8 +41,18 @@ const Game = () => {
         return <p>Error: {error}</p>;
 
       case "succeeded":
-        if (questions.length !== 0) {
+        // Without the following, the code goes to case 'failed'
+        //Scenario when user has answered all questions correctly:
+        if (answeredQuestionsCount === questions.length) {
+          navigate("/gameover");
+        }
+
+        if (
+          questions.length !== 0 &&
+          answeredQuestionsCount < questions.length
+        ) {
           const currentQuestion = questions[answeredQuestionsCount];
+
           const shuffledAnswers = [
             ...currentQuestion.incorrect_answers,
             currentQuestion.correct_answer,

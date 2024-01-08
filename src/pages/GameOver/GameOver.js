@@ -23,9 +23,8 @@ const GameOver = () => {
   return (
     <div className={styles.endBackground}>
       <div className={styles.endViewContainer}>
-        {/* the check if user has answered last question correctly is not working as expected */}
-        {currentQuestionIndex === 14 ? (
-          <div>Won</div>
+        {currentQuestionIndex === 15 ? (
+          <h1 className={styles.win}>CONGRATULATIONS YOU WON 100,000lv.</h1>
         ) : (
           <div className={styles.endViewText}>
             <h1>End of the game!</h1>

@@ -70,8 +70,9 @@ const AnswerItem = ({
   };
 
   return (
+    //  somehow remove the next button from final question
     <div>
-      {showNext && (
+      {showNext ? (
         <button
           className={styles.nextBtn}
           onClick={() => {
@@ -83,7 +84,7 @@ const AnswerItem = ({
         >
           Next
         </button>
-      )}
+      ) : null}
       {/* Possible answers buttons */}
       <button
         disabled={isAnswerSelected}
