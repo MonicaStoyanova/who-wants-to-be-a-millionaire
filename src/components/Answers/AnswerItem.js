@@ -6,7 +6,10 @@ import {
   updateGameStage,
   updateUserStatistics,
 } from "store/slices/gamePlaySlice.js";
-import { LETTERS, PATTERN } from "utils/constants";
+import {
+  LETTERS,
+  REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,
+} from "utils/constants";
 
 import styles from "./Answers.module.css";
 
@@ -23,8 +26,14 @@ const AnswerItem = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const modifiedAnswers = possibleAnswers.replace(PATTERN, "'");
-  const modifiedCorrectAnswer = correctAnswer.replace(PATTERN, "'");
+  const modifiedAnswers = possibleAnswers.replace(
+    REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,
+    "'"
+  );
+  const modifiedCorrectAnswer = correctAnswer.replace(
+    REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,
+    "'"
+  );
 
   const answerClass = () => {
     if (isSuspense) return "selected";
