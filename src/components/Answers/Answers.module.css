@@ -17,6 +17,7 @@
     border: none;
     cursor: pointer;
     transition: all 0.4s ease-in-out;
+    width: 100%;
   }
   
   .answerOptions:hover {
@@ -25,6 +26,25 @@
   .answerOptions span {
     margin-right: 5px;
   }
+  @keyframes blink {
+    50% { background-color: orange; }
+  }
+  
+  .selected {
+    background-color: orange;
+  }
+  
+  .correct {
+    background-color: green;
+    animation: blink 1s linear 3; 
+    
+  } 
+  
+  .incorrect {
+    background-color: red;
+    animation: blink 1s linear 3;
+  }
+  
   
   @media screen and (max-width: 800px) {
     .answersContainer {

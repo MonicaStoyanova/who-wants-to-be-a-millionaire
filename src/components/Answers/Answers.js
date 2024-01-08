@@ -11,7 +11,7 @@ const Answers = ({ shuffledAnswers, correctAnswer }) => {
       {shuffledAnswers.map((a, i) => (
         <AnswerItem
           key={a}
-          answer={a}
+          possibleAnswers={a}
           index={i}
           correctAnswer={correctAnswer}
           setIsAnswerSelected={setIsAnswerSelected}
