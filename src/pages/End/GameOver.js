@@ -2,9 +2,9 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import styles from "./GameOver.module.css";
-import { REWARDS } from "../../utils/constants";
-import { formatNumber } from "../../utils/projectUtils";
-import { resetGame } from "../../store/slices/gamePlaySlice";
+import { REWARDS } from "utils/constants";
+import { formatNumber } from "utils/projectUtils";
+import { resetGame } from "store/slices/gamePlaySlice";
 
 const GameOver = () => {
   const { answeredQuestionsCount } = useSelector((state) => state.gamePlay);

@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import {
   updateGameStage,
   updateUserStatistics,
-} from "../../store/slices/gamePlaySlice";
-import { LETTERS, PATTERN } from "../../utils/constants";
+} from "store/slices/gamePlaySlice.js";
+import { LETTERS, PATTERN } from "utils/constants";
 
 import styles from "./Answers.module.css";
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@mui/joy";
 
 import styles from "./Sound.module.css";
-import song from "../../assets/sounds/sound.mp3";
+import song from "assets/sounds/sound.mp3";
 
 // transfer to custom hooks
 const useAudio = () => {
