@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { Button } from "@mui/joy";
 
 import styles from "./Sound.module.css";
-import song from "../../assets/sound.mp3";
+import song from "../../assets/sounds/sound.mp3";
 
+// transfer to custom hooks
 const useAudio = () => {
   const [audio] = useState(new Audio(song));
   const [playing, setPlaying] = useState(true);

@@ -44,13 +44,13 @@ const AnswerItem = ({
         const isWrong = selectedAnswer !== modifiedCorrectAnswer;
 
         if (isCorrect) {
-          setAnswerStatus({ [selectedAnswer]: "correct" });
+          //  setAnswerStatus({ [selectedAnswer]: "correct" });
           setTimeout(() => setShowNext(true), 3000);
         } else if (isWrong) {
-          setAnswerStatus((prevState) => ({
-            ...prevState,
-            [selectedAnswer]: "incorrect",
-          }));
+          // setAnswerStatus((prevState) => ({
+          //   ...prevState,
+          //   [selectedAnswer]: "incorrect",
+          // }));
           setTimeout(() => navigate("/gameover"), 4000);
         }
       }, 3000);

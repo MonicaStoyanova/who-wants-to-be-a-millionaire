@@ -11,5 +11,5 @@ const AlertMessage = ({ message, title, onClose }) => {
     </div>
   );
 };
-
+//wrap in memo
 export default AlertMessage;

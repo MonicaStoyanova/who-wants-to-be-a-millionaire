@@ -6,13 +6,13 @@
 }
 
  .playerOn{
-    background-image: url('../../assets/icon.png');
+    background-image: url('../../assets/images/icon.png');
     background-size:cover;
     width: 5em ;
     height: 5em;
 } 
 .playerOff{
-    background-image: url('../../assets/muted.jpg');
+    background-image: url('../../assets/images/muted.jpg');
     background-size:cover;
     width: 5em ;
     height: 5em;
