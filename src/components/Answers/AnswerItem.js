@@ -29,8 +29,9 @@ const AnswerItem = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { answeredQuestionsCount } = useSelector((state) => state.gamePlay);
-  let currentQuestionIndex = answeredQuestionsCount;
+  const currentQuestionIndex = useSelector(
+    (state) => state.gamePlay.answeredQuestionsCount
+  );
 
   const modifiedAnswers = possibleAnswers.replace(
     REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,

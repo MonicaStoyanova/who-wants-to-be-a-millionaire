@@ -8,8 +8,9 @@ import { resetGame } from "store/slices/gamePlaySlice";
 import styles from "./GameOver.module.css";
 
 const GameOver = () => {
-  const { answeredQuestionsCount } = useSelector((state) => state.gamePlay);
-  let currentQuestionIndex = answeredQuestionsCount;
+  const currentQuestionIndex = useSelector(
+    (state) => state.gamePlay.answeredQuestionsCount
+  );
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
