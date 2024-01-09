@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -25,6 +25,9 @@ const AnswerItem = ({
   const [isSuspense, setIsSuspense] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // const { answeredQuestionsCount } = useSelector((state) => state.gamePlay);
+  // let currentQuestionIndex = answeredQuestionsCount;
 
   const modifiedAnswers = possibleAnswers.replace(
     REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,
