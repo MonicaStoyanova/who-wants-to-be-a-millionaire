@@ -1,15 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { REWARDS } from "utils/constants";
+import { QUESTIONS_COUNT, REWARDS } from "utils/constants";
 import { formatNumber } from "utils/helpers";
 import { resetGame } from "store/slices/gamePlaySlice";
 
 import styles from "./GameOver.module.css";
 
 const GameOver = () => {
-  const { answeredQuestionsCount } = useSelector((state) => state.gamePlay);
-  let currentQuestionIndex = answeredQuestionsCount;
+  const currentQuestionIndex = useSelector(
+    (state) => state.gamePlay.answeredQuestionsCount
+  );
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -23,9 +24,8 @@ const GameOver = () => {
   return (
     <div className={styles.endBackground}>
       <div className={styles.endViewContainer}>
-        {/* the check if user has answered last question correctly is not working as expected */}
-        {currentQuestionIndex === 14 ? (
-          <div>Won</div>
+        {currentQuestionIndex === QUESTIONS_COUNT ? (
+          <h1 className={styles.win}>CONGRATULATIONS YOU WON 100,000lv.</h1>
         ) : (
           <div className={styles.endViewText}>
             <h1>End of the game!</h1>

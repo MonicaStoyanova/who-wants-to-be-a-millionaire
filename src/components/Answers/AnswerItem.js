@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import {
   updateGameStage,
   updateUserStatistics,
 } from "store/slices/gamePlaySlice.js";
+
 import {
   LETTERS,
+  QUESTIONS_COUNT,
   REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,
 } from "utils/constants";
 
@@ -23,8 +25,13 @@ const AnswerItem = ({
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showNext, setShowNext] = useState(false);
   const [isSuspense, setIsSuspense] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const currentQuestionIndex = useSelector(
+    (state) => state.gamePlay.answeredQuestionsCount
+  );
 
   const modifiedAnswers = possibleAnswers.replace(
     REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,
@@ -53,6 +60,11 @@ const AnswerItem = ({
         const isWrong = selectedAnswer !== modifiedCorrectAnswer;
 
         if (isCorrect) {
+          // if the last question is answered correctly
+          if (currentQuestionIndex === QUESTIONS_COUNT - 1) {
+            dispatch(updateUserStatistics());
+            setTimeout(() => navigate("/gameover"), 3000);
+          }
           setTimeout(() => setShowNext(true), 3000);
         }
 
@@ -71,7 +83,7 @@ const AnswerItem = ({
 
   return (
     <div>
-      {showNext && (
+      {showNext ? (
         <button
           className={styles.nextBtn}
           onClick={() => {
@@ -83,7 +95,7 @@ const AnswerItem = ({
         >
           Next
         </button>
-      )}
+      ) : null}
       {/* Possible answers buttons */}
       <button
         disabled={isAnswerSelected}
