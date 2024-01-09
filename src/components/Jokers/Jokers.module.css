@@ -1,0 +1,34 @@
+.jokers {
+    width: 5em ;
+    height: 5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+   margin: 0 auto;
+    padding: 2em;
+   
+}
+
+.fifty{
+    background-image: url("assets/images/Classic5050.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    align-items: center; 
+   
+}
+.fifty:hover{
+    transform: scale(1.5);
+}
+.audience{    
+    background-image: url("assets/images/audience.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    align-items: center;
+   }
+
+.call{    
+    background-image: url("assets/images/callFriend.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    align-items: center;
+   }
