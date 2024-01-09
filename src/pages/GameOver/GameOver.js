@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { REWARDS } from "utils/constants";
+import { QUESTIONS_COUNT, REWARDS } from "utils/constants";
 import { formatNumber } from "utils/helpers";
 import { resetGame } from "store/slices/gamePlaySlice";
 
@@ -23,7 +23,7 @@ const GameOver = () => {
   return (
     <div className={styles.endBackground}>
       <div className={styles.endViewContainer}>
-        {currentQuestionIndex === 15 ? (
+        {currentQuestionIndex === QUESTIONS_COUNT ? (
           <h1 className={styles.win}>CONGRATULATIONS YOU WON 100,000lv.</h1>
         ) : (
           <div className={styles.endViewText}>

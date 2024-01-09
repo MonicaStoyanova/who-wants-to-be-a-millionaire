@@ -8,6 +8,7 @@ import {
 } from "store/slices/gamePlaySlice.js";
 import {
   LETTERS,
+  QUESTIONS_COUNT,
   REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,
 } from "utils/constants";
 
@@ -26,8 +27,8 @@ const AnswerItem = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const { answeredQuestionsCount } = useSelector((state) => state.gamePlay);
-  // let currentQuestionIndex = answeredQuestionsCount;
+  const { answeredQuestionsCount } = useSelector((state) => state.gamePlay);
+  let currentQuestionIndex = answeredQuestionsCount;
 
   const modifiedAnswers = possibleAnswers.replace(
     REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,
@@ -56,6 +57,10 @@ const AnswerItem = ({
         const isWrong = selectedAnswer !== modifiedCorrectAnswer;
 
         if (isCorrect) {
+          if (currentQuestionIndex === QUESTIONS_COUNT - 1) {
+            dispatch(updateUserStatistics());
+            setTimeout(() => navigate("/gameover"), 3000);
+          }
           setTimeout(() => setShowNext(true), 3000);
         }
 
