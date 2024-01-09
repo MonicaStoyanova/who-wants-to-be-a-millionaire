@@ -6,6 +6,7 @@ import {
   updateGameStage,
   updateUserStatistics,
 } from "store/slices/gamePlaySlice.js";
+
 import {
   LETTERS,
   QUESTIONS_COUNT,
@@ -24,6 +25,7 @@ const AnswerItem = ({
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showNext, setShowNext] = useState(false);
   const [isSuspense, setIsSuspense] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -57,6 +59,7 @@ const AnswerItem = ({
         const isWrong = selectedAnswer !== modifiedCorrectAnswer;
 
         if (isCorrect) {
+          // if the last question is answered correctly
           if (currentQuestionIndex === QUESTIONS_COUNT - 1) {
             dispatch(updateUserStatistics());
             setTimeout(() => navigate("/gameover"), 3000);
@@ -78,7 +81,6 @@ const AnswerItem = ({
   };
 
   return (
-    //  somehow remove the next button from final question
     <div>
       {showNext ? (
         <button
