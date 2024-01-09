@@ -8,6 +8,8 @@ import GameContent from "./GameContent";
 
 import {
   fetchQuestionsAndAnswers,
+  updateCorrectAnswer,
+  updateIncorrectAnswers,
   resetGame,
 } from "store/slices/gamePlaySlice";
 
@@ -15,12 +17,14 @@ const Game = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
-    categoryId,
-    difficulty,
-    answeredQuestionsCount,
+    correctAnswer,
+    incorrectAnswers,
     status,
-    questions,
     error,
+    answeredQuestionsCount,
+    difficulty,
+    questions,
+    categoryId,
   } = useSelector((state) => state.gamePlay);
 
   useEffect(() => {
@@ -43,17 +47,22 @@ const Game = () => {
       case "succeeded":
         if (questions.length !== 0) {
           const currentQuestion = questions[answeredQuestionsCount];
+          // setting the answers according to current question
+          dispatch(updateCorrectAnswer(currentQuestion.correct_answer));
+          dispatch(updateIncorrectAnswers(currentQuestion.incorrect_answers));
           const shuffledAnswers = [
             ...currentQuestion.incorrect_answers,
             currentQuestion.correct_answer,
           ].sort(() => Math.random() - 0.5);
 
           return (
-            <GameContent
-              currentQuestion={currentQuestion}
-              answeredQuestionsCount={answeredQuestionsCount}
-              shuffledAnswers={shuffledAnswers}
-            />
+            <>
+              <GameContent
+                currentQuestion={currentQuestion}
+                answeredQuestionsCount={answeredQuestionsCount}
+                shuffledAnswers={shuffledAnswers}
+              />
+            </>
           );
         }
         return (

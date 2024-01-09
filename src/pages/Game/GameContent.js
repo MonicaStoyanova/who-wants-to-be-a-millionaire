@@ -4,6 +4,7 @@ import Question from "components/Question/Question";
 import Answers from "components/Answers/Answers";
 import Timer from "components/Timer/Timer";
 import Player from "components/Sound/Sound";
+//import RemoveTwoRandomElements from "components/Jokers/50-50";
 
 import styles from "./GameContent.module.css";
 
@@ -40,6 +41,7 @@ const GameContent = ({ currentQuestion, answeredQuestionsCount }) => {
 
   return (
     <div className={styles.background}>
+      {/* <RemoveTwoRandomElements /> */}
       <Player />
       <Timer />
       <div className={styles.gameContainer}>

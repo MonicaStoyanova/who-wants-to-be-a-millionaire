@@ -3,6 +3,8 @@ import axios from "axios";
 
 const initialState = {
   questions: [],
+  correctAnswer: "",
+  incorrectAnswers: [],
   status: "idle",
   error: null,
   answeredQuestionsCount: 0,
@@ -48,6 +50,12 @@ const gamePlaySlice = createSlice({
     updateQuestions: (state, action) => {
       state.questions = action.payload;
     },
+    updateCorrectAnswer: (state, action) => {
+      state.correctAnswer = action.payload;
+    },
+    updateIncorrectAnswers: (state, action) => {
+      state.incorrectAnswers = action.payload;
+    },
     // we are counting the correctly answered questions
     updateUserStatistics: (state, action) => {
       state.answeredQuestionsCount += 1;
@@ -92,6 +100,8 @@ const gamePlaySlice = createSlice({
 
 export const {
   updateQuestions,
+  updateCorrectAnswer,
+  updateIncorrectAnswers,
   updateUserStatistics,
   updateDifficulty,
   updateCategory,
