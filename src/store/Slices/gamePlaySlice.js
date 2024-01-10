@@ -12,6 +12,7 @@ const initialState = {
   categories: [],
   categoryId: "",
   gameStage: "running",
+  fiftyFiftyUsed: false,
 };
 
 export const fetchCategories = createAsyncThunk(
@@ -77,6 +78,10 @@ const gamePlaySlice = createSlice({
       state.difficulty = initialState.difficulty;
       state.categories = initialState.categories;
       state.answeredQuestionsCount = initialState.answeredQuestionsCount;
+      state.fiftyFiftyUsed = initialState.fiftyFiftyUsed;
+    },
+    applyFiftyFifty: (state, action) => {
+      state.fiftyFiftyUsed = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -107,6 +112,7 @@ export const {
   updateCategory,
   updateGameStage,
   resetGame,
+  applyFiftyFifty,
 } = gamePlaySlice.actions;
 
 export default gamePlaySlice.reducer;

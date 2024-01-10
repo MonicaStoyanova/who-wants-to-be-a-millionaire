@@ -2,6 +2,7 @@ import { Button } from "@mui/joy";
 import { useDispatch, useSelector } from "react-redux";
 import { updateIncorrectAnswers } from "store/slices/gamePlaySlice";
 import styles from "./Jokers.module.css";
+import { applyFiftyFifty } from "store/slices/gamePlaySlice";
 
 const Jokers = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,9 @@ const Jokers = () => {
     }
 
     dispatch(updateIncorrectAnswers(reducedIncorrectAnswers));
+    dispatch(applyFiftyFifty(true));
   };
+
   // TO DO:
   const handleAudienceHelp = () => {};
 
