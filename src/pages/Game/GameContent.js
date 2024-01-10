@@ -53,7 +53,7 @@ const GameContent = ({ currentQuestion, answeredQuestionsCount }) => {
         <Answers
           shuffledAnswers={shuffledAnswers}
           correctAnswer={currentQuestion.correct_answer}
-          fiftyFiftyUsed={fiftyFiftyUsed}
+          currentQuestionIndex={answeredQuestionsCount}
         />
       </div>
     </div>

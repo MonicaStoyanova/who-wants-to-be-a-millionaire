@@ -1,16 +1,18 @@
 import { Button } from "@mui/joy";
 import { useDispatch, useSelector } from "react-redux";
-import { updateIncorrectAnswers } from "store/slices/gamePlaySlice";
+import {
+  applyFiftyFifty,
+  updateIncorrectAnswers,
+} from "store/slices/gamePlaySlice";
 import styles from "./Jokers.module.css";
-import { applyFiftyFifty } from "store/slices/gamePlaySlice";
 
 const Jokers = () => {
   const dispatch = useDispatch();
-  const { incorrectAnswers } = useSelector((state) => state.gamePlay);
+
+  const { incorrectAnswers, fiftyFiftyJoker, answeredQuestionsCount } =
+    useSelector((state) => state.gamePlay);
 
   const handleFiftyFifty = () => {
-    // have to advise AnswerItem to use those if selected
-    // have to track if the joker is used; can it be as object with keys the names and boolean values?
     if (incorrectAnswers.length < 2) {
       return;
     }
@@ -24,7 +26,9 @@ const Jokers = () => {
     }
 
     dispatch(updateIncorrectAnswers(reducedIncorrectAnswers));
-    dispatch(applyFiftyFifty(true));
+    dispatch(
+      applyFiftyFifty({ used: true, questionIndex: answeredQuestionsCount })
+    );
   };
 
   // TO DO:
@@ -37,7 +41,11 @@ const Jokers = () => {
     // fix w & h; p & m
     // once used we need to have them crossed
     <div className={styles.jokers}>
-      <Button className={styles.fifty} onClick={handleFiftyFifty}></Button>
+      <Button
+        className={styles.fifty}
+        onClick={handleFiftyFifty}
+        disabled={fiftyFiftyJoker.used}
+      ></Button>
       <Button className={styles.audience} onClick={handleAudienceHelp}></Button>
       <Button className={styles.call} onClick={handleCallFriend}></Button>
     </div>

@@ -12,7 +12,10 @@ const initialState = {
   categories: [],
   categoryId: "",
   gameStage: "running",
-  fiftyFiftyUsed: false,
+  fiftyFiftyJoker: {
+    used: false,
+    questionIndex: null,
+  },
 };
 
 export const fetchCategories = createAsyncThunk(
@@ -78,10 +81,11 @@ const gamePlaySlice = createSlice({
       state.difficulty = initialState.difficulty;
       state.categories = initialState.categories;
       state.answeredQuestionsCount = initialState.answeredQuestionsCount;
-      state.fiftyFiftyUsed = initialState.fiftyFiftyUsed;
+      state.fiftyFiftyJoker = initialState.fiftyFiftyJoker;
     },
     applyFiftyFifty: (state, action) => {
-      state.fiftyFiftyUsed = action.payload;
+      state.fiftyFiftyJoker.used = action.payload.used;
+      state.fiftyFiftyJoker.questionIndex = action.payload.questionIndex;
     },
   },
   extraReducers: (builder) => {
