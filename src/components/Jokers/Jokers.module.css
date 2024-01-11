@@ -8,7 +8,7 @@
 }
 
 .jokers button {
-    width: 8em;
+    width: 8em;                                  
     height: 5em;
     background-size: contain;
     background-repeat: no-repeat;
@@ -26,6 +26,10 @@
 .fifty {
     background-image: url("assets/images/Classic5050.jpg");
 }
+/* this will be needed for the other jokers too */
+.fifty.used {
+    opacity: 0.2;
+  }
 
 
 .audience {

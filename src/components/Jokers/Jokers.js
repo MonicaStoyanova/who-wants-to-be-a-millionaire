@@ -38,12 +38,9 @@ const Jokers = () => {
   const handleCallFriend = () => {};
 
   return (
-    // take a look how Buttons color is coming from MUI as blue, i need it transparent
-    // fix w & h; p & m
-    // once used we need to have them crossed
     <div className={styles.jokers}>
       <button
-        className={styles.fifty}
+        className={`${styles.fifty} ${fiftyFiftyJoker.used ? styles.used : ""}`}
         onClick={handleFiftyFifty}
         disabled={fiftyFiftyJoker.used}
       ></button>
