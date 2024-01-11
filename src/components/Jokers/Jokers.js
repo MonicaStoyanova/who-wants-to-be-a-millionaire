@@ -1,9 +1,10 @@
-import { Button } from "@mui/joy";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   applyFiftyFifty,
   updateIncorrectAnswers,
 } from "store/slices/gamePlaySlice";
+
 import styles from "./Jokers.module.css";
 
 const Jokers = () => {
@@ -41,13 +42,13 @@ const Jokers = () => {
     // fix w & h; p & m
     // once used we need to have them crossed
     <div className={styles.jokers}>
-      <Button
+      <button
         className={styles.fifty}
         onClick={handleFiftyFifty}
         disabled={fiftyFiftyJoker.used}
-      ></Button>
-      <Button className={styles.audience} onClick={handleAudienceHelp}></Button>
-      <Button className={styles.call} onClick={handleCallFriend}></Button>
+      ></button>
+      <button className={styles.audience} onClick={handleAudienceHelp}></button>
+      <button className={styles.call} onClick={handleCallFriend}></button>
     </div>
   );
 };
