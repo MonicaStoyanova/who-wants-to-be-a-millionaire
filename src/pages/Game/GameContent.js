@@ -7,7 +7,6 @@ import Player from "components/Sound/Sound";
 import Jokers from "components/Jokers/Jokers";
 
 import styles from "./GameContent.module.css";
-import { useSelector } from "react-redux";
 
 const shuffle = (array) => {
   let currentIndex = array.length;
@@ -28,7 +27,7 @@ const shuffle = (array) => {
 
 const GameContent = ({ currentQuestion, answeredQuestionsCount }) => {
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
-  const { fiftyFiftyUsed } = useSelector((state) => state.gamePlay);
+
   // Shuffle the answers whenever the currentQuestion changes
   useEffect(() => {
     if (currentQuestion) {

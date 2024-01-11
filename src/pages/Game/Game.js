@@ -17,8 +17,6 @@ const Game = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
-    correctAnswer,
-    incorrectAnswers,
     status,
     error,
     answeredQuestionsCount,
@@ -50,17 +48,12 @@ const Game = () => {
           // setting the answers according to current question
           dispatch(updateCorrectAnswer(currentQuestion.correct_answer));
           dispatch(updateIncorrectAnswers(currentQuestion.incorrect_answers));
-          const shuffledAnswers = [
-            ...currentQuestion.incorrect_answers,
-            currentQuestion.correct_answer,
-          ].sort(() => Math.random() - 0.5);
 
           return (
             <>
               <GameContent
                 currentQuestion={currentQuestion}
                 answeredQuestionsCount={answeredQuestionsCount}
-                shuffledAnswers={shuffledAnswers}
               />
             </>
           );
