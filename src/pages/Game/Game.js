@@ -27,50 +27,50 @@ const Game = () => {
 
   useEffect(() => {
     dispatch(fetchQuestionsAndAnswers({ categoryId, difficulty }));
-  }, [categoryId, difficulty]);
+  }, [categoryId, difficulty, dispatch]);
+
+  useEffect(() => {
+    if (status === "succeeded" && questions.length !== 0) {
+      const currentQuestion = questions[answeredQuestionsCount];
+      dispatch(updateCorrectAnswer(currentQuestion.correct_answer));
+      dispatch(updateIncorrectAnswers(currentQuestion.incorrect_answers));
+    }
+  }, [answeredQuestionsCount, questions, status]);
 
   const handleAlertClose = () => {
     dispatch(resetGame());
     navigate("/");
   };
 
-  const content = () => {
-    switch (status) {
-      case "loading":
-        return <p>Loading...</p>;
+  if (status === "loading") {
+    return <p>Loading...</p>;
+  }
 
-      case "failed":
-        return <p>Error: {error}</p>;
+  if (status === "failed") {
+    return <p>Error: {error}</p>;
+  }
 
-      case "succeeded":
-        if (questions.length !== 0) {
-          const currentQuestion = questions[answeredQuestionsCount];
-          // setting the answers according to current question
-          dispatch(updateCorrectAnswer(currentQuestion.correct_answer));
-          dispatch(updateIncorrectAnswers(currentQuestion.incorrect_answers));
-
-          return (
-            <>
-              <GameContent
-                currentQuestion={currentQuestion}
-                answeredQuestionsCount={answeredQuestionsCount}
-              />
-            </>
-          );
-        }
-        return (
-          <AlertMessage
-            message={GAME_SCREEN_ALERTS.NO_QUESTIONS_MESSAGE}
-            title={GAME_SCREEN_ALERTS.NO_QUESTIONS_TITLE}
-            onClose={handleAlertClose}
-          />
-        );
-
-      default:
-        return null;
+  if (status === "succeeded") {
+    if (questions.length !== 0) {
+      const currentQuestion = questions[answeredQuestionsCount];
+      return (
+        <GameContent
+          currentQuestion={currentQuestion}
+          answeredQuestionsCount={answeredQuestionsCount}
+        />
+      );
+    } else {
+      return (
+        <AlertMessage
+          message={GAME_SCREEN_ALERTS.NO_QUESTIONS_MESSAGE}
+          title={GAME_SCREEN_ALERTS.NO_QUESTIONS_TITLE}
+          onClose={handleAlertClose}
+        />
+      );
     }
-  };
+  }
 
-  return content();
+  return null;
 };
+
 export default Game;
