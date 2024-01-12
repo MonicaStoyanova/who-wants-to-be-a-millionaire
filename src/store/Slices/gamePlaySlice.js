@@ -18,7 +18,6 @@ const initialState = {
   },
   audienceHelpJoker: {
     used: false,
-    questionIndex: null,
   },
 };
 
@@ -94,7 +93,6 @@ const gamePlaySlice = createSlice({
     },
     applyAudienceHelp: (state, action) => {
       state.audienceHelpJoker.used = action.payload.used;
-      state.audienceHelpJoker.questionIndex = action.payload.questionIndex;
     },
   },
   extraReducers: (builder) => {

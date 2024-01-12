@@ -10,11 +10,15 @@ import styles from "./FiftyFiftyJoker.module.css";
 
 const FiftyFiftyJoker = () => {
   const dispatch = useDispatch();
-  const { incorrectAnswers, fiftyFiftyJoker, answeredQuestionsCount } =
-    useSelector((state) => state.gamePlay);
-
+  const {
+    correctAnswer,
+    incorrectAnswers,
+    fiftyFiftyJoker,
+    answeredQuestionsCount,
+  } = useSelector((state) => state.gamePlay);
+  const allAnswers = [...incorrectAnswers, correctAnswer];
   const handleFiftyFifty = () => {
-    if (incorrectAnswers.length < 2) {
+    if (incorrectAnswers.length < allAnswers.length / 2) {
       return;
     }
 
