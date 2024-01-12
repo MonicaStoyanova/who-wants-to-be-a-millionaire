@@ -1,36 +1,35 @@
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width:100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-  }
-  
-  .closeButton {
-    position: fixed;
-    background: yellow;
-    width: auto; 
-    width: 450px; 
-    height: 350px;
-    top: 50%;
-    left: 55%;
-    transform: translate(-45%, -50%);
-    padding: 20px; 
-    overflow: auto; 
-    display: flex;
-  justify-content: center;
+  display: flex;
   align-items: center;
-  
+  justify-content: center;
+  margin-top: 2em;
   }
-  
+
+  .modalContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  background: white;
+  width:26em; 
+  height: 18em; 
+  padding: 1em; 
+  overflow: auto; 
+  border-radius: 20px; 
+  overflow: hidden;
+  }
+
   .closeButton {
-    float: right;
+    position:fixed;
+    top: 10px; 
+    right: 10px; 
     cursor: pointer;
-    font-size: 1.5em; /* Adjust as necessary */
-    color: black; /* or any contrasting color */
-    background-color: #f1f1f1; /* Light background for the button */
-    padding: 0.5em;
+    width: 30px; 
+    height: 30px;
+    font-size: 1.5em;
+    color: white; 
+    background-color: red;
     border-radius: 50%;
+    line-height: 30px;
+    text-align: center; 
+    border: 2px solid white; 
   }
-  

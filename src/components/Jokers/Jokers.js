@@ -91,7 +91,7 @@ const Jokers = () => {
         {
           label: "Audience Votes",
           data: Object.values(sortedAudienceStatistics),
-          backgroundColor: "rgba(0, 100, 0, 0.5)",
+          backgroundColor: "rgba(213, 184, 255)",
         },
       ],
     });
@@ -141,7 +141,7 @@ const Jokers = () => {
         <div className={styles.chartContainer}>
           {audienceChartData.labels && (
             <Bar
-              className={styles.chartContainer}
+              // className={styles.chartContainer}
               data={audienceChartData}
               options={chartOptions}
             />
