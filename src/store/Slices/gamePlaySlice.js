@@ -86,6 +86,7 @@ const gamePlaySlice = createSlice({
       state.categories = initialState.categories;
       state.answeredQuestionsCount = initialState.answeredQuestionsCount;
       state.fiftyFiftyJoker = initialState.fiftyFiftyJoker;
+      state.audienceHelpJoker = initialState.audienceHelpJoker;
     },
     applyFiftyFifty: (state, action) => {
       state.fiftyFiftyJoker.used = action.payload.used;

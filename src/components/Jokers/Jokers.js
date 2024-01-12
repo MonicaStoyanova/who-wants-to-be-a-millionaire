@@ -111,6 +111,7 @@ const Jokers = () => {
     scales: {
       y: {
         beginAtZero: true,
+        max: 100,
       },
     },
     plugins: {
