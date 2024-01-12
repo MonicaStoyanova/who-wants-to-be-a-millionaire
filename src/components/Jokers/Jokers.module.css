@@ -27,7 +27,11 @@
     background-image: url("assets/images/Classic5050.jpg");
 }
 /* this will be needed for the other jokers too */
-.fifty.used {
+.fifty.used{
+    opacity: 0.2;
+  }
+  
+.audience.used{
     opacity: 0.2;
   }
 

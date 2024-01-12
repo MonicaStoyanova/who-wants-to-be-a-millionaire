@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {
   applyFiftyFifty,
+  applyAudienceHelp,
   updateIncorrectAnswers,
 } from "store/slices/gamePlaySlice";
 
@@ -21,6 +22,7 @@ const Jokers = () => {
     correctAnswer,
     incorrectAnswers,
     fiftyFiftyJoker,
+    audienceHelpJoker,
     answeredQuestionsCount,
   } = useSelector((state) => state.gamePlay);
   const [audienceChartData, setAudienceChartData] = useState({});
@@ -48,6 +50,9 @@ const Jokers = () => {
 
   const handleAudienceHelp = () => {
     // AUDIENCE
+    if (audienceHelpJoker.used) {
+      return;
+    }
     const allAnswers = [...incorrectAnswers, correctAnswer];
 
     const quizResponses = Array.from(
@@ -96,6 +101,9 @@ const Jokers = () => {
       ],
     });
     setIsModalOpen(true);
+    dispatch(
+      applyAudienceHelp({ used: true, questionIndex: answeredQuestionsCount })
+    );
   };
 
   const chartOptions = {
@@ -132,8 +140,11 @@ const Jokers = () => {
           disabled={fiftyFiftyJoker.used}
         ></button>
         <button
-          className={styles.audience}
+          className={`${styles.audience} ${
+            audienceHelpJoker.used ? styles.used : ""
+          }`}
           onClick={handleAudienceHelp}
+          disabled={audienceHelpJoker.used}
         ></button>
         <button className={styles.call} onClick={handleCallFriend}></button>
       </div>

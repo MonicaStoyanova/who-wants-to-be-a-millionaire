@@ -16,6 +16,10 @@ const initialState = {
     used: false,
     questionIndex: null,
   },
+  audienceHelpJoker: {
+    used: false,
+    questionIndex: null,
+  },
 };
 
 export const fetchCategories = createAsyncThunk(
@@ -87,6 +91,10 @@ const gamePlaySlice = createSlice({
       state.fiftyFiftyJoker.used = action.payload.used;
       state.fiftyFiftyJoker.questionIndex = action.payload.questionIndex;
     },
+    applyAudienceHelp: (state, action) => {
+      state.audienceHelpJoker.used = action.payload.used;
+      state.audienceHelpJoker.questionIndex = action.payload.questionIndex;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCategories.fulfilled, (state, action) => {
@@ -117,6 +125,7 @@ export const {
   updateGameStage,
   resetGame,
   applyFiftyFifty,
+  applyAudienceHelp,
 } = gamePlaySlice.actions;
 
 export default gamePlaySlice.reducer;
