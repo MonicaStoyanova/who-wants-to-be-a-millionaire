@@ -39,3 +39,8 @@
 .call {
     background-image: url("assets/images/callFriend.jpg");
 }
+
+.chartContainer{
+    width: 400px;
+    height: 300px;
+  }

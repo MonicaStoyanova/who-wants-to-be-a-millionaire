@@ -8,6 +8,11 @@ import {
 import { NUMBER_OF_PARTICIPANTS } from "utils/constants";
 
 import styles from "./Jokers.module.css";
+import { Bar } from "react-chartjs-2";
+import Chart from "chart.js/auto";
+import { useState } from "react";
+import "chartjs-plugin-datalabels";
+import Modal from "components/Modal/Modal";
 
 const Jokers = () => {
   const dispatch = useDispatch();
@@ -18,6 +23,8 @@ const Jokers = () => {
     fiftyFiftyJoker,
     answeredQuestionsCount,
   } = useSelector((state) => state.gamePlay);
+  const [audienceChartData, setAudienceChartData] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // 50-50
   const handleFiftyFifty = () => {
@@ -78,6 +85,38 @@ const Jokers = () => {
     /*console.log(sortedAudienceStatistics);
     it returns object like that: 
     {Aries: 10, Capricorn: 21, Libra: 57, Sagittarius: 12}*/
+    setAudienceChartData({
+      labels: Object.keys(sortedAudienceStatistics),
+      datasets: [
+        {
+          label: "Audience Votes",
+          data: Object.values(sortedAudienceStatistics),
+          backgroundColor: "rgba(0, 100, 0, 0.5)",
+        },
+      ],
+    });
+    setIsModalOpen(true);
+  };
+
+  const chartOptions = {
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+    plugins: {
+      datalabels: {
+        display: true,
+        color: "red",
+        font: {
+          weight: "bold",
+        },
+        formatter: (value, context) => {
+          return `${context.chart.data.labels[context.dataIndex]}: ${value}`;
+        },
+      },
+    },
   };
 
   const handleCallFriend = () => {};
@@ -98,6 +137,17 @@ const Jokers = () => {
         ></button>
         <button className={styles.call} onClick={handleCallFriend}></button>
       </div>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <div className={styles.chartContainer}>
+          {audienceChartData.labels && (
+            <Bar
+              className={styles.chartContainer}
+              data={audienceChartData}
+              options={chartOptions}
+            />
+          )}
+        </div>
+      </Modal>
     </>
   );
 };

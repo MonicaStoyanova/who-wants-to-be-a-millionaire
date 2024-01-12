@@ -1,0 +1,36 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+  }
+  
+  .closeButton {
+    position: fixed;
+    background: yellow;
+    width: auto; 
+    width: 450px; 
+    height: 350px;
+    top: 50%;
+    left: 55%;
+    transform: translate(-45%, -50%);
+    padding: 20px; 
+    overflow: auto; 
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  }
+  
+  .closeButton {
+    float: right;
+    cursor: pointer;
+    font-size: 1.5em; /* Adjust as necessary */
+    color: black; /* or any contrasting color */
+    background-color: #f1f1f1; /* Light background for the button */
+    padding: 0.5em;
+    border-radius: 50%;
+  }
+  
