@@ -23,28 +23,6 @@
     transform: scale(1.5);
 }
 
-.fifty {
-    background-image: url("assets/images/Classic5050.jpg");
-}
-/* this will be needed for the other jokers too */
-.fifty.used{
-    opacity: 0.2;
-  }
-  
-.audience.used{
-    opacity: 0.2;
-  }
-
-
-.audience {
-    background-image: url("assets/images/audience.jpg");
-}
-
 .call {
     background-image: url("assets/images/callFriend.jpg");
 }
-
-.chartContainer{
-    width: 400px;
-    height: 230px;
-  }
