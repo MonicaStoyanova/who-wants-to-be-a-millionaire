@@ -1,4 +1,3 @@
-// FiftyFiftyJoker.js
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -10,13 +9,16 @@ import styles from "./FiftyFiftyJoker.module.css";
 
 const FiftyFiftyJoker = () => {
   const dispatch = useDispatch();
+
   const {
     correctAnswer,
     incorrectAnswers,
     fiftyFiftyJoker,
     answeredQuestionsCount,
   } = useSelector((state) => state.gamePlay);
+
   const allAnswers = [...incorrectAnswers, correctAnswer];
+
   const handleFiftyFifty = () => {
     if (incorrectAnswers.length < allAnswers.length / 2) {
       return;
