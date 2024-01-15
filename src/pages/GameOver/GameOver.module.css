@@ -85,4 +85,9 @@ position: relative;
   .playagainBtn:hover{
     cursor: pointer;
   }
+
+  .win {
+    color: rgb(73, 161, 142);
+    padding: 2em 0;
+  }
   

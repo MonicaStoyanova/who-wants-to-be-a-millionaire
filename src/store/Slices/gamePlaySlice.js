@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { QUESTIONS_COUNT } from "utils/constants";
 
 const initialState = {
   questions: [],
@@ -41,7 +42,7 @@ export const fetchQuestionsAndAnswers = createAsyncThunk(
   async ({ categoryId, difficulty }, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `https://opentdb.com/api.php?amount=15&category=${Number(
+        `https://opentdb.com/api.php?amount=${QUESTIONS_COUNT}&category=${Number(
           categoryId
         )}&difficulty=${difficulty}&type=multiple`
       );
