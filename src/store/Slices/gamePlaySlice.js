@@ -19,6 +19,9 @@ const initialState = {
   audienceHelpJoker: {
     used: false,
   },
+  callFriendJoker: {
+    used: false,
+  },
 };
 
 export const fetchCategories = createAsyncThunk(
@@ -86,6 +89,7 @@ const gamePlaySlice = createSlice({
       state.answeredQuestionsCount = initialState.answeredQuestionsCount;
       state.fiftyFiftyJoker = initialState.fiftyFiftyJoker;
       state.audienceHelpJoker = initialState.audienceHelpJoker;
+      state.callFriendJoker = initialState.callFriendJoker;
     },
     applyFiftyFifty: (state, action) => {
       state.fiftyFiftyJoker.used = action.payload.used;
@@ -93,6 +97,9 @@ const gamePlaySlice = createSlice({
     },
     applyAudienceHelp: (state, action) => {
       state.audienceHelpJoker.used = action.payload.used;
+    },
+    applyCallFriend: (state, action) => {
+      state.callFriendJoker.used = action.payload.used;
     },
   },
   extraReducers: (builder) => {
@@ -125,6 +132,7 @@ export const {
   resetGame,
   applyFiftyFifty,
   applyAudienceHelp,
+  applyCallFriend,
 } = gamePlaySlice.actions;
 
 export default gamePlaySlice.reducer;

@@ -27,7 +27,7 @@ const Game = () => {
 
   useEffect(() => {
     dispatch(fetchQuestionsAndAnswers({ categoryId, difficulty }));
-  }, [categoryId, difficulty, dispatch]);
+  }, [categoryId, difficulty]);
 
   useEffect(() => {
     if (status === "succeeded" && questions.length !== 0) {

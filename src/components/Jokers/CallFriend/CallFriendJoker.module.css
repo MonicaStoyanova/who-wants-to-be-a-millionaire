@@ -1,0 +1,47 @@
+  blockquote {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 40px;
+    margin-inline-end: 40px;
+}
+  .ovalThought{
+    position: relative;
+    width: 270px;
+    padding: 50px 40px;
+    margin: 1em auto 80px;
+    text-align: center;
+    color: white;
+    background: linear-gradient(#2e88c4, #075698);
+    border-radius: 220px / 120px;     
+  }
+  
+  .ovalThought:before{
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 50px;
+    width: 30px;
+    height: 30px;
+    background: #075698;
+    border-radius: 30px;
+  }
+  
+  .ovalThought:after{
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    left: 30px;
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    background: #075698;
+  }
+  
+  .call {
+    background-image: url("assets/images/callFriend.jpg");
+}
+
+  .call.used{
+    opacity: 0.2;
+  }
