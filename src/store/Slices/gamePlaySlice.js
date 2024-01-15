@@ -4,6 +4,8 @@ import { QUESTIONS_COUNT } from "utils/constants";
 
 const initialState = {
   questions: [],
+  correctAnswer: "",
+  incorrectAnswers: [],
   status: "idle",
   error: null,
   answeredQuestionsCount: 0,
@@ -11,6 +13,16 @@ const initialState = {
   categories: [],
   categoryId: "",
   gameStage: "running",
+  fiftyFiftyJoker: {
+    used: false,
+    questionIndex: null,
+  },
+  audienceHelpJoker: {
+    used: false,
+  },
+  callFriendJoker: {
+    used: false,
+  },
 };
 
 export const fetchCategories = createAsyncThunk(
@@ -49,6 +61,12 @@ const gamePlaySlice = createSlice({
     updateQuestions: (state, action) => {
       state.questions = action.payload;
     },
+    updateCorrectAnswer: (state, action) => {
+      state.correctAnswer = action.payload;
+    },
+    updateIncorrectAnswers: (state, action) => {
+      state.incorrectAnswers = action.payload;
+    },
     // we are counting the correctly answered questions
     updateUserStatistics: (state, action) => {
       state.answeredQuestionsCount += 1;
@@ -70,6 +88,19 @@ const gamePlaySlice = createSlice({
       state.difficulty = initialState.difficulty;
       state.categories = initialState.categories;
       state.answeredQuestionsCount = initialState.answeredQuestionsCount;
+      state.fiftyFiftyJoker = initialState.fiftyFiftyJoker;
+      state.audienceHelpJoker = initialState.audienceHelpJoker;
+      state.callFriendJoker = initialState.callFriendJoker;
+    },
+    applyFiftyFifty: (state, action) => {
+      state.fiftyFiftyJoker.used = action.payload.used;
+      state.fiftyFiftyJoker.questionIndex = action.payload.questionIndex;
+    },
+    applyAudienceHelp: (state, action) => {
+      state.audienceHelpJoker.used = action.payload.used;
+    },
+    applyCallFriend: (state, action) => {
+      state.callFriendJoker.used = action.payload.used;
     },
   },
   extraReducers: (builder) => {
@@ -93,11 +124,16 @@ const gamePlaySlice = createSlice({
 
 export const {
   updateQuestions,
+  updateCorrectAnswer,
+  updateIncorrectAnswers,
   updateUserStatistics,
   updateDifficulty,
   updateCategory,
   updateGameStage,
   resetGame,
+  applyFiftyFifty,
+  applyAudienceHelp,
+  applyCallFriend,
 } = gamePlaySlice.actions;
 
 export default gamePlaySlice.reducer;

@@ -26,4 +26,30 @@ export const MAX_SECONDS = 60;
 
 export const REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN = /&[^;]+;/g;
 
+export const MAX_PERCENTAGE = 100;
+
+export const CHART_OPTIONS = {
+  responsive: true,
+  scales: {
+    y: {
+      beginAtZero: true,
+      max: 100,
+    },
+  },
+  plugins: {
+    datalabels: {
+      display: true,
+      color: "red",
+      font: {
+        weight: "bold",
+      },
+      formatter: (value, context) => {
+        return `${context.chart.data.labels[context.dataIndex]}: ${value}`;
+      },
+    },
+  },
+};
 export const QUESTIONS_COUNT = 15;
+export const FRIEND_THINKING = "Hmmm...I think the answer is: ";
+export const FRIEND_WHISHING_GOOD_LUCK = ". Good luck!";
+export const CLOVER_EMOJI = "\u{1F340}";

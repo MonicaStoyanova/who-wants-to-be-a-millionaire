@@ -8,6 +8,8 @@ import GameContent from "./GameContent";
 
 import {
   fetchQuestionsAndAnswers,
+  updateCorrectAnswer,
+  updateIncorrectAnswers,
   resetGame,
 } from "store/slices/gamePlaySlice";
 
@@ -15,70 +17,59 @@ const Game = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
-    categoryId,
-    difficulty,
-    answeredQuestionsCount,
     status,
-    questions,
     error,
+    answeredQuestionsCount,
+    difficulty,
+    questions,
+    categoryId,
   } = useSelector((state) => state.gamePlay);
 
   useEffect(() => {
     dispatch(fetchQuestionsAndAnswers({ categoryId, difficulty }));
   }, [categoryId, difficulty]);
 
+  useEffect(() => {
+    if (status === "succeeded" && questions.length !== 0) {
+      const currentQuestion = questions[answeredQuestionsCount];
+      dispatch(updateCorrectAnswer(currentQuestion.correct_answer));
+      dispatch(updateIncorrectAnswers(currentQuestion.incorrect_answers));
+    }
+  }, [answeredQuestionsCount, questions, status]);
+
   const handleAlertClose = () => {
     dispatch(resetGame());
     navigate("/");
   };
 
-  const content = () => {
-    switch (status) {
-      case "loading":
-        return <p>Loading...</p>;
+  if (status === "loading") {
+    return <p>Loading...</p>;
+  }
 
-      case "failed":
-        return <p>Error: {error}</p>;
+  if (status === "failed") {
+    return <p>Error: {error}</p>;
+  }
 
-      case "succeeded":
-        // Without the following, the code goes to case 'failed'
-        //Scenario when user has answered all questions correctly:
-        if (answeredQuestionsCount === questions.length) {
-          navigate("/gameover");
-        }
-
-        if (
-          questions.length !== 0 &&
-          answeredQuestionsCount < questions.length
-        ) {
-          const currentQuestion = questions[answeredQuestionsCount];
-
-          const shuffledAnswers = [
-            ...currentQuestion.incorrect_answers,
-            currentQuestion.correct_answer,
-          ].sort(() => Math.random() - 0.5);
-
-          return (
-            <GameContent
-              currentQuestion={currentQuestion}
-              answeredQuestionsCount={answeredQuestionsCount}
-              shuffledAnswers={shuffledAnswers}
-            />
-          );
-        }
-        return (
-          <AlertMessage
-            message={GAME_SCREEN_ALERTS.NO_QUESTIONS_MESSAGE}
-            title={GAME_SCREEN_ALERTS.NO_QUESTIONS_TITLE}
-            onClose={handleAlertClose}
-          />
-        );
-
-      default:
-        return null;
+  if (status === "succeeded") {
+    if (questions.length !== 0) {
+      return (
+        <GameContent
+          currentQuestion={questions[answeredQuestionsCount]}
+          answeredQuestionsCount={answeredQuestionsCount}
+        />
+      );
+    } else {
+      return (
+        <AlertMessage
+          message={GAME_SCREEN_ALERTS.NO_QUESTIONS_MESSAGE}
+          title={GAME_SCREEN_ALERTS.NO_QUESTIONS_TITLE}
+          onClose={handleAlertClose}
+        />
+      );
     }
-  };
+  }
 
-  return content();
+  return null;
 };
+
 export default Game;

@@ -4,6 +4,7 @@ import Question from "components/Question/Question";
 import Answers from "components/Answers/Answers";
 import Timer from "components/Timer/Timer";
 import Player from "components/Sound/Sound";
+import Jokers from "components/Jokers/Jokers";
 
 import styles from "./GameContent.module.css";
 
@@ -42,6 +43,7 @@ const GameContent = ({ currentQuestion, answeredQuestionsCount }) => {
     <div className={styles.background}>
       <Player />
       <Timer />
+      <Jokers />
       <div className={styles.gameContainer}>
         <Question
           question={currentQuestion.question}
@@ -50,6 +52,7 @@ const GameContent = ({ currentQuestion, answeredQuestionsCount }) => {
         <Answers
           shuffledAnswers={shuffledAnswers}
           correctAnswer={currentQuestion.correct_answer}
+          currentQuestionIndex={answeredQuestionsCount}
         />
       </div>
     </div>

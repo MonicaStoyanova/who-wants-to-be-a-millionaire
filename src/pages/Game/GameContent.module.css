@@ -9,8 +9,7 @@
 } 
 
 .gameContainer {
-  margin: 0 auto;
-  padding-top: 20em;
+  margin: 8em auto;
   display: flex;
   flex-direction: column;
   justify-content: center;

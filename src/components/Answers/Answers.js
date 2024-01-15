@@ -1,14 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AnswerItem from "./AnswerItem";
 
 import styles from "./Answers.module.css";
+import { useSelector } from "react-redux";
 
-const Answers = ({ shuffledAnswers, correctAnswer }) => {
+const Answers = ({ shuffledAnswers, correctAnswer, currentQuestionIndex }) => {
   const [isAnswerSelected, setIsAnswerSelected] = useState(false);
+  const [displayedAnswers, setDisplayedAnswers] = useState(shuffledAnswers);
+  const { fiftyFiftyJoker } = useSelector((state) => state.gamePlay);
 
+  const isFiftyFiftyJokerUsed =
+    fiftyFiftyJoker.used &&
+    currentQuestionIndex === fiftyFiftyJoker.questionIndex;
+
+  useEffect(() => {
+    if (isFiftyFiftyJokerUsed) {
+      // Apply 50-50 logic only for the question where it was used
+      const incorrectAnswers = shuffledAnswers.filter(
+        (a) => a !== correctAnswer
+      );
+      const randomIncorrect =
+        incorrectAnswers[Math.floor(Math.random() * incorrectAnswers.length)];
+      shuffledAnswers = [correctAnswer, randomIncorrect];
+    }
+    setDisplayedAnswers(shuffledAnswers);
+  }, [shuffledAnswers, correctAnswer, fiftyFiftyJoker, currentQuestionIndex]);
   return (
     <div className={styles.answersContainer}>
-      {shuffledAnswers.map((a, i) => (
+      {displayedAnswers.map((a, i) => (
         <AnswerItem
           key={a}
           possibleAnswers={a}
