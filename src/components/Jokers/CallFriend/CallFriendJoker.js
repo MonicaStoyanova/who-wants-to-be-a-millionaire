@@ -1,10 +1,10 @@
-//When the lifeline is used, display a mock phone call screen.
 import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { applyCallFriend } from "store/slices/gamePlaySlice";
 
 import { REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN } from "utils/constants";
+
 import styles from "./CallFriendJoker.module.css";
 
 const CallFriendJoker = () => {
@@ -38,9 +38,9 @@ const CallFriendJoker = () => {
       {showSpeechBubble && (
         <blockquote className={styles.ovalThought}>
           <p>
-            {"Hmmm...I think the answer is " +
+            {"Hmmm...I think the answer is: " +
               modifiedCorrectAnswer +
-              " Good luck!" +
+              ". Good luck!" +
               "\u{1F340}"}
           </p>
         </blockquote>

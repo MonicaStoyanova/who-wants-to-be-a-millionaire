@@ -4,7 +4,7 @@
     margin: 0 auto;
     padding-top: 5em;;
     gap:1em;
-  
+    position: relative;
 }
 
 .jokers button {
