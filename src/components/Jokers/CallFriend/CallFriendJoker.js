@@ -3,7 +3,12 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { applyCallFriend } from "store/slices/gamePlaySlice";
 
-import { REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN } from "utils/constants";
+import {
+  CLOVER_EMOJI,
+  FRIEND_THINKING,
+  FRIEND_WHISHING_GOOD_LUCK,
+  REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,
+} from "utils/constants";
 
 import styles from "./CallFriendJoker.module.css";
 
@@ -25,7 +30,7 @@ const CallFriendJoker = () => {
 
     setTimeout(() => {
       setShowSpeechBubble(false);
-    }, 150000);
+    }, 15000);
   };
 
   return (
@@ -38,10 +43,10 @@ const CallFriendJoker = () => {
       {showSpeechBubble && (
         <blockquote className={styles.ovalThought}>
           <p>
-            {"Hmmm...I think the answer is: " +
+            {FRIEND_THINKING +
               modifiedCorrectAnswer +
-              ". Good luck!" +
-              "\u{1F340}"}
+              FRIEND_WHISHING_GOOD_LUCK +
+              CLOVER_EMOJI}
           </p>
         </blockquote>
       )}

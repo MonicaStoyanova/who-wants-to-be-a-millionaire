@@ -49,3 +49,7 @@ export const CHART_OPTIONS = {
     },
   },
 };
+
+export const FRIEND_THINKING = "Hmmm...I think the answer is: ";
+export const FRIEND_WHISHING_GOOD_LUCK = ". Good luck!";
+export const CLOVER_EMOJI = "\u{1F340}";
