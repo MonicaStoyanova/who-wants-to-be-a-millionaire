@@ -52,10 +52,9 @@ const Game = () => {
 
   if (status === "succeeded") {
     if (questions.length !== 0) {
-      const currentQuestion = questions[answeredQuestionsCount];
       return (
         <GameContent
-          currentQuestion={currentQuestion}
+          currentQuestion={questions[answeredQuestionsCount]}
           answeredQuestionsCount={answeredQuestionsCount}
         />
       );

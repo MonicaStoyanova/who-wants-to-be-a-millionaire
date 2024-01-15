@@ -17,19 +17,25 @@ const CallFriendJoker = () => {
   const { correctAnswer, callFriendJoker } = useSelector(
     (state) => state.gamePlay
   );
-  const [showSpeechBubble, setShowSpeechBubble] = useState(false);
+  const [isSpeechBubbleVisible, setIsSpeechBubbleVisible] = useState(false);
 
   const modifiedCorrectAnswer = correctAnswer.replace(
     REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,
     "'"
   );
 
+  const friendAdvice =
+    FRIEND_THINKING +
+    modifiedCorrectAnswer +
+    FRIEND_WHISHING_GOOD_LUCK +
+    CLOVER_EMOJI;
+
   const handleCallFriend = () => {
     dispatch(applyCallFriend({ used: true }));
-    setShowSpeechBubble(true);
+    setIsSpeechBubbleVisible(true);
 
     setTimeout(() => {
-      setShowSpeechBubble(false);
+      setIsSpeechBubbleVisible(false);
     }, 15000);
   };
 
@@ -40,14 +46,9 @@ const CallFriendJoker = () => {
         onClick={handleCallFriend}
         disabled={callFriendJoker.used}
       ></button>
-      {showSpeechBubble && (
+      {isSpeechBubbleVisible && (
         <blockquote className={styles.ovalThought}>
-          <p>
-            {FRIEND_THINKING +
-              modifiedCorrectAnswer +
-              FRIEND_WHISHING_GOOD_LUCK +
-              CLOVER_EMOJI}
-          </p>
+          <p>{friendAdvice}</p>
         </blockquote>
       )}
     </>

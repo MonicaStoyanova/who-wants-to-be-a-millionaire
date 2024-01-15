@@ -18,13 +18,13 @@ const FiftyFiftyJoker = () => {
   } = useSelector((state) => state.gamePlay);
 
   const allAnswers = [...incorrectAnswers, correctAnswer];
-
   const handleFiftyFifty = () => {
     if (incorrectAnswers.length < allAnswers.length / 2) {
       return;
     }
 
     let reducedIncorrectAnswers = [...incorrectAnswers];
+
     for (let i = 0; i < 2; i++) {
       const randomIndex = Math.floor(
         Math.random() * reducedIncorrectAnswers.length

@@ -9,21 +9,21 @@ const Answers = ({ shuffledAnswers, correctAnswer, currentQuestionIndex }) => {
   const [displayedAnswers, setDisplayedAnswers] = useState(shuffledAnswers);
   const { fiftyFiftyJoker } = useSelector((state) => state.gamePlay);
 
+  const isFiftyFiftyJokerUsed =
+    fiftyFiftyJoker.used &&
+    currentQuestionIndex === fiftyFiftyJoker.questionIndex;
+
   useEffect(() => {
-    let answers = shuffledAnswers;
-    if (
-      fiftyFiftyJoker.used &&
-      currentQuestionIndex === fiftyFiftyJoker.questionIndex
-    ) {
+    if (isFiftyFiftyJokerUsed) {
       // Apply 50-50 logic only for the question where it was used
       const incorrectAnswers = shuffledAnswers.filter(
         (a) => a !== correctAnswer
       );
       const randomIncorrect =
         incorrectAnswers[Math.floor(Math.random() * incorrectAnswers.length)];
-      answers = [correctAnswer, randomIncorrect];
+      shuffledAnswers = [correctAnswer, randomIncorrect];
     }
-    setDisplayedAnswers(answers);
+    setDisplayedAnswers(shuffledAnswers);
   }, [shuffledAnswers, correctAnswer, fiftyFiftyJoker, currentQuestionIndex]);
   return (
     <div className={styles.answersContainer}>

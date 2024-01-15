@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import Chart from "chart.js/auto"; // This import is needed for the chart to work properly
+import { Bar } from "react-chartjs-2";
+import "chartjs-plugin-datalabels";
+
 import { MAX_PERCENTAGE, CHART_OPTIONS } from "utils/constants";
 import {
   generateQuizResponses,
@@ -9,7 +13,6 @@ import {
 } from "utils/helpers";
 import { applyAudienceHelp } from "store/slices/gamePlaySlice";
 
-import AudienceChart from "components/BarChart/AudienceChart";
 import Modal from "components/Modal/Modal";
 
 import styles from "./AudienceHelpJoker.module.css";
@@ -56,7 +59,7 @@ const AudienceHelpJoker = () => {
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div className={styles.chartContainer}>
           {audienceChartData.labels && (
-            <AudienceChart data={audienceChartData} options={CHART_OPTIONS} />
+            <Bar data={audienceChartData} options={CHART_OPTIONS} />
           )}
         </div>
       </Modal>
