@@ -5,7 +5,11 @@ import Chart from "chart.js/auto"; // This import is needed for the chart to wor
 import { Bar } from "react-chartjs-2";
 import "chartjs-plugin-datalabels";
 
-import { MAX_PERCENTAGE, CHART_OPTIONS } from "utils/constants";
+import {
+  MAX_PERCENTAGE,
+  CHART_OPTIONS,
+  REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,
+} from "utils/constants";
 import {
   generateQuizResponses,
   calculateAudienceStatistics,
@@ -33,7 +37,16 @@ const AudienceHelpJoker = () => {
     //we use it to block the jokers if the user has selected an answer
     if (gameStage !== "running") return;
 
-    const allAnswers = [...incorrectAnswers, correctAnswer];
+    //Cleaning the answers from elements before populating the chart
+    const modifiedIncorrectAnswers = incorrectAnswers.map((answer) =>
+      answer.replace(REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN, "'")
+    );
+    const modifiedCorrectAnswer = correctAnswer.replace(
+      REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,
+      "'"
+    );
+
+    const allAnswers = [...modifiedIncorrectAnswers, modifiedCorrectAnswer];
 
     const quizResponses = generateQuizResponses(
       allAnswers,
