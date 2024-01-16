@@ -19,9 +19,8 @@ import styles from "./AudienceHelpJoker.module.css";
 
 const AudienceHelpJoker = () => {
   const dispatch = useDispatch();
-  const { correctAnswer, incorrectAnswers, audienceHelpJoker } = useSelector(
-    (state) => state.gamePlay
-  );
+  const { correctAnswer, incorrectAnswers, audienceHelpJoker, gameStage } =
+    useSelector((state) => state.gamePlay);
 
   const [audienceChartData, setAudienceChartData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,6 +29,9 @@ const AudienceHelpJoker = () => {
     if (audienceHelpJoker.used) {
       return;
     }
+    //if there is selected answer, the gamestage is not running,
+    //we use it to block the jokers if the user has selected an answer
+    if (gameStage !== "running") return;
 
     const allAnswers = [...incorrectAnswers, correctAnswer];
 

@@ -15,10 +15,14 @@ const FiftyFiftyJoker = () => {
     incorrectAnswers,
     fiftyFiftyJoker,
     answeredQuestionsCount,
+    gameStage,
   } = useSelector((state) => state.gamePlay);
 
   const allAnswers = [...incorrectAnswers, correctAnswer];
   const handleFiftyFifty = () => {
+    //if there is selected answer, the gamestage is not running,
+    //we use it to block the jokers if the user has selected an answer
+    if (gameStage !== "running") return;
     if (incorrectAnswers.length < allAnswers.length / 2) {
       return;
     }

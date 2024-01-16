@@ -15,7 +15,7 @@ import styles from "./CallFriendJoker.module.css";
 
 const CallFriendJoker = () => {
   const dispatch = useDispatch();
-  const { correctAnswer, callFriendJoker } = useSelector(
+  const { correctAnswer, callFriendJoker, gameStage } = useSelector(
     (state) => state.gamePlay
   );
   const [isSpeechBubbleVisible, setIsSpeechBubbleVisible] = useState(false);
@@ -32,6 +32,10 @@ const CallFriendJoker = () => {
     CLOVER_EMOJI;
 
   const handleCallFriend = () => {
+    //if there is selected answer, the gamestage is not running,
+    //we use it to block the jokers if the user has selected an answer
+    if (gameStage !== "running") return;
+
     dispatch(applyCallFriend({ used: true }));
     setIsSpeechBubbleVisible(true);
 
