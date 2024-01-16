@@ -16,12 +16,12 @@
   align-items: start;
   border: none;
   cursor: pointer;
-  transition: all 0.4s ease-in-out;
+  transition: all ease-in-out;
   width: 100%;
 }
 
 .answerOptions:hover {
-  background-color: rgb(51, 31, 150);
+  background-color: rgb(101, 83, 232);
 }
 
 .answerOptions span {
