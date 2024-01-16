@@ -31,7 +31,6 @@ const GameOver = () => {
         {currentQuestionIndex === QUESTIONS_COUNT ? (
           <>
             <Confetti width={width} height={height} />
-
             <h1 className={styles.win}>CONGRATULATIONS YOU WON 100,000lv.</h1>
           </>
         ) : (

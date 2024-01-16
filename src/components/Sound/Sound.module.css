@@ -1,19 +1,20 @@
-.playerContainer{
-    position: absolute;
-    bottom: 4em;
-    left: 3em;
-    background-color: transparent;
+.playerContainer {
+position: absolute;
+bottom: 4em;
+left: 3em;
+background-color: transparent;
 }
 
- .playerOn{
-    background-image: url('../../assets/images/icon.png');
-    background-size:cover;
-    width: 5em ;
-    height: 5em;
+ .playerOn {
+background-image: url('../../assets/images/icon.png');
+background-size:cover;
+width: 5em ;
+height: 5em;
 } 
-.playerOff{
-    background-image: url('../../assets/images/muted.jpg');
-    background-size:cover;
-    width: 5em ;
-    height: 5em;
+
+.playerOff {
+background-image: url('../../assets/images/muted.jpg');
+background-size:cover;
+width: 5em ;
+height: 5em;
 } 

@@ -23,7 +23,7 @@ const FiftyFiftyJoker = () => {
       return;
     }
 
-    let reducedIncorrectAnswers = [...incorrectAnswers];
+    let reducedIncorrectAnswers = [...incorrectAnswers]; // incorrectAnswers is read-only, that is why we need a variable to work with it
 
     for (let i = 0; i < 2; i++) {
       const randomIndex = Math.floor(

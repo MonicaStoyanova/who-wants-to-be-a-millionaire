@@ -1,21 +1,21 @@
 .timer {
-    border: 2px solid white;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1.3em;
-    width: 2.5em;
-    height: 2.5em;
-    position: absolute;
-    top: 8.5em;
-    left: 2.5em;
+  border: 2px solid white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.3em;
+  width: 2.5em;
+  height: 2.5em;
+  position: absolute;
+  top: 8.5em;
+  left: 2.5em;
   }
   
-  .timer span {
-    color: white;
-    font-size: 1.3em;
-    font-weight: 800;
+.timer span {
+  color: white;
+  font-size: 1.3em;
+  font-weight: 800;
   }
   
   @media screen and (max-width: 800px) {
@@ -24,6 +24,7 @@
       left: 40px;
     }
   }
+
   @media screen and (max-width: 600px) {
     .timer {
       left: 50%;
@@ -31,6 +32,7 @@
       padding-bottom: 1em;
     }
   }
+
   @media screen and (max-width: 400px) {
     .timer {
       left: 50%;
