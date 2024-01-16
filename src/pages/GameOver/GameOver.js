@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
+import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from "react-confetti";
+
 import { QUESTIONS_COUNT, REWARDS } from "utils/constants";
 import { formatNumber } from "utils/helpers";
 import { resetGame } from "store/slices/gamePlaySlice";
@@ -8,6 +11,7 @@ import { resetGame } from "store/slices/gamePlaySlice";
 import styles from "./GameOver.module.css";
 
 const GameOver = () => {
+  const { width, height } = useWindowSize();
   const currentQuestionIndex = useSelector(
     (state) => state.gamePlay.answeredQuestionsCount
   );
@@ -25,7 +29,11 @@ const GameOver = () => {
     <div className={styles.endBackground}>
       <div className={styles.endViewContainer}>
         {currentQuestionIndex === QUESTIONS_COUNT ? (
-          <h1 className={styles.win}>CONGRATULATIONS YOU WON 100,000lv.</h1>
+          <>
+            <Confetti width={width} height={height} />
+
+            <h1 className={styles.win}>CONGRATULATIONS YOU WON 100,000lv.</h1>
+          </>
         ) : (
           <div className={styles.endViewText}>
             <h1>End of the game!</h1>
