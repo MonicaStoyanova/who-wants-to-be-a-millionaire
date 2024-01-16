@@ -34,17 +34,21 @@
   }
 }
 
-.selected {
+.selected,
+.selected:hover {
   background-color: orange;
 }
 
-.correct {
+.correct,
+.correct:hover {
   background-color: green;
   animation: blink 1s linear 3;
 
 }
 
-.incorrect {
+
+.incorrect,
+.incorrect:hover {
   background-color: red;
   animation: blink 1s linear 3;
 }
