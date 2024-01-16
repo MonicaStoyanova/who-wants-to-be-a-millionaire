@@ -1,86 +1,92 @@
 .answersContainer {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    width: 100%;
-  }
-  
-  .answerOptions {
-    border-radius: 35px;
-    background-color: rgb(51, 31, 126);
-    color: white;
-    font-size: 16px;
-    padding: 16px 30px;
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    border: none;
-    cursor: pointer;
-    transition: all 0.4s ease-in-out;
-    width: 100%;
-  }
-  
-  .answerOptions:hover {
-    background-color: rgb(51, 31, 150);
-  }
-  .answerOptions span {
-    margin-right: 5px;
-  }
-  @keyframes blink {
-    50% { background-color: orange; }
-  }
-  
-  .selected {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+.answerOptions {
+  border-radius: 35px;
+  background-color: rgb(51, 31, 126);
+  color: white;
+  font-size: 16px;
+  padding: 16px 30px;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  width: 100%;
+}
+
+.answerOptions:hover {
+  background-color: rgb(51, 31, 150);
+}
+
+.answerOptions span {
+  margin-right: 5px;
+}
+
+@keyframes blink {
+  50% {
     background-color: orange;
   }
-  
-  .correct {
-    background-color: green;
-    animation: blink 1s linear 3; 
-    
-  } 
-  
-  .incorrect {
-    background-color: red;
-    animation: blink 1s linear 3;
-  }
-  
-  
-  @media screen and (max-width: 800px) {
-    .answersContainer {
-      grid-template-columns: repeat(1, 1fr);
-    }
-  }
-  .nextBtn {
-    cursor: pointer;
-    border: 1px solid white;
-    background-color: transparent;
-    height: 50px;
-    width: 100px;
-    color: white;
-    font-size: 1.5em;
-    margin-bottom: 50px;
-    position: absolute;
-    top: 150px;
-    right: 150px;
-  }
-  
-  @media screen and (max-width: 700px) {
-    .nextBtn {
-      top: 700px;
-      right: 1%;
-    }
-  }
+}
 
-  @media screen and (max-width: 500px) {
-    .nextBtn {
-      top: 700px;
-      right: 30%;
-    }
+.selected {
+  background-color: orange;
+}
+
+.correct {
+  background-color: green;
+  animation: blink 1s linear 3;
+
+}
+
+.incorrect {
+  background-color: red;
+  animation: blink 1s linear 3;
+}
+
+
+@media screen and (max-width: 800px) {
+  .answersContainer {
+    grid-template-columns: repeat(1, 1fr);
   }
-  @media screen and (max-width: 300px) {
-    .nextBtn {
-      top: 700px;
-      right: 25%;
-    }
+}
+
+.nextBtn {
+  cursor: pointer;
+  background-color: #1B8AE6;
+  border-radius: 50%;
+  height: 60px;
+  width: 100px;
+  color: white;
+  font-size: 1.5em;
+  margin-bottom: 50px;
+  position: absolute;
+  top: 22%;
+  right: 48%;
+}
+
+@media screen and (max-width: 700px) {
+  .nextBtn {
+    top: 700px;
+    right: 1%;
   }
+}
+
+@media screen and (max-width: 500px) {
+  .nextBtn {
+    top: 700px;
+    right: 30%;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .nextBtn {
+    top: 700px;
+    right: 25%;
+  }
+}

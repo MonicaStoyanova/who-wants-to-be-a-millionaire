@@ -93,7 +93,7 @@ const AnswerItem = ({
             setShowNext(false);
           }}
         >
-          Next
+          Next &#11166;
         </button>
       ) : null}
       {/* Possible answers buttons */}

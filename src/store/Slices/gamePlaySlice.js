@@ -88,6 +88,7 @@ const gamePlaySlice = createSlice({
     resetGame: (state, action) => {
       state.difficulty = initialState.difficulty;
       state.categories = initialState.categories;
+      state.gameStage = initialState.gameStage;
       state.answeredQuestionsCount = initialState.answeredQuestionsCount;
       state.fiftyFiftyJoker = initialState.fiftyFiftyJoker;
       state.audienceHelpJoker = initialState.audienceHelpJoker;
