@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
+
 import { applyCallFriend } from "store/slices/gamePlaySlice";
 
 import {
@@ -14,7 +15,7 @@ import styles from "./CallFriendJoker.module.css";
 
 const CallFriendJoker = () => {
   const dispatch = useDispatch();
-  const { correctAnswer, callFriendJoker } = useSelector(
+  const { correctAnswer, callFriendJoker, gameStage } = useSelector(
     (state) => state.gamePlay
   );
   const [isSpeechBubbleVisible, setIsSpeechBubbleVisible] = useState(false);
@@ -31,7 +32,11 @@ const CallFriendJoker = () => {
     CLOVER_EMOJI;
 
   const handleCallFriend = () => {
-    dispatch(applyCallFriend({ used: true }));
+    //if there is selected answer, the gamestage is not running,
+    //we use it to block the jokers if the user has selected an answer
+    if (gameStage !== "running") return;
+
+    dispatch(applyCallFriend({ isUsed: true }));
     setIsSpeechBubbleVisible(true);
 
     setTimeout(() => {
@@ -42,9 +47,11 @@ const CallFriendJoker = () => {
   return (
     <>
       <button
-        className={`${styles.call} ${callFriendJoker.used ? styles.used : ""}`}
+        className={`${styles.call} ${
+          callFriendJoker.isUsed ? styles.isUsed : ""
+        }`}
         onClick={handleCallFriend}
-        disabled={callFriendJoker.used}
+        disabled={callFriendJoker.isUsed}
       ></button>
       {isSpeechBubbleVisible && (
         <blockquote className={styles.ovalThought}>

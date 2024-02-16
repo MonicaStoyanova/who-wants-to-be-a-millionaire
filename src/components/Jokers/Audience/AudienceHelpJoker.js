@@ -5,7 +5,11 @@ import Chart from "chart.js/auto"; // This import is needed for the chart to wor
 import { Bar } from "react-chartjs-2";
 import "chartjs-plugin-datalabels";
 
-import { MAX_PERCENTAGE, CHART_OPTIONS } from "utils/constants";
+import {
+  MAX_PERCENTAGE,
+  CHART_OPTIONS,
+  REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,
+} from "utils/constants";
 import {
   generateQuizResponses,
   calculateAudienceStatistics,
@@ -19,19 +23,30 @@ import styles from "./AudienceHelpJoker.module.css";
 
 const AudienceHelpJoker = () => {
   const dispatch = useDispatch();
-  const { correctAnswer, incorrectAnswers, audienceHelpJoker } = useSelector(
-    (state) => state.gamePlay
-  );
+  const { correctAnswer, incorrectAnswers, audienceHelpJoker, gameStage } =
+    useSelector((state) => state.gamePlay);
 
   const [audienceChartData, setAudienceChartData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAudienceHelp = () => {
-    if (audienceHelpJoker.used) {
+    if (audienceHelpJoker.isUsed) {
       return;
     }
+    //if there is selected answer, the gamestage is not running,
+    //we use it to block the jokers if the user has selected an answer
+    if (gameStage !== "running") return;
 
-    const allAnswers = [...incorrectAnswers, correctAnswer];
+    //Cleaning the answers from elements before populating the chart
+    const modifiedIncorrectAnswers = incorrectAnswers.map((answer) =>
+      answer.replace(REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN, "'")
+    );
+    const modifiedCorrectAnswer = correctAnswer.replace(
+      REPLACE_FROM_AMPERSAND_TO_SEMICOLON_PATTERN,
+      "'"
+    );
+
+    const allAnswers = [...modifiedIncorrectAnswers, modifiedCorrectAnswer];
 
     const quizResponses = generateQuizResponses(
       allAnswers,
@@ -44,17 +59,17 @@ const AudienceHelpJoker = () => {
     setAudienceChartData(chartData);
 
     setIsModalOpen(true);
-    dispatch(applyAudienceHelp({ used: true }));
+    dispatch(applyAudienceHelp({ isUsed: true }));
   };
 
   return (
     <>
       <button
         className={`${styles.audience} ${
-          audienceHelpJoker.used ? styles.used : ""
+          audienceHelpJoker.isUsed ? styles.isUsed : ""
         }`}
         onClick={handleAudienceHelp}
-        disabled={audienceHelpJoker.used}
+        disabled={audienceHelpJoker.isUsed}
       ></button>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div className={styles.chartContainer}>

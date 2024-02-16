@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import AlertMessage from "components/Alert/AlertMessage";
-import { GAME_SCREEN_ALERTS } from "utils/constants";
 import GameContent from "./GameContent";
+
+import { GAME_SCREEN_ALERTS } from "utils/constants";
 
 import {
   fetchQuestionsAndAnswers,

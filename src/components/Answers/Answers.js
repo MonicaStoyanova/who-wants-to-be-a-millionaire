@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
 import AnswerItem from "./AnswerItem";
 
 import styles from "./Answers.module.css";
-import { useSelector } from "react-redux";
 
 const Answers = ({ shuffledAnswers, correctAnswer, currentQuestionIndex }) => {
   const [isAnswerSelected, setIsAnswerSelected] = useState(false);
@@ -10,7 +11,7 @@ const Answers = ({ shuffledAnswers, correctAnswer, currentQuestionIndex }) => {
   const { fiftyFiftyJoker } = useSelector((state) => state.gamePlay);
 
   const isFiftyFiftyJokerUsed =
-    fiftyFiftyJoker.used &&
+    fiftyFiftyJoker.isUsed &&
     currentQuestionIndex === fiftyFiftyJoker.questionIndex;
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const Answers = ({ shuffledAnswers, correctAnswer, currentQuestionIndex }) => {
     }
     setDisplayedAnswers(shuffledAnswers);
   }, [shuffledAnswers, correctAnswer, fiftyFiftyJoker, currentQuestionIndex]);
+
   return (
     <div className={styles.answersContainer}>
       {displayedAnswers.map((a, i) => (

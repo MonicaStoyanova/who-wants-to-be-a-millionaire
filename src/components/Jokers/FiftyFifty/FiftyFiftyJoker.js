@@ -15,15 +15,19 @@ const FiftyFiftyJoker = () => {
     incorrectAnswers,
     fiftyFiftyJoker,
     answeredQuestionsCount,
+    gameStage,
   } = useSelector((state) => state.gamePlay);
 
   const allAnswers = [...incorrectAnswers, correctAnswer];
   const handleFiftyFifty = () => {
+    //if there is selected answer, the gamestage is not running,
+    //we use it to block the jokers if the user has selected an answer
+    if (gameStage !== "running") return;
     if (incorrectAnswers.length < allAnswers.length / 2) {
       return;
     }
 
-    let reducedIncorrectAnswers = [...incorrectAnswers];
+    let reducedIncorrectAnswers = [...incorrectAnswers]; // incorrectAnswers is read-only, that is why we need a variable to work with it
 
     for (let i = 0; i < 2; i++) {
       const randomIndex = Math.floor(
@@ -34,15 +38,17 @@ const FiftyFiftyJoker = () => {
 
     dispatch(updateIncorrectAnswers(reducedIncorrectAnswers));
     dispatch(
-      applyFiftyFifty({ used: true, questionIndex: answeredQuestionsCount })
+      applyFiftyFifty({ isUsed: true, questionIndex: answeredQuestionsCount })
     );
   };
 
   return (
     <button
-      className={`${styles.fifty} ${fiftyFiftyJoker.used ? styles.used : ""}`}
+      className={`${styles.fifty} ${
+        fiftyFiftyJoker.isUsed ? styles.isUsed : ""
+      }`}
       onClick={handleFiftyFifty}
-      disabled={fiftyFiftyJoker.used}
+      disabled={fiftyFiftyJoker.isUsed}
     ></button>
   );
 };

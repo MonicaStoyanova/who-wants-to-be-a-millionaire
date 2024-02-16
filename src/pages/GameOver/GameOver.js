@@ -31,7 +31,6 @@ const GameOver = () => {
         {currentQuestionIndex === QUESTIONS_COUNT ? (
           <>
             <Confetti width={width} height={height} />
-
             <h1 className={styles.win}>CONGRATULATIONS YOU WON 100,000lv.</h1>
           </>
         ) : (
@@ -53,7 +52,7 @@ const GameOver = () => {
                     className={`${
                       position % 5 === 0 ? styles.listItemWhite : ""
                     }
-                   ${currentQuestionIndex == position ? styles.won : ""}
+                   ${currentQuestionIndex === position ? styles.won : ""}
                   `}
                   >
                     {position}: {formatNumber(price)}

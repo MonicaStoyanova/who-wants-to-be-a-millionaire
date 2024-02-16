@@ -1,19 +1,20 @@
-.playerContainer{
+.playerContainer {
     position: absolute;
-    bottom: 4em;
-    left: 3em;
+    top: 21%;
+    right: 42%;
     background-color: transparent;
 }
 
- .playerOn{
+.playerOn {
     background-image: url('../../assets/images/icon.png');
-    background-size:cover;
-    width: 5em ;
+    background-size: cover;
+    width: 5em;
     height: 5em;
-} 
-.playerOff{
+}
+
+.playerOff {
     background-image: url('../../assets/images/muted.jpg');
-    background-size:cover;
-    width: 5em ;
+    background-size: cover;
+    width: 5em;
     height: 5em;
-} 
+}

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+
 import { QUESTIONS_COUNT } from "utils/constants";
 
 const initialState = {
@@ -14,14 +15,14 @@ const initialState = {
   categoryId: "",
   gameStage: "running",
   fiftyFiftyJoker: {
-    used: false,
+    isUsed: false,
     questionIndex: null,
   },
   audienceHelpJoker: {
-    used: false,
+    isUsed: false,
   },
   callFriendJoker: {
-    used: false,
+    isUsed: false,
   },
 };
 
@@ -68,7 +69,7 @@ const gamePlaySlice = createSlice({
       state.incorrectAnswers = action.payload;
     },
     // we are counting the correctly answered questions
-    updateUserStatistics: (state, action) => {
+    updateUserStatistics: (state) => {
       state.answeredQuestionsCount += 1;
     },
     //the user select one of 3 options
@@ -84,23 +85,24 @@ const gamePlaySlice = createSlice({
       state.gameStage = action.payload;
     },
     // resetting the state, when the user clicks play again button
-    resetGame: (state, action) => {
+    resetGame: (state) => {
       state.difficulty = initialState.difficulty;
       state.categories = initialState.categories;
+      state.gameStage = initialState.gameStage;
       state.answeredQuestionsCount = initialState.answeredQuestionsCount;
       state.fiftyFiftyJoker = initialState.fiftyFiftyJoker;
       state.audienceHelpJoker = initialState.audienceHelpJoker;
       state.callFriendJoker = initialState.callFriendJoker;
     },
     applyFiftyFifty: (state, action) => {
-      state.fiftyFiftyJoker.used = action.payload.used;
+      state.fiftyFiftyJoker.isUsed = action.payload.isUsed;
       state.fiftyFiftyJoker.questionIndex = action.payload.questionIndex;
     },
     applyAudienceHelp: (state, action) => {
-      state.audienceHelpJoker.used = action.payload.used;
+      state.audienceHelpJoker.isUsed = action.payload.v;
     },
     applyCallFriend: (state, action) => {
-      state.callFriendJoker.used = action.payload.used;
+      state.callFriendJoker.isUsed = action.payload.isUsed;
     },
   },
   extraReducers: (builder) => {
