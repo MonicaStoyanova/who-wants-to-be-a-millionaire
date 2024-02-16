@@ -11,7 +11,7 @@ const Answers = ({ shuffledAnswers, correctAnswer, currentQuestionIndex }) => {
   const { fiftyFiftyJoker } = useSelector((state) => state.gamePlay);
 
   const isFiftyFiftyJokerUsed =
-    fiftyFiftyJoker.used &&
+    fiftyFiftyJoker.isUsed &&
     currentQuestionIndex === fiftyFiftyJoker.questionIndex;
 
   useEffect(() => {

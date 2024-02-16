@@ -38,15 +38,17 @@ const FiftyFiftyJoker = () => {
 
     dispatch(updateIncorrectAnswers(reducedIncorrectAnswers));
     dispatch(
-      applyFiftyFifty({ used: true, questionIndex: answeredQuestionsCount })
+      applyFiftyFifty({ isUsed: true, questionIndex: answeredQuestionsCount })
     );
   };
 
   return (
     <button
-      className={`${styles.fifty} ${fiftyFiftyJoker.used ? styles.used : ""}`}
+      className={`${styles.fifty} ${
+        fiftyFiftyJoker.isUsed ? styles.isUsed : ""
+      }`}
       onClick={handleFiftyFifty}
-      disabled={fiftyFiftyJoker.used}
+      disabled={fiftyFiftyJoker.isUsed}
     ></button>
   );
 };

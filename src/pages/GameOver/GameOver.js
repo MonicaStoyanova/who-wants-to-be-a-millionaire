@@ -52,7 +52,7 @@ const GameOver = () => {
                     className={`${
                       position % 5 === 0 ? styles.listItemWhite : ""
                     }
-                   ${currentQuestionIndex == position ? styles.won : ""}
+                   ${currentQuestionIndex === position ? styles.won : ""}
                   `}
                   >
                     {position}: {formatNumber(price)}

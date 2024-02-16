@@ -30,7 +30,7 @@ const AudienceHelpJoker = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAudienceHelp = () => {
-    if (audienceHelpJoker.used) {
+    if (audienceHelpJoker.isUsed) {
       return;
     }
     //if there is selected answer, the gamestage is not running,
@@ -59,17 +59,17 @@ const AudienceHelpJoker = () => {
     setAudienceChartData(chartData);
 
     setIsModalOpen(true);
-    dispatch(applyAudienceHelp({ used: true }));
+    dispatch(applyAudienceHelp({ isUsed: true }));
   };
 
   return (
     <>
       <button
         className={`${styles.audience} ${
-          audienceHelpJoker.used ? styles.used : ""
+          audienceHelpJoker.isUsed ? styles.isUsed : ""
         }`}
         onClick={handleAudienceHelp}
-        disabled={audienceHelpJoker.used}
+        disabled={audienceHelpJoker.isUsed}
       ></button>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div className={styles.chartContainer}>

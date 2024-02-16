@@ -36,7 +36,7 @@ const CallFriendJoker = () => {
     //we use it to block the jokers if the user has selected an answer
     if (gameStage !== "running") return;
 
-    dispatch(applyCallFriend({ used: true }));
+    dispatch(applyCallFriend({ isUsed: true }));
     setIsSpeechBubbleVisible(true);
 
     setTimeout(() => {
@@ -47,9 +47,11 @@ const CallFriendJoker = () => {
   return (
     <>
       <button
-        className={`${styles.call} ${callFriendJoker.used ? styles.used : ""}`}
+        className={`${styles.call} ${
+          callFriendJoker.isUsed ? styles.isUsed : ""
+        }`}
         onClick={handleCallFriend}
-        disabled={callFriendJoker.used}
+        disabled={callFriendJoker.isUsed}
       ></button>
       {isSpeechBubbleVisible && (
         <blockquote className={styles.ovalThought}>

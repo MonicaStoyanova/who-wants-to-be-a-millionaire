@@ -1,7 +1,7 @@
-.audience.used{
-    opacity: 0.2;
-  }
+.audience.isUsed {
+  opacity: 0.2;
+}
 
 .audience {
-    background-image: url("assets/images/audience.jpg");
+  background-image: url("assets/images/audience.jpg");
 }
