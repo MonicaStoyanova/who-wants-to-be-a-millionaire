@@ -1,0 +1,7 @@
+.fifty {
+    background-image: url("assets/images/Classic5050.jpg");
+}
+
+.fifty.isUsed {
+    opacity: 0.2;
+}

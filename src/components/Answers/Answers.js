@@ -1,44 +1,42 @@
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
+import AnswerItem from "./AnswerItem";
+
 import styles from "./Answers.module.css";
-import { updateUserStatistics } from "../../store/Slices/gamePlaySlice";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
-const AnswerItem = ({ answer, index, correctAnswer }) => {
-  const letters = ["A", "B", "C", "D"];
+const Answers = ({ shuffledAnswers, correctAnswer, currentQuestionIndex }) => {
+  const [isAnswerSelected, setIsAnswerSelected] = useState(false);
+  const [displayedAnswers, setDisplayedAnswers] = useState(shuffledAnswers);
+  const { fiftyFiftyJoker } = useSelector((state) => state.gamePlay);
 
-  const dispatch = useDispatch();
-  let navigate = useNavigate();
+  const isFiftyFiftyJokerUsed =
+    fiftyFiftyJoker.isUsed &&
+    currentQuestionIndex === fiftyFiftyJoker.questionIndex;
 
-  const isCorrectAnswer = (answer) => {
-    if (!(correctAnswer === answer)) {
-      navigate("/gameover");
-    } else {
-      dispatch(updateUserStatistics());
+  useEffect(() => {
+    if (isFiftyFiftyJokerUsed) {
+      // Apply 50-50 logic only for the question where it was used
+      const incorrectAnswers = shuffledAnswers.filter(
+        (a) => a !== correctAnswer
+      );
+      const randomIncorrect =
+        incorrectAnswers[Math.floor(Math.random() * incorrectAnswers.length)];
+      shuffledAnswers = [correctAnswer, randomIncorrect];
     }
-  };
-  // TO DO:
-  // When the user selects an answer, it should start blinking. If the answer is correct, show the answer in green; if incorrect, show it in red and display the correct answer in green simultaneously.
-  // If the user answers all 15 questions correctly, redirect them to this screen with the title "CONGRATULATIONS YOU WON 100,000lv." Show a table with the amount they have won.
-  return (
-    <button
-      className={styles.answerOptions}
-      onClick={() => isCorrectAnswer(answer)}
-    >
-      <span>{letters[index]}: </span>
-      {answer}
-    </button>
-  );
-};
+    setDisplayedAnswers(shuffledAnswers);
+  }, [shuffledAnswers, correctAnswer, fiftyFiftyJoker, currentQuestionIndex]);
 
-const Answers = ({ shuffledAnswers, correctAnswer }) => {
   return (
     <div className={styles.answersContainer}>
-      {shuffledAnswers.map((a, i) => (
+      {displayedAnswers.map((a, i) => (
         <AnswerItem
           key={a}
-          answer={a}
+          possibleAnswers={a}
           index={i}
           correctAnswer={correctAnswer}
+          setIsAnswerSelected={setIsAnswerSelected}
+          isAnswerSelected={isAnswerSelected}
         />
       ))}
     </div>

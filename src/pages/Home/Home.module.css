@@ -1,18 +1,17 @@
-main {
-  background-image: url('../../images/background.jpg');
+body {
+  background-image: url('../../assets/images/background.jpg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
   height: 100vh;
   position: relative;
+  overflow: hidden;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  align-content: center;
   gap: 15px;
   width: 100%;
 }
@@ -29,67 +28,31 @@ main {
   object-fit: cover;
 }
 
-.dropdown{
+.dropdownContainer{
   display: flex;
   flex-direction: column;
   gap: 1.5em;
   align-items: center;
+  width: 40%;
+}
+
+.select {
+  width: 15.5vw;
 }
 
 @media screen and (max-width: 600px) {
-  main {
-    background-size: contain; 
-    background-position: top;
-    height: 100vh;
-  }
 
   .logoContainer {
-    width: 15vw; 
+    width: 50vw; 
     padding-top: 1em;
   }
 
-  .dropdown{
-    width: 80%;
+  .dropdownContainer{
+    gap:1em;
+    margin-top: 1em;
   }
 
-  .dropdown select {
-    font-size: 14px; 
-    padding: 8px; 
-  }
-}
-@media screen and (max-width: 400px) {
-  .dropdown{
-    gap:0.6em;
-  }
-
-  .dropdown select {
-    font-size: 14px; 
-    padding: 3px; 
-  }
-}
-
-@media screen and (max-width: 300px) {
-  .main {
-    display: flex;
-    flex-direction: column;
-  }
-  .container {
-    gap: 0;
-  }
-  .dropdown{
-    gap:0.4em;
-  }
-
-  .dropdown select {
-    font-size: 10px; 
-  }
-
-  .dropdown button {
-    font-size: 10px;
-  }
-  .logoContainer {
-    width: 15vw; 
-    padding-top: 1em;
-    padding-bottom: 0;
+  .select {
+    width: 80vw; 
   }
 }

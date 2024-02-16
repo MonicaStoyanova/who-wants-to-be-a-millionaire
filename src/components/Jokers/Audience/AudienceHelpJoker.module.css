@@ -1,0 +1,7 @@
+.audience.isUsed {
+  opacity: 0.2;
+}
+
+.audience {
+  background-image: url("assets/images/audience.jpg");
+}

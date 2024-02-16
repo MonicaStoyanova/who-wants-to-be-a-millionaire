@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -11,9 +11,11 @@ import {
   updateDifficulty,
   fetchCategories,
   updateCategory,
-} from "../../store/Slices/gamePlaySlice";
+  resetGame,
+} from "store/slices/gamePlaySlice";
+import logo from "assets/images/logo.png";
+
 import styles from "./Home.module.css";
-import logo from "../../images/logo.png";
 
 export default function Home() {
   const { difficulty, categories, categoryId } = useSelector(
@@ -24,10 +26,13 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const dispatch = useDispatch();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   // Fetch categories when the component mounts
+  // if the user is here because they clicked the back button,
+  // the state for the previously selected params will be cleared
   useEffect(() => {
+    dispatch(resetGame());
     dispatch(fetchCategories());
   }, []);
 
@@ -48,20 +53,23 @@ export default function Home() {
     }
   };
 
+  // once the user selects difficulty & category,
+  // clicking Start button will navigate them to the game
   const routeChange = () => {
-    let path = "/game";
+    const path = "/game";
     navigate(path, { state: { categoryId, difficulty } });
   };
 
   return (
-    <main className={styles.main}>
+    <main>
       <div className={styles.container}>
         <div className={styles.logoContainer}>
           <img src={logo} alt="logo" />
         </div>
         {/* Difficulty Dropdown */}
-        <div className={styles.dropdown}>
+        <div className={styles.dropdownContainer}>
           <Select
+            className={styles.select}
             onChange={handleChangeDifficulty}
             color="neutral"
             disabled={false}
@@ -76,6 +84,7 @@ export default function Home() {
           </Select>
           {/* Categories Dropdown */}
           <Select
+            className={styles.select}
             onChange={handleChangeCategory}
             color="neutral"
             disabled={false}
@@ -92,11 +101,11 @@ export default function Home() {
           </Select>
           {/* Start Game button */}
           {difficulty && selectedCategory ? (
-            <Button color="success" onClick={routeChange}>
+            <Button color="success" onClick={routeChange} disabled={false}>
               Start
             </Button>
           ) : (
-            <Button disabled>Please choose Difficulty and Category</Button>
+            <Button disabled>Start</Button>
           )}
         </div>
       </div>

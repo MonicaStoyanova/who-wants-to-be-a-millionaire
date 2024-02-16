@@ -5,7 +5,6 @@
     font-size: 14px;
     padding: 16px 14px;
     display: flex;
-    width: 100%;
     justify-content: center;
     align-items: center;
     border: none;
@@ -14,5 +13,19 @@
   
   .question span {
     margin-right: 5px;
+  }
+
+  @media screen and (max-width: 600px) {
+    .question {
+      width: 95%;
+      font-size: 0.5em;
+    }
+  }
+
+  @media screen and (max-width: 300px) {
+    .question {
+      width: 90%;
+      font-size: 0.5em;
+    }
   }
   

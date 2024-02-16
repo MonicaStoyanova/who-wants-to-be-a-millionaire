@@ -1,0 +1,25 @@
+.jokers {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding-top: 5em;;
+    gap:1em;
+    position: relative;
+}
+
+.jokers button {
+    width: 8em;                                  
+    height: 5em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    align-items: center;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    cursor: pointer; 
+}
+
+.jokers button:hover {
+    transform: scale(1.5);
+}
+

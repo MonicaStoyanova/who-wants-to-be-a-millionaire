@@ -1,0 +1,26 @@
+.alert {
+    color: rgb(212, 46, 80);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #49616d;
+    padding: 1.2em;
+    border-radius: 0.7em;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    font-weight: bolder;
+    font-size: 2em;
+  }
+  
+  .alertBtn{
+  font-size: 0.7em;
+  padding: 0.4em 0.7em;
+  border: none;
+  border-radius: 0.5em;
+  color: rgb(75, 83, 10);
+  }
+  
+  .alertBtn:hover{
+    cursor: pointer;
+  }

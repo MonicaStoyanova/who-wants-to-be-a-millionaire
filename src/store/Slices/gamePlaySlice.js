@@ -1,14 +1,29 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+import { QUESTIONS_COUNT } from "utils/constants";
+
 const initialState = {
   questions: [],
+  correctAnswer: "",
+  incorrectAnswers: [],
   status: "idle",
   error: null,
-  answeredQuestions: 0,
+  answeredQuestionsCount: 0,
   difficulty: "",
   categories: [],
   categoryId: "",
+  gameStage: "running",
+  fiftyFiftyJoker: {
+    isUsed: false,
+    questionIndex: null,
+  },
+  audienceHelpJoker: {
+    isUsed: false,
+  },
+  callFriendJoker: {
+    isUsed: false,
+  },
 };
 
 export const fetchCategories = createAsyncThunk(
@@ -28,7 +43,7 @@ export const fetchQuestionsAndAnswers = createAsyncThunk(
   async ({ categoryId, difficulty }, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `https://opentdb.com/api.php?amount=15&category=${Number(
+        `https://opentdb.com/api.php?amount=${QUESTIONS_COUNT}&category=${Number(
           categoryId
         )}&difficulty=${difficulty}&type=multiple`
       );
@@ -47,9 +62,15 @@ const gamePlaySlice = createSlice({
     updateQuestions: (state, action) => {
       state.questions = action.payload;
     },
+    updateCorrectAnswer: (state, action) => {
+      state.correctAnswer = action.payload;
+    },
+    updateIncorrectAnswers: (state, action) => {
+      state.incorrectAnswers = action.payload;
+    },
     // we are counting the correctly answered questions
-    updateUserStatistics: (state, action) => {
-      state.answeredQuestions += 1;
+    updateUserStatistics: (state) => {
+      state.answeredQuestionsCount += 1;
     },
     //the user select one of 3 options
     updateDifficulty: (state, action) => {
@@ -58,6 +79,30 @@ const gamePlaySlice = createSlice({
     // the user have selects a category and we save the id
     updateCategory: (state, action) => {
       state.categoryId = action.payload;
+    },
+
+    updateGameStage: (state, action) => {
+      state.gameStage = action.payload;
+    },
+    // resetting the state, when the user clicks play again button
+    resetGame: (state) => {
+      state.difficulty = initialState.difficulty;
+      state.categories = initialState.categories;
+      state.gameStage = initialState.gameStage;
+      state.answeredQuestionsCount = initialState.answeredQuestionsCount;
+      state.fiftyFiftyJoker = initialState.fiftyFiftyJoker;
+      state.audienceHelpJoker = initialState.audienceHelpJoker;
+      state.callFriendJoker = initialState.callFriendJoker;
+    },
+    applyFiftyFifty: (state, action) => {
+      state.fiftyFiftyJoker.isUsed = action.payload.isUsed;
+      state.fiftyFiftyJoker.questionIndex = action.payload.questionIndex;
+    },
+    applyAudienceHelp: (state, action) => {
+      state.audienceHelpJoker.isUsed = action.payload.v;
+    },
+    applyCallFriend: (state, action) => {
+      state.callFriendJoker.isUsed = action.payload.isUsed;
     },
   },
   extraReducers: (builder) => {
@@ -81,9 +126,16 @@ const gamePlaySlice = createSlice({
 
 export const {
   updateQuestions,
+  updateCorrectAnswer,
+  updateIncorrectAnswers,
   updateUserStatistics,
   updateDifficulty,
   updateCategory,
+  updateGameStage,
+  resetGame,
+  applyFiftyFifty,
+  applyAudienceHelp,
+  applyCallFriend,
 } = gamePlaySlice.actions;
 
 export default gamePlaySlice.reducer;
